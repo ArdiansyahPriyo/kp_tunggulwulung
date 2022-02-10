@@ -8,8 +8,9 @@
               <div class="card-header">
                 <h4>Login</h4>
               </div>
+               <?php echo $this->session->flashdata('login_gagal') ?>
               <div class="card-body">
-                <form method="POST" action="#" class="needs-validation" novalidate="">
+                <form method="POST" action="<?php echo base_url('login/auth') ?>" class="needs-validation" novalidate="">
                   <div class="form-group">
                     <label for="email">Email</label>
                     <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
@@ -44,7 +45,7 @@
                   </div>
                 </form>
                <div class="mt-3 text-muted text-center">
-                Belum punya akun? <a href="auth-register.html">Silahkan daftar</a>
+                Belum punya akun? <a href="<?php echo base_url('register') ?>">Silahkan daftar</a>
               </div>
               </div>
             </div>

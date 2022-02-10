@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="<?php echo base_url()?>assets2/css/components.css">
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="<?php echo base_url()?>assets2/css/custom.css">
-  <link rel='shortcut icon' type='image/x-icon' href='<?php echo base_url()?>assets2/img/favicon.ico' />
+  <link rel='shortcut icon' type='image/x-icon' href="<?php echo base_url()?>assets/img/strike5.jpg" />
 </head>
 
 <body>
