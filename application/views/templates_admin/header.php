@@ -9,6 +9,8 @@
   <title>KP Tunggul Wulung</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?php echo base_url()?>assets2/css/app.min.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets2/bundles/datatables/datatables.min.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets2/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
   <!-- Template CSS -->
   <link rel="stylesheet" href="<?php echo base_url()?>assets2/css/style.css">
   <link rel="stylesheet" href="<?php echo base_url()?>assets2/css/components.css">
