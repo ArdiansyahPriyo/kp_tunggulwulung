@@ -15,7 +15,8 @@
             <div class="collapse show" id="event-collapse">
             <div class="card-body">
               <?php echo $this->session->flashdata('berhasilTambahSubEvent');  ?>  
-              <?php echo $this->session->flashdata('berhasilEditSubEvent');  ?>  
+              <?php echo $this->session->flashdata('berhasilEditSubEvent');  ?> 
+              <?php echo $this->session->flashdata('berhasilHapusSubEvent');  ?> 
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
                   <thead>
@@ -306,6 +307,34 @@ foreach ($subevent as $sbevt) : ?>
 </div>
 <?php endforeach; ?>
 <!-- Akhir modal -->
+
+<!-- modal hapus user-->
+<?php foreach ($subevent as $sbevt) : ?>
+<div class="modal fade" id="hapusDataSubEvent<?php echo $sbevt->id_subevent ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="<?php echo base_url('admin/data_subevent/hapus_subevent') ?>" method="post">
+        <input hidden value="<?php echo $sbevt->id_subevent ?>" type="text" name="id_subevent">
+        <div class="modal-body">
+          Apakah anda yakin ingin menghapus data ini ?
+        </div>
+        <div class="modal-footer bg-whitesmoke br">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+          <button type="submit" class="btn btn-primary">Ya</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>
+<!-- akhir modal -->
 
 <script type="text/javascript">
 //tanggal pelaksanaan minimal hari ini tambah

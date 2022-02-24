@@ -93,5 +93,20 @@ class Data_subevent extends CI_Controller{
 
 	}
 
+	public function hapus_subevent()
+	{
+		$id_subevent 	= $this->input->post('id_subevent');
+
+		$where = array('id_subevent' => $id_subevent);
+      $this->db->delete('t_subevent', $where);
+			$this->session->set_flashdata('berhasilHapusSubEvent','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
+  				Data berhasil dihapus!
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		  </div>');
+		redirect('admin/data_subevent');
+	}
+
 }
 ?>
