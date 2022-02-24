@@ -174,6 +174,9 @@
             <li <?=$this->uri->segment(2) == 'data_subevent' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('admin/data_subevent') ?>" class="nav-link"><i data-feather="list"></i><span>Sub Event</span></a>
             </li>
+            <li <?=$this->uri->segment(2) == 'data_pengumuman' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+              <a href="<?php echo base_url('admin/data_pengumuman') ?>" class="nav-link"><i data-feather="volume-2"></i><span>Pengumuman</span></a>
+            </li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i
                   data-feather="briefcase"></i><span>Widgets</span></a>

@@ -29,10 +29,13 @@ class Data_event extends CI_Controller{
 
 	public function tambah_event()
 	{
+		$created_by		= $this->session->userdata('nama');
 		$event		= $this->input->post('event');
 	
 		$data = array(
-			'event' 		=> $event, 
+			'event' 		   => $event, 
+			'created_by'   => $created_by,
+			'created_date' => date('Y-m-d H:i:s')
 		);
 
 		$this->model_event->tambah_event($data, 't_event');

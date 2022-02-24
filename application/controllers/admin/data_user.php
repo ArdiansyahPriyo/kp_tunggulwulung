@@ -37,12 +37,13 @@ class Data_user extends CI_Controller{
 
 		if ($password == $password2) {
 			$data = array(
-				'id_user' 		=> $id_user,
-				'nama' 		    => $nama, 
-				'email' 		  => $email,
-				'no_hp' 		  => $no_hp,
-				'alamat'			=> $alamat,
-				'hak_akses'   => $hak_akses				
+				'id_user' 		 => $id_user,
+				'nama' 		     => $nama, 
+				'email' 		   => $email,
+				'no_hp' 		   => $no_hp,
+				'alamat'			 => $alamat,
+				'hak_akses'    => $hak_akses,
+				'created_date' => date('Y-m-d H:i:s')		
 			);
 
 			$this->db->where('id_user', $id_user);
@@ -56,13 +57,14 @@ class Data_user extends CI_Controller{
 			redirect('admin/data_user');
 		}else{
 			$data = array(
-				'id_user' 		=> $id_user,
-				'nama' 		    => $nama, 
-				'email' 		  => $email,
-				'no_hp' 		  => $no_hp,
-				'alamat'			=> $alamat,
-				'hak_akses'   => $hak_akses,
-				'password'		=> md5($password)
+				'id_user' 		 => $id_user,
+				'nama' 		     => $nama, 
+				'email' 		   => $email,
+				'no_hp' 		   => $no_hp,
+				'alamat'			 => $alamat,
+				'hak_akses'    => $hak_akses,
+				'password'		 => md5($password),
+				'created_date' => date('Y-m-d H:i:s')
 			);
 
 			$this->db->where('id_user', $id_user);
