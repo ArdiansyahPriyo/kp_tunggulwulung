@@ -86,27 +86,40 @@ class Data_user extends CI_Controller{
 		$email				= $this->input->post('email');
 		$no_hp				= $this->input->post('no_hp');
 		$alamat				= $this->input->post('alamat');
-		$password			= $this->input->post('password');
+		$password			= md5($this->input->post('password'));
 		$hak_akses		= $this->input->post('hak_akses');
 
-		$data = array(
+		$sql = $this->db->query("SELECT email,password FROM t_user where email='$email' or password='$password'");
+      $cek_email = $sql->num_rows();
+      if ($cek_email > 0) {
+      $this->session->set_flashdata('sudahAda','<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Gagal, Email atau Password sudah ada!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>'  
+      );
+      redirect('admin/data_user');
+    }else{
+    	$data = array(
 			'id_user' 		=> $id_user, 
 			'nama' 				=> $nama,
 			'email' 			=> $email,
 			'no_hp' 			=> $no_hp,
 			'alamat' 			=> $alamat,
-			'password' 		=> md5($password), 
+			'password' 		=> $password, 
 			'hak_akses' 	=> $hak_akses	
 		);
 
-		$this->model_user->tambah_user($data, 't_user');
-		$this->session->set_flashdata('berhasilTambahUser','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
-  				Data berhasil ditambahkan!
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		</div>');
-		redirect('admin/data_user');
+			$this->model_user->tambah_user($data, 't_user');
+			$this->session->set_flashdata('berhasilTambahUser','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
+	  				Data berhasil ditambahkan!
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>');
+			redirect('admin/data_user');	
+    }	
 	}
 
 	public function hapus_user()

@@ -26,6 +26,7 @@
                       <th>Sub Event</th>
                       <th>Tanggal Pelaksanaan</th>
                       <th>Harga Tiket</th>
+                      <th>Potongan</th>
                       <th>Stok Tiket</th>
                       <th style="width: 5%;">Jumlah Lapak</th>
                       <th>Tanggal Mulai</th>
@@ -43,6 +44,7 @@
                       <td><?php echo $sbevt->subevent ?></td>
                       <td><?php echo date("d-m-Y", strtotime($sbevt->tanggal_pelaksanaan)) ?></td>
                       <td>Rp. <?php echo number_format($sbevt->harga,0,'.','.') ?></td>
+                      <td>Rp. <?= number_format($sbevt->potongan,0,'.','.') ?></td>
                       <td><?php echo $sbevt->stok ?></td>
                       <td><?php echo $sbevt->jumlah_lapak ?></td>
                       <td><?php echo date("d-m-Y", strtotime($sbevt->mulai)) ?></td>
@@ -54,6 +56,7 @@
                           <div class="dropdown-menu">
                             <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#editDataSubEvent<?php echo $sbevt->id_subevent ?>"><i class="far fa-edit"></i> Edit</button>
                             <button class="btn btn-icon icon-left btn-light dropdown-item text-danger" data-toggle="modal" data-target="#hapusDataSubEvent<?php echo $sbevt->id_subevent ?>"><i class="fas fa-trash"></i> Hapus</button>
+                            <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#lihatDataFileSubEvent<?php echo $sbevt->id_subevent ?>"><i class="fas fa-search-plus"></i> Lihat File</button>
                           </div>
                         </div>
                       </td>
@@ -162,6 +165,52 @@
   </div>
 </div>
 
+<!--Modal Lihat File  -->
+<?php foreach($subevent as $sbevt) : ?>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="lihatDataFileSubEvents<?php echo $sbevt->id_subevent ?>" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myLargeModalLabel">File</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <embed src="<?php echo base_url().'/uploads/'.$sbevt->file ?>"
+                    frameborder="0" width="100%" height="600px">
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>
+<!-- End modal -->
+
+<!-- basic modal -->
+<?php foreach($subevent as $sbevt) : ?>
+<div class="modal fade" id="lihatDataFileSubEvent<?php echo $sbevt->id_subevent ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">File</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <embed src="<?php echo base_url().'/uploads/'.$sbevt->file ?>"
+                    frameborder="0" width="100%" height="600px">
+      </div>
+      <div class="modal-footer bg-whitesmoke br">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>
+
 <!-- Modal Tambah Sub event -->
 <div class="modal fade" id="tambahDataSubEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -201,6 +250,12 @@
             <label>Harga Tiket</label>
             <div class="input-group">
               <input type="text" class="form-control" id="rupiah" name="harga" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" onkeyup="erpe()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Potongan</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="rupiah2" name="potongan" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" onkeyup="erpe2()">
             </div>
           </div>
           <div class="form-group">
@@ -400,6 +455,34 @@ function erpe(){
 
     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
     return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+  }
+}
+
+//mengubah inputan harga ke format rupiah
+function erpe2(){
+  var rupiah2 = document.getElementById('rupiah2');
+  rupiah2.addEventListener('keyup', function(e){
+    // tambahkan 'Rp.' pada saat form di ketik
+    // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+    rupiah2.value = formatRupiah2(this.value, 'Rp. ');
+  });
+
+  /* Fungsi formatRupiah */
+  function formatRupiah2(angka, prefix){
+    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+    split       = number_string.split(','),
+    sisa        = split[0].length % 3,
+    rupiah2        = split[0].substr(0, sisa),
+    ribuan        = split[0].substr(sisa).match(/\d{3}/gi);
+
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if(ribuan){
+      separator = sisa ? '.' : '';
+      rupiah2 += separator + ribuan.join('.');
+    }
+
+    rupiah2 = split[1] != undefined ? rupiah2 + ',' + split[1] : rupiah2;
+    return prefix == undefined ? rupiah2 : (rupiah2 ? 'Rp. ' + rupiah2 : '');
   }
 }
 

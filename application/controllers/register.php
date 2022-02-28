@@ -1,13 +1,8 @@
 <?php 
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Register extends CI_Controller {
 
-    // public function index()
-    // {
-    //     $this->load->view('templates_admin/header');
-    //     $this->load->view('register');
-    //     $this->load->view('templates_admin/footer');
-    // }
 
     public function index()
     {
@@ -25,12 +20,12 @@ class Register extends CI_Controller {
         $cek_email = $sql->num_rows();
         if ($cek_email > 0) {
         $this->session->set_flashdata('sudah_ada','<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                      Email atau Password sudah ada!
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>'  
-                    );
+          Email atau Password sudah ada!
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>'  
+        );
         redirect(site_url('register'));
                 }else{
         if($this->form_validation->run() == FALSE)
@@ -50,12 +45,12 @@ class Register extends CI_Controller {
             );
 
             $this->db->insert('t_user',$data);
-                    $this->session->set_flashdata('berhasil_daftar','<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
-                            <script type ="text/JavaScript">  
-                            swal("Registrasi berhasil !","Silahkan login ","success")  
-                            </script>'  
-                    );
-                    redirect('login');
+            $this->session->set_flashdata('berhasil_daftar','<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+                <script type ="text/JavaScript">  
+                swal("Registrasi berhasil !","Silahkan login ","success")  
+                </script>'  
+            );
+            redirect('login');
         }
         }
     }

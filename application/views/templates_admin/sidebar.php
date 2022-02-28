@@ -23,118 +23,8 @@
           </ul>
         </div>
         <ul class="navbar-nav navbar-right">
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-              class="nav-link nav-link-lg message-toggle"><i data-feather="mail"></i>
-              <span class="badge headerBadge1">
-                6 </span> </a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
-              <div class="dropdown-header">
-                Messages
-                <div class="float-right">
-                  <a href="#">Mark All As Read</a>
-                </div>
-              </div>
-              <div class="dropdown-list-content dropdown-list-message">
-                <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar
-											text-white"> <img alt="image" src="<?php echo base_url()?>assets2/img/users/user-1.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">John
-                      Deo</span>
-                    <span class="time messege-text">Please check your mail !!</span>
-                    <span class="time">2 Min Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="<?php echo base_url()?>assets2/img/users/user-2.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">Sarah
-                      Smith</span> <span class="time messege-text">Request for leave
-                      application</span>
-                    <span class="time">5 Min Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="<?php echo base_url()?>assets2/img/users/user-5.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">Jacob
-                      Ryan</span> <span class="time messege-text">Your payment invoice is
-                      generated.</span> <span class="time">12 Min Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="<?php echo base_url()?>assets2/img/users/user-4.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">Lina
-                      Smith</span> <span class="time messege-text">hii John, I have upload
-                      doc
-                      related to task.</span> <span class="time">30
-                      Min Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="<?php echo base_url()?>assets2/img/users/user-3.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">Jalpa
-                      Joshi</span> <span class="time messege-text">Please do as specify.
-                      Let me
-                      know if you have any query.</span> <span class="time">1
-                      Days Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-avatar text-white">
-                    <img alt="image" src="<?php echo base_url()?>assets2/img/users/user-2.png" class="rounded-circle">
-                  </span> <span class="dropdown-item-desc"> <span class="message-user">Sarah
-                      Smith</span> <span class="time messege-text">Client Requirements</span>
-                    <span class="time">2 Days Ago</span>
-                  </span>
-                </a>
-              </div>
-              <div class="dropdown-footer text-center">
-                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-              class="nav-link notification-toggle nav-link-lg"><i data-feather="bell" class="bell"></i>
-            </a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
-              <div class="dropdown-header">
-                Notifications
-                <div class="float-right">
-                  <a href="#">Mark All As Read</a>
-                </div>
-              </div>
-              <div class="dropdown-list-content dropdown-list-icons">
-                <a href="#" class="dropdown-item dropdown-item-unread"> <span
-                    class="dropdown-item-icon bg-primary text-white"> <i class="fas
-												fa-code"></i>
-                  </span> <span class="dropdown-item-desc"> Template update is
-                    available now! <span class="time">2 Min
-                      Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="far
-												fa-user"></i>
-                  </span> <span class="dropdown-item-desc"> <b>You</b> and <b>Dedik
-                      Sugiharto</b> are now friends <span class="time">10 Hours
-                      Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-success text-white"> <i
-                      class="fas
-												fa-check"></i>
-                  </span> <span class="dropdown-item-desc"> <b>Kusnaedi</b> has
-                    moved task <b>Fix bug header</b> to <b>Done</b> <span class="time">12
-                      Hours
-                      Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-danger text-white"> <i
-                      class="fas fa-exclamation-triangle"></i>
-                  </span> <span class="dropdown-item-desc"> Low disk space. Let's
-                    clean it! <span class="time">17 Hours Ago</span>
-                  </span>
-                </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="fas
-												fa-bell"></i>
-                  </span> <span class="dropdown-item-desc"> Welcome to Otika
-                    template! <span class="time">Yesterday</span>
-                  </span>
-                </a>
-              </div>
-              <div class="dropdown-footer text-center">
-                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-              </div>
-            </div>
-          </li>
           <li class="dropdown"><a href="#" data-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="<?php echo base_url()?>assets2/img/user.png"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="<?php echo base_url()?>assets2/img/saya.jpg"
                 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-item has-icon"><b><?php echo $this->session->userdata('nama') ?></b><br>
@@ -166,28 +56,32 @@
           <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
             <li <?=$this->uri->segment(2) == 'dashboard' || $this->uri->segment(2) == '' ? 'class="dropdown active"' : 'class="dropdown"'?>>
-              <a href="<?php echo base_url('admin/dashboard') ?>" class="nav-link"><i data-feather="home"></i><span>Dashboard</span></a>
+              <a href="<?php echo base_url('admin/dashboard') ?>" class="nav-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
             </li>
             <li <?=$this->uri->segment(2) == 'data_event' ? 'class="dropdown active"' : 'class="dropdown"'?>>
-              <a href="<?php echo base_url('admin/data_event') ?>" class="nav-link"><i data-feather="layers"></i><span>Event</span></a>
+              <a href="<?php echo base_url('admin/data_event') ?>" class="nav-link"><i class="fas fa-bars"></i><span>Event</span></a>
             </li>
             <li <?=$this->uri->segment(2) == 'data_subevent' ? 'class="dropdown active"' : 'class="dropdown"'?>>
-              <a href="<?php echo base_url('admin/data_subevent') ?>" class="nav-link"><i data-feather="list"></i><span>Sub Event</span></a>
+              <a href="<?php echo base_url('admin/data_subevent') ?>" class="nav-link"><i class="fas fa-stream"></i></i><span>Sub Event</span></a>
             </li>
+            <li <?=$this->uri->segment(2) == 'data_panitia' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+              <a href="<?php echo base_url('admin/data_panitia') ?>" class="nav-link"><i class="fas fa-user-cog"></i><span>Panitia</span></a>
+            </li>
+            <li <?=$this->uri->segment(2) == 'data_supplier' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+              <a href="<?php echo base_url('admin/data_supplier') ?>" class="nav-link"><i class="fas fa-truck"></i><span>Supplier Ikan</span></a>
+            </li> 
             <li <?=$this->uri->segment(2) == 'data_pengumuman' ? 'class="dropdown active"' : 'class="dropdown"'?>>
-              <a href="<?php echo base_url('admin/data_pengumuman') ?>" class="nav-link"><i data-feather="volume-2"></i><span>Pengumuman</span></a>
+              <a href="<?php echo base_url('admin/data_pengumuman') ?>" class="nav-link"><i class="fas fa-bullhorn"></i><span>Pengumuman</span></a>
             </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="briefcase"></i><span>Widgets</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="widget-chart.html">Chart Widgets</a></li>
-                <li><a class="nav-link" href="widget-data.html">Data Widgets</a></li>
-              </ul>
-            </li>
+
+            <li class="menu-header">Event</li>
+            <li <?=$this->uri->segment(2) == 'data_suplier' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+              <a href="<?php echo base_url('admin/data_suplier') ?>" class="nav-link"><i class="fas fa-award"></i><span>Pemenang</span></a>
+            </li> 
+            
             <li class="menu-header">Account</li>
             <li <?=$this->uri->segment(2) == 'data_user' ? 'class="dropdown active"' : 'class="dropdown"'?>>
-              <a href="<?php echo base_url('admin/data_user') ?>" class="nav-link"><i data-feather="user"></i><span>User</span></a></li> 
+              <a href="<?php echo base_url('admin/data_user') ?>" class="nav-link"><i class="fas fa-users"></i><span>User</span></a></li> 
           </ul>
         </aside>
       </div>

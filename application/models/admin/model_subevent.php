@@ -9,7 +9,7 @@ class Model_subevent extends CI_Model{
 		//$this->db->where('id_subevent', $id_subevent);
 		//$result = $this->db->where('id_subevent', $id_subevent);
 		$query = $this->db->get();
-      return $query->result();
+      	return $query->result();
 	}
 
 	public function list_nama_event() {
@@ -24,5 +24,13 @@ class Model_subevent extends CI_Model{
 		$this->db->insert($table,$data);
 	}
 	
+
+	public function list_nama_user() {
+      $this->db->select('*');
+      $this->db->from('t_user');
+      $this->db->where('hak_akses','panitia');
+      $query = $this->db->get();
+      return $query->result();
+   }
 }
 ?>

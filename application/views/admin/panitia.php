@@ -6,35 +6,34 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Data Event</h4>
+              <h4>Data Panitia</h4>
                <div class="card-header-action">
-                  <button class="btn btn-icon icon-left btn-primary mr-1" data-toggle="modal" data-target="#tambahDataEvent"><i class="fas fa-plus-circle"></i> Tambah Event</button>
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
             </div>
             <div class="collapse show" id="event-collapse">
             <div class="card-body">
-              <?php echo $this->session->flashdata('berhasilTambahEvent');  ?>  
-              <?php echo $this->session->flashdata('berhasilEditEvent');  ?> 
-              <?php echo $this->session->flashdata('berhasilHapusEvent');  ?> 
+              <?php echo $this->session->flashdata('berhasilTambahPanitia');  ?>  
+              <?php echo $this->session->flashdata('panitiaSudahAda');  ?> 
+              <?php echo $this->session->flashdata('berhasilHapusPanitia');  ?> 
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
                   <thead>
                     <tr>
                       <th style="width: 10%;">No</th>
-                      <th>Event</th>
-                      <th class="text-center" style="width: 20%;" colspan="2">Action</th>
+                      <th >Sub Event</th>
+                      <th class="text-center" colspan="2" style="width: 30%;">Action</th>
                    </tr>
                   </thead>
                   <tbody>
                     <?php 
                     $no=1;
-                    foreach($event as $evt) : ?>
+                    foreach ($subevent as $sbevt):?>
                     <tr>
                       <td><?php echo $no++ ?></td>
-                      <td><?php echo $evt->event ?></td>
-                      <td><button class="btn btn-light btn-icon icon-left dropdown-item" data-toggle="modal" data-target="#editDataEvent<?php echo $evt->id_event ?>"><i class="far fa-edit"></i> Edit</button></td>
-                      <td><button class="btn btn-light btn-icon icon-left dropdown-item text-danger " data-toggle="modal" data-target="#hapusDataEvent<?php echo $evt->id_event ?>"><i class="fas fa-trash"></i> Hapus</button></td>
+                      <td><?php echo $sbevt->subevent ?></td>
+                      <td class="text-center"><button class="btn btn-light btn-icon icon-left" data-toggle="modal" data-target="#tambahDataPanitia<?php echo $sbevt->id_subevent ?>"><i class="fas fa-plus-circle"></i> Tambah Panitia</button></td>
+                      <td class="text-center"><a href="" class="btn btn-light btn-icon icon-left " data-toggle="modal" data-target="#lihatDataPanitia<?php echo $sbevt->id_subevent ?>" ><i class="fas fa-search-plus"></i> Detail</a></td>
                     </tr>
                     <?php endforeach; ?>
                   </tbody>
@@ -141,25 +140,37 @@
 </div>
 
 <!-- Tambah modal -->
-<div class="modal fade" id="tambahDataEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<?php foreach ($subevent as $sbevt) : ?>
+<div class="modal fade" id="tambahDataPanitia<?php echo $sbevt->id_subevent ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Event</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Panitia</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(). 'admin/data_event/tambah_event'; ?>" method="post" enctype="multipart/form-data" >
+        <form action="<?php echo base_url(). 'admin/data_panitia/tambah_panitia'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Event</label>
+            <label>Sub Event</label>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="event" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
+              <input type="text" class="form-control" name="" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" value="<?php echo $sbevt->subevent ?>" readonly>
             </div>
           </div>
-       </div>
+          <div class="form-group">
+            <label>Panitia</label>
+            <select class="form-control" name="id_user">
+              <?php foreach($list_user as $lsusr) : ?>
+                <option value="<?php echo $lsusr->id_user ?>">
+                  <?php echo $lsusr->nama ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <input type="hidden" name="id_subevent" value="<?php echo $sbevt->id_subevent ?>">
+      </div>
       <div class="modal-footer bg-whitesmoke br">
         <button type="submit" class="btn btn-primary">Simpan</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -168,67 +179,55 @@
     </div>
   </div>
 </div>
+<?php endforeach;?>
 <!-- End modal -->
 
 
-<!--modal edit event-->
-<?php 
-foreach ($event as $evt) : ?>
-<div class="modal fade" id="editDataEvent<?php echo $evt->id_event?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- detail modal -->
+<?php foreach ($subevent as $sbevt) : ?>
+<div class="modal fade" id="lihatDataPanitia<?php echo $sbevt->id_subevent ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Event</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Data Panitia</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(). 'admin/data_event/edit_event'; ?>" method="post" enctype="multipart/form-data" >
-          <div class="form-group">
-            <label>Event</label>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="event" value="<?php echo $evt->event ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-              <input type="hidden" value="<?php echo $evt->id_event ?>" type="text" name="id_event">
-            </div>
-          </div>
-          
-       </div>
+        
+        <div class="table-responsive">
+          <table class="table table-striped" id="table-1">
+            <thead>
+              <tr>
+                <th style="width: 10%;">No</th>
+                <th>Panitia</th>
+                <th class="text-center" style="width: 30%;">Action</th>
+             </tr>
+            </thead>
+            <tbody>
+              <?php 
+              $no=1;
+              foreach($panitia as $pnt) : ?>
+                <?php if ($pnt->id_subevent == $sbevt->id_subevent) {  ?>
+                  <tr>
+                    <td><?php echo $no++ ?></td>
+                    <td><?php echo $pnt->nama ?></td>
+                    <td class="text-center"><?php echo anchor('admin/data_panitia/hapus/' .$pnt->id_panitia, '<div class="btn btn-light btn-icon icon-left text-danger"><i class="fas fa-trash"></i> Hapus</div>') ?></td>
+                  </tr>
+                <?php } ?> 
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>  
+      </div>
       <div class="modal-footer bg-whitesmoke br">
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
-      </form>
     </div>
   </div>
 </div>
-<?php endforeach; ?>
-<!-- Akhir modal -->
+<?php endforeach;?>
+<!-- End modal -->
 
-<!-- modal hapus event-->
-<?php foreach ($event as $evt) : ?>
-<div class="modal fade" id="hapusDataEvent<?php echo $evt->id_event ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="<?php echo base_url('admin/data_event/hapus_event') ?>" method="post">
-        <input hidden value="<?php echo $evt->id_event ?>" type="text" name="id_event">
-        <div class="modal-body">
-          Apakah anda yakin ingin menghapus data ini ?
-        </div>
-        <div class="modal-footer bg-whitesmoke br">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-          <button type="submit" class="btn btn-primary">Ya</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<?php endforeach; ?>

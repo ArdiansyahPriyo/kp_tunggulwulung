@@ -33,6 +33,7 @@ class Data_subevent extends CI_Controller{
 		$subevent							= $this->input->post('subevent');
 		$tanggal_pelaksanaan	= $this->input->post('tanggal_pelaksanaan');
 		$harga								= $this->input->post('harga');
+		$potongan							= $this->input->post('potongan');
 		$stok  								= $this->input->post('stok');
 		$jumlah_lapak					= $this->input->post('jumlah_lapak');
 		$mulai								= $this->input->post('mulai');
@@ -43,6 +44,7 @@ class Data_subevent extends CI_Controller{
 			'subevent' 						=> $subevent,
 			'tanggal_pelaksanaan' => $tanggal_pelaksanaan,
 			'harga' 							=> preg_replace("/[^0-9]/","",$harga),
+			'potongan' 						=> preg_replace("/[^0-9]/","",$potongan),
 			'stok'								=> $stok,
 			'jumlah_lapak' 				=> $jumlah_lapak,
 			'mulai' 							=> $mulai, 

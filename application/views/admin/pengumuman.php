@@ -155,7 +155,7 @@
 
 <!--Modal Lihat File Pengumuman -->
 <?php foreach($pengumuman as $png) : ?>
-<div class="modal fade bd-example-modal-lg" tabindex="-1" id="lihatDataFilePengumuman<?php echo $png->id_pengumuman ?>" role="dialog" aria-labelledby="myLargeModalLabel"
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="lihatDataFilePengumumans<?php echo $png->id_pengumuman ?>" role="dialog" aria-labelledby="myLargeModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -174,6 +174,29 @@
 </div>
 <?php endforeach; ?>
 <!-- End modal -->
+
+<?php foreach($pengumuman as $png) : ?>
+<div class="modal fade" id="lihatDataFilePengumuman<?php echo $png->id_pengumuman ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pengumuman</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <embed src="<?php echo base_url().'/uploads/'.$png->gambar ?>"
+                    frameborder="0" width="100%" height="600px">
+      </div>
+      <div class="modal-footer bg-whitesmoke br">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>
 
 <!-- Modal Tambah Pengumuman -->
 <div class="modal fade" id="tambahDataPengumuman" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -6,54 +6,42 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Data User</h4>
+              <h4>Data Supplier</h4>
                <div class="card-header-action">
-                  <button class="btn btn-icon icon-left btn-primary mr-1" data-toggle="modal" data-target="#tambahDataUser"><i class="fas fa-plus-circle"></i> Tambah User</button>
+                  <button class="btn btn-icon icon-left btn-primary mr-1" data-toggle="modal" data-target="#tambahDataSupplier"><i class="fas fa-plus-circle"></i> Tambah Supplier</button>
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
             </div>
             <div class="collapse show" id="event-collapse">
             <div class="card-body">
-              <?php echo $this->session->flashdata('berhasilTambahUser');  ?>  
-              <?php echo $this->session->flashdata('berhasilEditUser');  ?> 
-              <?php echo $this->session->flashdata('berhasilHapusUser');  ?> 
-              <?php echo $this->session->flashdata('sudahAda');  ?>  
+              <?php echo $this->session->flashdata('berhasilTambahSupplier');  ?>  
+              <?php echo $this->session->flashdata('berhasilEditSupplier');  ?> 
+              <?php echo $this->session->flashdata('berhasilHapusSupplier');  ?>  
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
                   <thead>
                     <tr>
                       <th style="width: 5%;">No</th>
-                      <th>Nama User</th>
-                      <th>Email</th>
-                      <th>Nomor HP</th>
+                      <th>Nama Supplier</th>
                       <th>Alamat</th>
-                      <th>Password</th>
-                      <th>Hak Akses</th>
-                     <!--  <th style="width: 6%;">Actionss</th> -->
-                      <th class="text-center" style="width: 6%;">Action</th>
+                      <th>Nomor HP</th>
+                      <th class="text-center" style="width: 21%;" colspan="2">Action</th>
                    </tr>
                   </thead>
                   <tbody>
                     <?php 
                     $no=1;
-                    foreach($user as $usr) : ?>
+                    foreach($supplier as $spl) : ?>
                     <tr>
                       <td><?php echo $no++ ?></td>
-                      <td><?php echo $usr->nama ?></td>
-                      <td><?php echo $usr->email ?></td>
-                      <td><?php echo $usr->no_hp ?></td>
-                      <td><?php echo $usr->alamat ?></td>
-                      <td><?php echo substr($usr->password, 25)?>. . .</td>
-                      <td style="text-transform: capitalize;"><?php echo $usr->hak_akses ?></td>
-                      <!-- <td><a href="#" class="btn btn-primary">Detail</a></td> -->
-                      <td>
-                        <div class="dropdown">
-                          <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Options</a>
-                          <div class="dropdown-menu">
-                            <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#editDataUser<?php echo $usr->id_user ?>"><i class="far fa-edit"></i> Edit</button>
-                            <button class="btn btn-icon icon-left btn-light dropdown-item text-danger" data-toggle="modal" data-target="#hapusDataUser<?php echo $usr->id_user ?>"><i class="fas fa-trash"></i> Hapus</button>
-                          </div>
-                        </div>
+                      <td><?php echo $spl->nama_supplier ?></td>
+                      <td><?php echo $spl->alamat_supplier ?></td>
+                      <td><?php echo $spl->no_hp_supplier ?></td>
+                      <td class="text-center">
+                        <button class="btn btn-icon icon-left btn-light" data-toggle="modal" data-target="#editDataSupplier<?php echo $spl->id_supplier ?>"><i class="far fa-edit"></i> Edit</button>
+                       </td>
+                      <td class="text-center">
+                        <button class="btn btn-icon icon-left btn-light text-danger" data-toggle="modal" data-target="#hapusDataSupplier<?php echo $spl->id_supplier ?>"><i class="fas fa-trash"></i> Hapus</button>
                       </td>
                     </tr>
                     <?php endforeach; ?>
@@ -160,66 +148,36 @@
   </div>
 </div>
 
-<!--modal tambah data user-->
-<div class="modal fade" id="tambahDataUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!--modal tambah data supplier-->
+<div class="modal fade" id="tambahDataSupplier" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah User</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Supplier</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(). 'admin/data_user/tambah_user'; ?>" method="post" enctype="multipart/form-data" >
+        <form action="<?php echo base_url(). 'admin/data_supplier/tambah_supplier'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Nama</label>
+            <label>Nama Supplier</label>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="nama" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-              
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <div class="input-group">
-              <input type="email" class="form-control" placeholder="" name="email" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Nomor HP</label>
-            <div class="input-group">
-              <input type="number" class="form-control" placeholder="" name="no_hp" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
+              <input type="text" class="form-control" placeholder="" name="nama_supplier" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
             </div>
           </div>
           <div class="form-group">
             <label>Alamat</label>
             <div class="input-group">
-              <textarea class="form-control" name="alamat" required></textarea>
+              <textarea class="form-control" name="alamat_supplier" required></textarea>
             </div>
           </div>
           <div class="form-group">
-            <label>Password</label>
+            <label>Nomor HP</label>
             <div class="input-group">
-             <!--  <input type="password" id="pass" class="form-control" tabindex="2" name="password" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')"><span id="mybutton" style=" position: relative;z-index: 1;left: 90%;top: -30px;cursor: pointer;" onclick="change()"><i class="far fa-eye"></i></span> -->
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text" id="mybutton" onclick="change()">
-                    <i class="far fa-eye"></i>
-                  </div>
-                </div>
-                <input type="password" id="pass" class="form-control" name="password">
-              </div>
+              <input type="number" class="form-control" placeholder="" name="no_hp_supplier" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
             </div>
-          </div>
-          <div class="form-group">
-            <label>Hak Akses</label>
-            <select class="form-control" name="hak_akses">
-              
-                <option value="pemancing">Pemancing</option>
-                <option value="panitia">Panitia</option>
-             
-            </select>
           </div>
        </div>
       <div class="modal-footer bg-whitesmoke br">
@@ -232,65 +190,39 @@
 </div>
 <!-- akhir modal -->
 
-<!--modal edit user-->
+<!--modal edit supplier-->
 <?php 
-foreach ($user as $usr) : ?>
-<div class="modal fade" id="editDataUser<?php echo $usr->id_user?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+foreach ($supplier as $spl) : ?>
+<div class="modal fade" id="editDataSupplier<?php echo $spl->id_supplier?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Supplier</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(). 'admin/data_user/edit_user'; ?>" method="post" enctype="multipart/form-data" >
+        <form action="<?php echo base_url(). 'admin/data_supplier/edit_supplier'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Nama</label>
+            <label>Nama Supplier</label>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="nama" value="<?php echo $usr->nama ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-              <input type="hidden" value="<?php echo $usr->id_user ?>" type="text" name="id_user">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <div class="input-group">
-              <input type="email" class="form-control" placeholder="" name="email" value="<?php echo $usr->email ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Nomor HP/WA</label>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="no_hp" value="<?php echo $usr->no_hp ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
+              <input type="text" class="form-control" placeholder="" name="nama_supplier" value="<?php echo $spl->nama_supplier ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
+              <input type="hidden" value="<?php echo $spl->id_supplier ?>" type="text" name="id_supplier">
             </div>
           </div>
           <div class="form-group">
             <label>Alamat</label>
             <div class="input-group">
-              <textarea class="form-control" name="alamat" required><?php echo $usr->alamat ?></textarea>
+              <textarea class="form-control" name="alamat_supplier" required><?php echo $spl->alamat_supplier ?></textarea>
             </div>
           </div>
           <div class="form-group">
-            <label>Password</label>
+            <label>Nomor HP/WA</label>
             <div class="input-group">
-              <input type="password" class="form-control" placeholder="" name="password" value="<?php echo $usr->password ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-               <input type="hidden" value="<?php echo $usr->password ?>" type="text" name="password2">
+              <input type="text" class="form-control" placeholder="" name="no_hp_supplier" value="<?php echo $spl->no_hp_supplier ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
             </div>
-          </div>
-          <div class="form-group">
-            <label>Hak Akses</label>
-            <select class="form-control" name="hak_akses" required>
-                <option><?php echo $usr->hak_akses ?></option>
-                <?php if ($usr->hak_akses == "admin"): ?>
-                <option value="panitia">panitia</option>
-              <?php elseif($usr->hak_akses == "panitia"): ?>
-                <option value="admin">admin</option>
-              <?php else:?>
-                <option disabled value="pemancing">pemancing</option>
-                <?php endif;?>
-            </select>
           </div>
        </div>
       <div class="modal-footer bg-whitesmoke br">
@@ -305,8 +237,8 @@ foreach ($user as $usr) : ?>
 <!-- Akhir modal -->
 
 <!-- modal hapus user-->
-<?php foreach ($user as $usr) : ?>
-<div class="modal fade" id="hapusDataUser<?php echo $usr->id_user ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<?php foreach ($supplier as $spl) : ?>
+<div class="modal fade" id="hapusDataSupplier<?php echo $spl->id_supplier ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" >
     <div class="modal-content">
@@ -316,8 +248,8 @@ foreach ($user as $usr) : ?>
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?php echo base_url('admin/data_user/hapus_user') ?>" method="post">
-        <input hidden value="<?php echo $usr->id_user ?>" type="text" name="id_user">
+      <form action="<?php echo base_url('admin/data_supplier/hapus_supplier') ?>" method="post">
+        <input hidden value="<?php echo $spl->id_supplier ?>" type="text" name="id_supplier">
         <div class="modal-body">
           Apakah anda yakin ingin menghapus data ini ?
         </div>
@@ -330,21 +262,3 @@ foreach ($user as $usr) : ?>
   </div>
 </div>
 <?php endforeach; ?>
-
-<script type="text/javascript">
-   function change()
-   {
-      var x = document.getElementById('pass').type;
-
-      if (x == 'password')
-      {
-         document.getElementById('pass').type = 'text';
-         document.getElementById('mybutton').innerHTML = '<i class="far fa-eye-slash"></i>';
-      }
-      else
-      {
-         document.getElementById('pass').type = 'password';
-         document.getElementById('mybutton').innerHTML = '<i class="far fa-eye"></i>';
-      }
-   }
-</script>
