@@ -42,7 +42,9 @@ class Login extends CI_Controller {
                 switch($auth->hak_akses){
                     case 'admin' : redirect('admin/dashboard');
                         break;
-                    case 'admin' : redirect('admin/dashboard'); 
+                    case 'panitia' : redirect('panitia/dashboard'); 
+                        break;
+                    case 'pemancing' : redirect(''); 
                         break;
                     default: break;
                 }

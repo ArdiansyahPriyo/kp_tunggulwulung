@@ -1,7 +1,7 @@
 <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center">
-       <img class="logo me-auto" src="<?php echo base_url()?>assets/img/tunggul_wulung4.png" width="280" height="50" >
+       <img class="logo me-auto" src="<?php echo base_url()?>assets/img/tunggul_wulung4.png" width="250" height="40" >
       <!-- <h1 class="logo me-auto"><a href="index.html"> K<span>.</span>P Tunggul Wulung</a></h1> -->
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt=""></a>-->

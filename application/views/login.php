@@ -44,6 +44,9 @@
                <div class="mt-3 text-muted text-center">
                 Belum punya akun? <a href="<?php echo base_url('register') ?>">Silahkan Daftar</a>
               </div>
+              <div class="text-muted text-center">
+                <a href="<?php echo base_url('') ?>"><i class="fas fa-arrow-left"></i> Kembali</a>
+              </div>
               </div>
             </div>
             

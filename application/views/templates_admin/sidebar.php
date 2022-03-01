@@ -22,13 +22,22 @@
             </li>
           </ul>
         </div>
+        <ul class="navbar-nav" style="line-height: 120%;">
+          <li class="text-right">
+            <strong><?php echo $this->session->userdata('nama') ?></strong><br>
+            <?php echo $this->session->userdata('email') ?>
+          </li>
+        </ul>
         <ul class="navbar-nav navbar-right">
+          
+          
+          
           <li class="dropdown"><a href="#" data-toggle="dropdown"
               class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="<?php echo base_url()?>assets2/img/saya.jpg"
                 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
-              <div class="dropdown-item has-icon"><b><?php echo $this->session->userdata('nama') ?></b><br>
-              <?php echo $this->session->userdata('email') ?></div>
+              <!-- <div class="dropdown-item has-icon"><b><?php echo $this->session->userdata('nama') ?></b><br>
+              <?php echo $this->session->userdata('email') ?></div> -->
               <!-- <a href="profile.html" class="dropdown-item has-icon"> <i class="far
 										fa-user"></i> Profile
               </a> <a href="timeline.html" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>
@@ -36,10 +45,13 @@
               </a> <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
                 Settings
               </a> -->
-              <div class="dropdown-divider"></div>
-              <a data-toggle="modal" data-target="#logout" class="dropdown-item has-icon"> <i class="fas fa-power-off"></i>
-                <b>Logout</b>
+              <!-- <div class="dropdown-divider"></div> -->
+             <!--  <a data-toggle="modal" data-target="#logout" class="btn btn-icon icon-left btn-outline-primary dropdown-item"> <i class="fas fa-power-off"></i>
               </a>
+                <b>Logout</b>
+              </a> -->
+
+              <a href="" data-toggle="modal" data-target="#logout" class="dropdown-item has-icon"> <i class="fas fa-power-off"></i> Logout</a>
             </div>
           </li>
         </ul>
