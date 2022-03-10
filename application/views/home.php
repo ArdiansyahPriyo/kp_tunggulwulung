@@ -1,34 +1,9 @@
-<!-- BEGIN: Content-->
+<!--  BEGIN: Content -->
     <div class="app-content content ">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper container-xxl p-0">
             <div class="content-header row">
-                <div class="content-header-left col-md-9 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
-                        <div class="col-12">
-                            <h2 class="content-header-title float-start mb-0">Knowledge Base</h2>
-                            <div class="breadcrumb-wrapper">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item"><a href="#">Pages</a>
-                                    </li>
-                                    <li class="breadcrumb-item active">Knowledge Base
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
-                    <div class="mb-1 breadcrumb-right">
-                        <div class="dropdown">
-                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
-                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="app-todo.html"><i class="me-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="me-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="me-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="me-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="content-body">
                 <!-- Knowledge base Jumbotron -->
@@ -39,7 +14,7 @@
                                 <div class="card-body">
                                     <h2 class="text-primary">Kolam Pemancingan Tunggul Wulung</h2>
                                     <p class="card-text mb-2">
-                                        <span>Popular searches: </span><span class="fw-bolder">Sales automation, Email marketing</span>
+                                        <span class="fw-bolder">Selamat Datang </span><span>di Website Kami </span>
                                     </p>
                                     <form class="kb-search-input">
                                         <div class="input-group input-group-merge">
@@ -54,6 +29,50 @@
                 </section>
                 <!--/ Knowledge base Jumbotron -->
 
+                <section class="app-ecommerce-details">
+                    <div class="card">
+                        <!-- Product Details starts -->
+                        <div class="card-header">
+                          <h4 class="card-title">Profil</h4>
+                          <div class="heading-elements">
+                              <ul class="list-inline mb-0">
+                                  <li>
+                                      <a data-action="collapse"><i data-feather="chevron-down"></i></a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="card-content collapse show">
+                        <div class="card-body">
+                            <div class="row my-2">
+                                <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <img src="<?php echo base_url()?>assets2/img/kolam.jpeg" class="img-fluid product-img" alt="product image" />
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-7">
+                                    <h4>Kolam Pemancingan Tunggul Wulung</h4>
+                                    <span class="card-text item-company">By <a href="#" class="company-name">ADMIN</a></span>
+                                    
+                                    <p class="card-text mt-2" style="text-align: justify;">
+                                        Kolam Pemancingan Tunggul Wulung berdiri sejak tahun 2018 dengan luas area sekitar 1 hektar. Terletak di kota Ponorogo tepatnya di Desa Kupuk, Kecamatan Bungkal sebagai kolam pemancingan dan wisata. Kolam pemancingan ini dikelola oleh pihak BUMDes Kupuk dan dibangun untuk memberikan pengalaman yang memuaskan dan menyenangkan untuk para pemancing. Pemancing bisa mengikuti event-event dengan hadiah yang istimewa.
+                                    </p>
+                                 
+                                    <div class="d-flex flex-column flex-sm-row pt-1">
+                                        <a href="#" class="btn btn-primary btn-cart me-0 me-sm-1 mb-1 mb-sm-0">
+                                          <span class="add-to-cart">View More </span><i data-feather="chevron-right" class="me-50"></i>
+                                        </a>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                 </section>
+                <!-- app e-commerce details end -->
+                <!-- Custom Icons Starts -->
+               
+                <!-- /Custom Icons Ends -->
                 <!-- Knowledge base -->
                 <section id="knowledge-base-content">
                     <div class="row kb-search-content-info match-height">
@@ -148,4 +167,4 @@
             </div>
         </div>
     </div>
-    <!-- END: Content-->
+    <!-- END: Content

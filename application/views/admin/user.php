@@ -208,13 +208,13 @@
                     <i class="far fa-eye"></i>
                   </div>
                 </div>
-                <input type="password" id="pass" class="form-control" name="password">
+                <input type="password" id="pass" class="form-control" name="password" required>
               </div>
             </div>
           </div>
           <div class="form-group">
             <label>Hak Akses</label>
-            <select class="form-control" name="hak_akses">
+            <select class="form-control" name="hak_akses" required>
               
                 <option value="pemancing">Pemancing</option>
                 <option value="panitia">Panitia</option>
@@ -282,9 +282,9 @@ foreach ($user as $usr) : ?>
           <div class="form-group">
             <label>Hak Akses</label>
             <select class="form-control" name="hak_akses" required>
-                <option><?php echo $usr->hak_akses ?></option>
+                <option ><?php echo $usr->hak_akses ?></option>
                 <?php if ($usr->hak_akses == "admin"): ?>
-                <option value="panitia">panitia</option>
+                <option disabled value="admin">admin</option>
               <?php elseif($usr->hak_akses == "panitia"): ?>
                 <option value="admin">admin</option>
               <?php else:?>

@@ -53,12 +53,11 @@ class Data_panitia extends CI_Controller{
 		$id_subevent		= $this->input->post('id_subevent');
 
 
-		$sql = $this->db->query("SELECT id_user FROM t_panitia where id_user='$id_user' AND id_subevent='$id_subevent'");
-			// 	
+		$sql = $this->db->query("SELECT id_user FROM t_panitia where id_user='$id_user' AND id_subevent='$id_subevent'");	
 		$cek_user = $sql->num_rows();
 		if ( $cek_user > 0 ) {
 			$this->session->set_flashdata('panitiaSudahAda','<div class="alert alert-danger alert-dismissible fade show" role="alert"><i class="fas fa-times-circle"></i>
-	  				Data panitia sudah ada!
+	  				Gagal, Data panitia sudah ada!
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			    <span aria-hidden="true">&times;</span>
 			  </button>

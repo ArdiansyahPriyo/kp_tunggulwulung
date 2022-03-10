@@ -14,6 +14,9 @@
   <script src="<?php echo base_url()?>assets2/bundles/jquery-ui/jquery-ui.min.js"></script>
   <!-- Page Specific JS File -->
   <script src="<?php echo base_url()?>assets2/js/page/datatables.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/>
 </body>
 
 

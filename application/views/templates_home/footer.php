@@ -14,10 +14,19 @@
     <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/vendors.min.js"></script>
     <!-- BEGIN Vendor JS-->
 
+    <script src="https://kit.fontawesome.com/3b7dd5174c.js" crossorigin="anonymous"></script>
     <!-- BEGIN: Page Vendor JS-->
     <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/ui/jquery.sticky.js"></script>
     <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/charts/apexcharts.min.js"></script>
     <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/forms/wizard/bs-stepper.min.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/forms/cleave/cleave.min.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/forms/cleave/addons/cleave-phone.us.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/vendors/js/forms/validation/jquery.validate.min.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -27,6 +36,15 @@
 
     <!-- BEGIN: Page JS-->
     <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/pages/modal-add-new-cc.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/pages/page-pricing.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/pages/modal-add-new-address.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/pages/modal-create-app.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/pages/modal-two-factor-auth.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/pages/modal-edit-user.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/pages/modal-share-project.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/pages/app-invoice.js"></script>
+    <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/forms/form-wizard.js"></script>
     <!-- END: Page JS-->
 
     <script>

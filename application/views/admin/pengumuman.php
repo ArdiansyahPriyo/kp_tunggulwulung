@@ -38,7 +38,7 @@
                       <td><?php echo $png->judul ?></td>
                       <td><?php echo $png->deskripsi ?></td>
                       <td style="text-transform: capitalize;"><?php echo $png->status ?></td> 
-                      <td class="text-center"><button class="btn btn-icon icon-left btn-success" data-toggle="modal" data-target="#lihatDataFilePengumuman<?php echo $png->id_pengumuman ?>"><i class="fas fa-search"></i> Lihat</button></td>
+                      <td class="text-center"><button class="btn btn-icon icon-left btn-success dropdown-item" data-toggle="modal" data-target="#lihatDataFilePengumuman<?php echo $png->id_pengumuman ?>"><i class="fas fa-search"></i> Lihat</button></td>
                       <td class="text-center">
                         <div class="dropdown">
                           <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Options</a>

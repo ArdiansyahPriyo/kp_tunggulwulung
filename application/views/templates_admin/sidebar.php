@@ -79,14 +79,23 @@
             <li <?=$this->uri->segment(2) == 'data_panitia' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('admin/data_panitia') ?>" class="nav-link"><i class="fas fa-user-cog"></i><span>Panitia</span></a>
             </li>
-            <li <?=$this->uri->segment(2) == 'data_supplier' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+            <!-- <li <?=$this->uri->segment(2) == 'data_supplier' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('admin/data_supplier') ?>" class="nav-link"><i class="fas fa-truck"></i><span>Supplier Ikan</span></a>
-            </li> 
+            </li> --> 
+            <li <?=$this->uri->segment(2) == 'data_supplier' || $this->uri->segment(2) == 'data_pembelian' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i class="fas fa-fish"></i><span>Ikan</span></a>
+              <ul class="dropdown-menu">
+                <li <?=$this->uri->segment(2) == 'data_supplier' ? 'class="active"' : 'class=""'?>><a class="nav-link" href="<?php echo base_url('admin/data_supplier') ?>">Supplier</a></li>
+                <li><a class="nav-link" href="<?php echo base_url('admin/data_pembelian') ?>">Pembelian</a></li>
+              </ul>
+            </li>
+            
             <li <?=$this->uri->segment(2) == 'data_pengumuman' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('admin/data_pengumuman') ?>" class="nav-link"><i class="fas fa-bullhorn"></i><span>Pengumuman</span></a>
             </li>
 
             <li class="menu-header">Event</li>
+            
             <li <?=$this->uri->segment(2) == 'data_suplier' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('admin/data_suplier') ?>" class="nav-link"><i class="fas fa-award"></i><span>Pemenang</span></a>
             </li> 

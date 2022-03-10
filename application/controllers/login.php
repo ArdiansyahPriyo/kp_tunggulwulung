@@ -5,6 +5,7 @@ class Login extends CI_Controller {
 
     public function index()
     {
+       // 
         $this->load->view('templates_admin/header');
         $this->load->view('login');
         $this->load->view('templates_admin/footer');
@@ -38,13 +39,15 @@ class Login extends CI_Controller {
                 $this->session->set_userdata('hak_akses',$auth->hak_akses);
                 $this->session->set_userdata('nama',$auth->nama);
                 $this->session->set_userdata('id_user',$auth->id_user);
+                $this->session->set_userdata('no_hp',$auth->no_hp);
+                $this->session->set_userdata('alamat',$auth->alamat);
 
                 switch($auth->hak_akses){
                     case 'admin' : redirect('admin/dashboard');
                         break;
                     case 'panitia' : redirect('panitia/dashboard'); 
                         break;
-                    case 'pemancing' : redirect(''); 
+                    case 'pemancing' : redirect('home'); 
                         break;
                     default: break;
                 }

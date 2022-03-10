@@ -32,23 +32,44 @@ class Data_subevent extends CI_Controller{
 		$id_event							= $this->input->post('id_event');
 		$subevent							= $this->input->post('subevent');
 		$tanggal_pelaksanaan	= $this->input->post('tanggal_pelaksanaan');
+		$tmmulai							= $this->input->post('tmmulai');
+		$tmselesai						= $this->input->post('tmselesai');
+		$jenis_hadiah					= $this->input->post('jenis_hadiah');
 		$harga								= $this->input->post('harga');
-		$potongan							= $this->input->post('potongan');
+		$nominal							= $this->input->post('nominal');
 		$stok  								= $this->input->post('stok');
 		$jumlah_lapak					= $this->input->post('jumlah_lapak');
 		$mulai								= $this->input->post('mulai');
 		$akhir								= $this->input->post('akhir');
+		$file						      = $_FILES['file']['name'];
+		if ($file ='') {
+			
+		}else{
+			$config ['upload_path'] = './uploads';
+			$config ['allowed_types'] = 'pdf|jpg|jpeg|png';
+
+			$this->load->library('upload', $config);
+			if(!$this->upload->do_upload('file')){
+				echo "File gagal diupload";
+			}else{
+				$file = $this->upload->data('file_name');
+			}
+		}
 
 		$data = array(
 			'id_event' 						=> $id_event, 
 			'subevent' 						=> $subevent,
 			'tanggal_pelaksanaan' => $tanggal_pelaksanaan,
+			'jenis_hadiah'				=> $jenis_hadiah,
+			'jam_mulai' 						=> $tmmulai,
+			'jam_selesai'						=> $tmselesai,
 			'harga' 							=> preg_replace("/[^0-9]/","",$harga),
-			'potongan' 						=> preg_replace("/[^0-9]/","",$potongan),
+			'nominal' 						=> preg_replace("/[^0-9]/","",$nominal),
 			'stok'								=> $stok,
 			'jumlah_lapak' 				=> $jumlah_lapak,
 			'mulai' 							=> $mulai, 
-			'akhir' 							=> $akhir	
+			'akhir' 							=> $akhir,
+			'file'								=> $file
 		);
 
 		$this->model_subevent->tambah_subevent($data, 't_subevent');
@@ -66,22 +87,58 @@ class Data_subevent extends CI_Controller{
 		$id_subevent	 				= $this->input->post('id_subevent');
 		$subevent 						= $this->input->post('subevent');
 		$tanggal_pelaksanaan 	= $this->input->post('tanggal_pelaksanaan');
-		$harga 								= $this->input->post('harga');
+		$jenis_hadiah					= $this->input->post('jenis_hadiah');
+		$harga								= $this->input->post('harga');
+		$nominal							= $this->input->post('nominal');
 		$jumlah_lapak					= $this->input->post('jumlah_lapak');
 		$stok 								= $this->input->post('stok');
 		$mulai								= $this->input->post('mulai');
 		$akhir  							= $this->input->post('akhir');
+		$file					        =  $_FILES['file']['name'];
+		if ($file ='') {
+			
+		}else{
+			$config ['upload_path'] = './uploads';
+			$config ['allowed_types'] = 'pdf|jpg|jpeg|png';
 
-		$data = array(
+			$this->load->library('upload', $config);
+			if(!$this->upload->do_upload('file')){
+				echo "File gagal diupload";
+			}else{
+				$file = $this->upload->data('file_name');
+			}
+		}
+
+		if ($file != null) {
+			$data = array(
 			'id_subevent' 		     => $id_subevent,
 			'subevent' 		    		 => $subevent, 
 			'tanggal_pelaksanaan'  => $tanggal_pelaksanaan,
-			'harga' 		           => $harga,
+			'jenis_hadiah'				 => $jenis_hadiah,
+			'harga' 							 => preg_replace("/[^0-9]/","",$harga),
+			'nominal' 						 => preg_replace("/[^0-9]/","",$nominal),
+			'jumlah_lapak'			   => $jumlah_lapak,
+			'stok'                 => $stok,
+			'mulai'		             => $mulai,
+			'akhir'		             => $akhir,
+			'file'								 => $file
+			);
+		}else{
+			$data = array(
+			'id_subevent' 		     => $id_subevent,
+			'subevent' 		    		 => $subevent, 
+			'tanggal_pelaksanaan'  => $tanggal_pelaksanaan,
+			'jenis_hadiah'				 => $jenis_hadiah,
+			'harga' 							 => preg_replace("/[^0-9]/","",$harga),
+			'nominal' 						 => preg_replace("/[^0-9]/","",$nominal),
 			'jumlah_lapak'			   => $jumlah_lapak,
 			'stok'                 => $stok,
 			'mulai'		             => $mulai,
 			'akhir'		             => $akhir
-		);
+			);
+		}
+
+		
 
 		$this->db->where('id_subevent', $id_subevent);
 		$this->db->update('t_subevent', $data);
