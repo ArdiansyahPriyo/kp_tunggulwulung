@@ -41,6 +41,7 @@ class Login extends CI_Controller {
                 $this->session->set_userdata('id_user',$auth->id_user);
                 $this->session->set_userdata('no_hp',$auth->no_hp);
                 $this->session->set_userdata('alamat',$auth->alamat);
+                $this->session->set_userdata('foto',$auth->foto);
 
                 switch($auth->hak_akses){
                     case 'admin' : redirect('admin/dashboard');

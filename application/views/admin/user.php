@@ -27,7 +27,8 @@
                       <th>Email</th>
                       <th>Nomor HP</th>
                       <th>Alamat</th>
-                      <th>Password</th>
+                      <!-- <th>Password</th> -->
+                      <th>Status</th>
                       <th>Hak Akses</th>
                      <!--  <th style="width: 6%;">Actionss</th> -->
                       <th class="text-center" style="width: 6%;">Action</th>
@@ -43,7 +44,12 @@
                       <td><?php echo $usr->email ?></td>
                       <td><?php echo $usr->no_hp ?></td>
                       <td><?php echo $usr->alamat ?></td>
-                      <td><?php echo substr($usr->password, 25)?>. . .</td>
+                      <td><?php if ($usr->status == 'aktif') {
+                        echo "Aktif";
+                      }else{
+                        echo "Nonaktif";
+                      } ?></td>
+                      <!-- <td><?php echo substr($usr->password, 25)?>. . .</td> -->
                       <td style="text-transform: capitalize;"><?php echo $usr->hak_akses ?></td>
                       <!-- <td><a href="#" class="btn btn-primary">Detail</a></td> -->
                       <td>
@@ -52,6 +58,7 @@
                           <div class="dropdown-menu">
                             <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#editDataUser<?php echo $usr->id_user ?>"><i class="far fa-edit"></i> Edit</button>
                             <button class="btn btn-icon icon-left btn-light dropdown-item text-danger" data-toggle="modal" data-target="#hapusDataUser<?php echo $usr->id_user ?>"><i class="fas fa-trash"></i> Hapus</button>
+                            <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#lihatFotoUser<?php echo $usr->id_user ?>"><i class="fas fa-file-image"></i> Lihat Foto</button>
                           </div>
                         </div>
                       </td>
@@ -215,11 +222,21 @@
           <div class="form-group">
             <label>Hak Akses</label>
             <select class="form-control" name="hak_akses" required>
-              
-                <option value="pemancing">Pemancing</option>
-                <option value="panitia">Panitia</option>
-             
+              <option value="pemancing">Pemancing</option>
+              <option value="panitia">Panitia</option>
             </select>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select class="form-control" name="status" required>
+              <option value="aktif">Aktif</option>
+              <option value="nonaktif">Nonaktif</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Foto User</label>
+            <input type="file" class="form-control" name="foto">
+            <small>Format Foto (JPEG/PNG)</small>
           </div>
        </div>
       <div class="modal-footer bg-whitesmoke br">
@@ -282,15 +299,41 @@ foreach ($user as $usr) : ?>
           <div class="form-group">
             <label>Hak Akses</label>
             <select class="form-control" name="hak_akses" required>
-                <option ><?php echo $usr->hak_akses ?></option>
+                <option value="<?php echo $usr->hak_akses ?>"><?php if ($usr->hak_akses == "admin") {
+                  echo "Admin";
+                }elseif ($usr->hak_akses == "panitia") {
+                  echo "Panitia";
+                }elseif ($usr->hak_akses == "pemancing") {
+                  echo "Pemancing";
+                } ?></option>
                 <?php if ($usr->hak_akses == "admin"): ?>
-                <option disabled value="admin">admin</option>
+                <option disabled value="admin">Admin</option>
               <?php elseif($usr->hak_akses == "panitia"): ?>
-                <option value="admin">admin</option>
+                <option value="admin">Admin</option>
               <?php else:?>
-                <option disabled value="pemancing">pemancing</option>
+                <option disabled value="pemancing">Pemancing</option>
                 <?php endif;?>
             </select>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select class="form-control" name="status" required>
+              <option value="<?php echo $usr->status ?>"><?php if ($usr->status == "aktif") {
+                echo "Aktif";
+              }else{
+                echo "Nonaktif";
+              } ?></option>
+              <?php if ($usr->status == "aktif") { ?>
+                 <option value="nonaktif">Nonaktif</option>
+              <?php }elseif($usr->status == "nonaktif") {?>
+              <option value="aktif">Aktif</option>
+              <?php } ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Foto User</label>
+            <input type="file" class="form-control" name="foto">
+            <small>Format Foto (JPEG/PNG)</small>
           </div>
        </div>
       <div class="modal-footer bg-whitesmoke br">
@@ -330,6 +373,27 @@ foreach ($user as $usr) : ?>
   </div>
 </div>
 <?php endforeach; ?>
+<!--Modal Lihat File  -->
+<?php foreach($user as $usr) : ?>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="lihatFotoUser<?php echo $usr->id_user ?>" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myLargeModalLabel">Foto User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body align-center">
+      <embed src="<?php echo base_url().'/uploads/'.$usr->foto ?>"
+                    frameborder="0" width="75%" height="600px">
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>
+<!-- End modal -->
 
 <script type="text/javascript">
    function change()

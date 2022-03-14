@@ -6,6 +6,7 @@ class Model_login extends CI_Model{
 		
 		$this->db->where('email', $this->input->post('email'));
         $this->db->where('password', md5($this->input->post('password')));
+        $this->db->where('status', 'aktif');
 
         $result = $this->db->get("t_user");
 		if($result->num_rows() > 0)

@@ -26,7 +26,7 @@
           <a class="nav-link" href="https://wa.me/6285730078027" data-bs-toggle="tooltip" target="blank" data-bs-placement="bottom" title="WhatsApp"><i class="ficon" data-feather="message-square"></i></a>
         </li>
         <li class="nav-item d-none d-lg-block">
-          <a class="nav-link nav-link-style"><span id="tgl"></span></a>
+          <a class="nav-link"><span id="tgl"></span></a>
         </li>
       </ul>
       <ul class="nav navbar-nav">
@@ -41,7 +41,7 @@
                   <span class="user-status"> <?php echo $this->session->userdata('email') ?></span>
                 </div> -->
                 <span class="avatar">
-                  <img class="round" src="<?php echo base_url()?>assets1/app-assets//images/portrait/small/avatar-s-11.jpg" alt="avatar" height="35" width="35"><span class="avatar-status-online"></span>
+                  <img class="round" src="<?php echo base_url().'/uploads/'.$this->session->userdata('foto') ?>" alt="avatar" height="35" width="35"><span class="avatar-status-online"></span>
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
@@ -59,7 +59,7 @@
               <!-- <span class="user-name fw-bolder">John Doe</span><span class="user-status">Admin</span> -->
             </div>
             <span class="">
-               <a class="btn btn-primary round" href="<?php echo base_url('login') ?>"> Login
+               <a class="btn btn-sm btn-outline-primary " href="<?php echo base_url('login') ?>"> Login
                </span>
           </a>
       </li>

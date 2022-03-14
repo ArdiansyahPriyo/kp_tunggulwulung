@@ -32,10 +32,26 @@ class Data_user extends CI_Controller{
 		$no_hp 			= $this->input->post('no_hp');
 		$alamat			= $this->input->post('alamat');
 		$hak_akses 	= $this->input->post('hak_akses');
+		$status 	  = $this->input->post('status');
 		$password		= $this->input->post('password');
 		$password2  = $this->input->post('password2');
+		$foto				= $_FILES['foto']['name'];
+		if ($foto ='') {
+			
+		}else{
+			$config ['upload_path'] = './uploads';
+			$config ['allowed_types'] = 'jpg|jpeg|png';
+
+			$this->load->library('upload', $config);
+			if(!$this->upload->do_upload('foto')){
+				echo "File gagal diupload";
+			}else{
+				$foto = $this->upload->data('file_name');
+			}
+		}
 
 		if ($password == $password2) {
+			if ($foto != null) {
 			$data = array(
 				'id_user' 		 => $id_user,
 				'nama' 		     => $nama, 
@@ -43,8 +59,20 @@ class Data_user extends CI_Controller{
 				'no_hp' 		   => $no_hp,
 				'alamat'			 => $alamat,
 				'hak_akses'    => $hak_akses,
-				'created_date' => date('Y-m-d H:i:s')		
+				'status' 			 => $status,
+				'foto'				 => $foto	
 			);
+			}else{
+			$data = array(
+				'id_user' 		 => $id_user,
+				'nama' 		     => $nama, 
+				'email' 		   => $email,
+				'no_hp' 		   => $no_hp,
+				'alamat'			 => $alamat,
+				'hak_akses'    => $hak_akses,
+				'status' 			 => $status
+			);
+			}
 
 			$this->db->where('id_user', $id_user);
 			$this->db->update('t_user', $data);
@@ -56,6 +84,7 @@ class Data_user extends CI_Controller{
 			</div>');
 			redirect('admin/data_user');
 		}else{
+			if ($foto != null) {
 			$data = array(
 				'id_user' 		 => $id_user,
 				'nama' 		     => $nama, 
@@ -63,10 +92,22 @@ class Data_user extends CI_Controller{
 				'no_hp' 		   => $no_hp,
 				'alamat'			 => $alamat,
 				'hak_akses'    => $hak_akses,
+				'status' 			 => $status,
 				'password'		 => md5($password),
-				'created_date' => date('Y-m-d H:i:s')
+				'foto'				 => $foto
 			);
-
+		 }else{
+		 	$data = array(
+				'id_user' 		 => $id_user,
+				'nama' 		     => $nama, 
+				'email' 		   => $email,
+				'no_hp' 		   => $no_hp,
+				'alamat'			 => $alamat,
+				'hak_akses'    => $hak_akses,
+				'status' 			 => $status,
+				'password'		 => md5($password)
+			);
+		 }
 			$this->db->where('id_user', $id_user);
 			$this->db->update('t_user', $data);
 			$this->session->set_flashdata('berhasilEditUser','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
@@ -88,6 +129,21 @@ class Data_user extends CI_Controller{
 		$alamat				= $this->input->post('alamat');
 		$password			= md5($this->input->post('password'));
 		$hak_akses		= $this->input->post('hak_akses');
+		$status		 		= $this->input->post('status');
+		$foto					= $_FILES['foto']['name'];
+		if ($foto ='') {
+			
+		}else{
+			$config ['upload_path'] = './uploads';
+			$config ['allowed_types'] = 'jpg|jpeg|png';
+
+			$this->load->library('upload', $config);
+			if(!$this->upload->do_upload('foto')){
+				echo "File gagal diupload";
+			}else{
+				$foto = $this->upload->data('file_name');
+			}
+		}
 
 		$sql = $this->db->query("SELECT email,password FROM t_user where email='$email' or password='$password'");
       $cek_email = $sql->num_rows();
@@ -108,7 +164,11 @@ class Data_user extends CI_Controller{
 			'no_hp' 			=> $no_hp,
 			'alamat' 			=> $alamat,
 			'password' 		=> $password, 
-			'hak_akses' 	=> $hak_akses	
+			'hak_akses' 	=> $hak_akses,
+			'status'			=> $status,
+			'foto'				=> $foto,
+			'created_date' => date('Y-m-d H:i:s')
+
 		);
 
 			$this->model_user->tambah_user($data, 't_user');
