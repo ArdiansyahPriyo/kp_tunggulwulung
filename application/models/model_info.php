@@ -9,5 +9,9 @@ class Model_info extends CI_Model{
         return $query->result();
 	} 
 
+	public function detail_info($where,$table){
+		return $this->db->get_where($table,$where);
+	}
+
 }
 ?>

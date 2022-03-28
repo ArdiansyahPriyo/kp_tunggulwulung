@@ -38,9 +38,9 @@
                                             <a href="page-blog-detail.html" class="blog-title-truncate text-body-heading"><?php echo $inf->judul ?>
                                         </h4>
                                         <div class="d-flex">
-                                            <div class="avatar me-50">
+                                            <!-- <div class="avatar me-50">
                                                 <img src="<?php echo base_url('')?>/assets1/app-assets/images/portrait/small/avatar-s-7.jpg" alt="Avatar" width="24" height="24" />
-                                            </div>
+                                            </div> -->
                                             <div class="author-info">
                                                 <small class="text-muted me-25">by</small>
                                                 <small><a href="#" class="text-body"><?php echo $inf->created_by ?></a></small>
@@ -83,12 +83,18 @@
                                         </div>
                                         
                                         <p class="card-text blog-content-truncate mt-2">
-                                            <?php echo $inf->deskripsi ?>
+                                            <?php echo substr($inf->deskripsi, 0, 100) ." . . . " ?>
                                         </p>
                                         <hr />
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <a href="page-blog-detail.html" class="fw-bold">Read More <i data-feather='chevron-right'></i></a>
-                                        </div>
+                                        <form action="<?php echo base_url(). 'info/read_more'; ?>" method="post">
+                                          <input type="hidden" name="id_pengumuman" value="<?php echo $inf->id_pengumuman?>">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <button type="submit" class="btn btn-flat-primary">
+                                                  <span>Read More</span>
+                                                  <i data-feather='chevron-right' class="me-25"></i>
+                                                </button> 
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +176,7 @@
                         <!--/ Recent Posts -->
 
                         <!-- Categories -->
-                        <div class="blog-categories mt-3">
+                        <!-- <div class="blog-categories mt-3">
                             <h6 class="section-label">Categories</h6>
                             <div class="mt-1">
                                 <div class="d-flex justify-content-start align-items-center mb-75">
@@ -234,7 +240,7 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!--/ Categories -->
                     </div>
 

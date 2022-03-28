@@ -48,7 +48,6 @@
                 <a class="dropdown-item" href="<?php echo base_url('profil') ?>"><i class="me-50" data-feather="user"></i> Profil</a>
                 <a class="dropdown-item" href="#"><i class="me-50" data-feather="credit-card"></i> Tiket Saya</a>
                 <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logout_user"><i class="me-50" data-feather="power"></i> Logout</a>
-
             </div>
         </li>
       <?php }else{ ?>
@@ -56,7 +55,6 @@
       <li class="nav-item dropdown dropdown-user">
           <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="user-nav d-sm-flex d-none">
-              <!-- <span class="user-name fw-bolder">John Doe</span><span class="user-status">Admin</span> -->
             </div>
             <span class="">
                <a class="btn btn-sm btn-outline-primary " href="<?php echo base_url('login') ?>"> Login
@@ -114,8 +112,8 @@
                   <i data-feather="image"></i><span data-i18n="Dashboards">Galeri</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="index.html" data-bs-toggle="dropdown">
+              <li <?=$this->uri->segment(1) == 'contact' ? 'class="nav-item active"' : 'class="nav-item"'?>>
+                <a class="nav-link d-flex align-items-center" href="<?php echo base_url('contact') ?>">
                   <i data-feather="message-circle"></i><span data-i18n="Dashboards">Contact</span>
                 </a>
               </li>
