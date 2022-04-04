@@ -18,8 +18,17 @@ class Model_tiket extends CI_Model{
 	}
 
 	public function beli(){
-		$query = $this->db->get('t_pesanan');
-		return $query->result_array();
+		$id_user = $this->session->userdata('id_user');
+		$this->db->select('*');
+		$this->db->from('t_pesanan');
+		$this->db->where('id_user', $id_user);
+		$query = $this->db->get();
+		if($query->num_rows() > 0){
+			return $query->result();
+		}else {
+			return array();
+		}
+		//return $query->result_array();
 	} 
 
 }

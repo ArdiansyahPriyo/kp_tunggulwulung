@@ -220,11 +220,13 @@
                         <!-- add new card  -->
                         <?php foreach ($tiket as $tk) : 
                         if (strtotime($tk->mulai) <= time() AND strtotime($tk->akhir) >= time()) :?>
+
+                        <?php if ($beli != null): ?>
                         <?php foreach ($beli as $bl) : 
-                          $sub[] = $bl['id_subevent'];
-                          $use[] = $bl['id_user'];?>
+                          $sub[] = $bl->id_subevent;?>
                         <?php endforeach; ?>  
-                        <?php if (in_array($tk->id_subevent, $sub) && in_array($this->session->userdata('id_user'), $use)) {?>
+                        <?php if (in_array($tk->id_subevent, $sub)) {?>
+
 
                         <?php }else{ ?>
                         <div class="col-md-4">
@@ -297,13 +299,97 @@
                                     </h6><br>
 
                                     <!-- modal trigger button -->
-                                    <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#createAppModal<?php echo $tk->id_subevent ?>">
-                                        Lihat Detail <i data-feather='chevron-right'></i>
-                                    </button>
+                                   
+                                        <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#createAppModal<?php echo $tk->id_subevent ?>">
+                                            Lihat Detail <i data-feather='chevron-right'></i>
+                                        </button>
+                                  
+                                
                                 </div>
                             </div>
                         </div>
                       <?php } ?>
+                    <?php else : ?>
+                      <div class="col-md-4">
+                            <div class="card card-primary">
+                                <div class="card-body text-center">
+                                  <div class="d-flex justify-content-between align-items-start">
+                                    <span class="badge badge-light-primary">
+                                      <?php echo $tk->event ?>
+                                    </span> 
+                                    <span class="badge rounded-pill badge-light-success">Stok : <?php echo $tk->stok ?></span>
+                                  </div>
+                                   <!-- <i class="fa-solid fa-ticket font-large-2 mb-1 mt-1"></i> -->
+                                   <i class="far fa-credit-card font-large-2 mb-1 mt-1"></i>
+                                    <h4 class="card-text text-primary"><b><?php echo $tk->subevent ?></b></h4>
+                                    <h6 class="badge bg-light-warning"> 
+                                      
+                                        <?php 
+                                        $hari = date("D",strtotime($tk->tanggal_pelaksanaan));
+                                        if ($hari == "Sun") {
+                                          echo "Minggu" ;
+                                        }elseif ($hari == "Mon") {
+                                          echo "Senin" ;
+                                        }elseif ($hari == "Tue") {
+                                          echo "Selasa" ;
+                                        }elseif ($hari == "Wed") {
+                                          echo "Rabu" ;
+                                        }elseif ($hari == "Thu") {
+                                          echo "Kamis" ;
+                                        }elseif ($hari == "Fri") {
+                                          echo "Jumat" ;
+                                        }elseif ($hari == "Sat") {
+                                          echo "Sabtu" ;
+                                        }else{
+                                          echo "";
+                                        }
+                                       ?>, <?php echo date("d", strtotime($tk->tanggal_pelaksanaan)) ?>
+
+                                       <?php 
+                                        $bln = date("F",strtotime($tk->tanggal_pelaksanaan));
+                                        if ($bln == "January") {
+                                          echo "Januari" ;
+                                        }elseif ($bln == "February") {
+                                          echo "Februari" ;
+                                        }elseif ($bln == "March") {
+                                          echo "Maret" ;
+                                        }elseif ($bln == "April") {
+                                          echo "April" ;
+                                        }elseif ($bln == "May") {
+                                          echo "Mei" ;
+                                        }elseif ($bln == "June") {
+                                          echo "Juni" ;
+                                        }elseif ($bln == "July") {
+                                          echo "Juli" ;
+                                        }elseif ($bln == "August") {
+                                          echo "Agustus" ;
+                                        }elseif ($bln == "September") {
+                                          echo "September" ;
+                                        }elseif ($bln == "October") {
+                                          echo "Oktober" ;
+                                        }elseif ($bln == "November") {
+                                          echo "November" ;
+                                        }elseif ($bln == "December") {
+                                          echo "Desember" ;
+                                        }else{
+                                          echo "";
+                                        }
+                                       ?>
+                                       <?php echo date("Y", strtotime($tk->tanggal_pelaksanaan)) ?>
+                                     
+                                    </h6><br>
+
+                                    <!-- modal trigger button -->
+                                   
+                                        <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#createAppModal<?php echo $tk->id_subevent ?>">
+                                            Lihat Detail <i data-feather='chevron-right'></i>
+                                        </button>
+                                  
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif;?>
                         <?php  endif; ?>
                         <!-- / add new card  -->
                         

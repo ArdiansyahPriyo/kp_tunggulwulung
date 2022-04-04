@@ -188,7 +188,7 @@
       </div>
       <div class="modal-body">
         <embed src="<?php echo base_url().'/uploads/'.$png->gambar ?>"
-                    frameborder="0" width="100%" height="600px">
+                    frameborder="0" width="100%" height="350px">
       </div>
       <div class="modal-footer bg-whitesmoke br">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

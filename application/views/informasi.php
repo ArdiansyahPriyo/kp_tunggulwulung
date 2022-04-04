@@ -31,7 +31,7 @@
                             <div class="col-md-6 col-12">
                                 <div class="card">
                                     <a href="page-blog-detail.html">
-                                        <img class="card-img-top img-fluid" src="<?php echo base_url('')?>/assets1/app-assets/images/slider/01.jpg" alt="Blog Post pic" />
+                                        <img class="card-img-top img-fluid" src="<?php echo base_url().'/uploads/'.$inf->gambar ?>" alt="Blog Post pic" />
                                     </a>
                                     <div class="card-body">
                                         <h4 class="card-title">
