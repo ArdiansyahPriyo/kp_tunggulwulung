@@ -1,5 +1,6 @@
 <!--  BEGIN: Content -->
     <div class="app-content content ">
+        <?php echo $this->session->flashdata('sudahMembayar');  ?>  
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper container-xxl p-0">
@@ -52,7 +53,7 @@
                                 </div>
                                 <div class="col-12 col-md-7">
                                     <h4>Kolam Pemancingan Tunggul Wulung</h4>
-                                    <span class="card-text item-company">By <a href="#" class="company-name">ADMIN</a></span>
+                                    <!-- <span class="card-text item-company">By <a href="#" class="company-name">ADMIN</a></span> -->
                                     
                                     <p class="card-text mt-2" style="text-align: justify;">
                                         Kolam Pemancingan Tunggul Wulung berdiri sejak tahun 2018 dengan luas area sekitar 1 hektar. Terletak di kota Ponorogo tepatnya di Desa Kupuk, Kecamatan Bungkal sebagai kolam pemancingan dan wisata. Kolam pemancingan ini dikelola oleh pihak BUMDes Kupuk dan dibangun untuk memberikan pengalaman yang memuaskan dan menyenangkan untuk para pemancing. Pemancing bisa mengikuti event-event dengan hadiah yang istimewa.

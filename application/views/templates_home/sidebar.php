@@ -32,7 +32,7 @@
       <ul class="nav navbar-nav">
       </ul>
     </div>
-    <ul class="nav navbar-nav align-items-center ms-auto">
+   <ul class="nav navbar-nav align-items-center ms-auto">
       <?php if($this->session->userdata('nama')) { ?>
         <li class="nav-item dropdown dropdown-user">
             <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -40,9 +40,11 @@
                   <span class="user-name fw-bolder"> <?php echo $this->session->userdata('nama') ?></span>
                   <span class="user-status"> <?php echo $this->session->userdata('email') ?></span>
                 </div> -->
+                <?php foreach ($user as $usr) : ?>
                 <span class="avatar">
-                  <img class="round" src="<?php echo base_url().'/uploads/'.$this->session->userdata('foto') ?>" alt="avatar" height="35" width="35"><span class="avatar-status-online"></span>
+                  <img class="round" src="<?php echo base_url().'/uploads/'.$usr->foto ?>" alt="avatar" height="35" width="35"><span class="avatar-status-online"></span>
                 </span>
+              <?php endforeach; ?>
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
                 <a class="dropdown-item" href="<?php echo base_url('profil') ?>"><i class="me-50" data-feather="user"></i> Profil</a>

@@ -36,32 +36,34 @@
                                 <!-- header section -->
                                 <?php foreach ($user as $usr) : ?>
                                 <div class="d-flex">
+
                                     <a href="#" class="me-25">
                                         <img src="<?php echo base_url().'/uploads/'.$usr->foto ?>" alt="profile image" height="100" width="100" />
                                     </a>
+                                  <?php endforeach; ?>
+
                                     <!-- upload and reset button -->
+                                    <?php foreach ($user as $usr) : ?>
+                                    <form action="<?php echo base_url(). 'profil/edit_profil'; ?>" method="post" enctype="multipart/form-data">
                                     <div class="d-flex  mt-75 ms-1">
+
                                         <div>
-                                            
                                             <span class="h3 d-block"><b><?php echo $usr->nama ?></b></span>
                                             <!-- <span class="d-block"><?php echo $this->session->userdata('email') ?></span> -->
                                             <label for="account-upload" class="btn btn-sm btn-outline-secondary mb-75 me-75"><i class="fas fa-pencil-alt"></i> Pilih Gambar</label>
-                                            <input type="file" id="account-upload" hidden accept="image/*" />
+                                            <input type="file" id="account-upload" name="foto" hidden accept="image/*"/>
                                             <small class="d-block">Format Gambar (JPEG/PNG)</label>
                                             <!-- <button type="button" id="account-reset" class="btn btn-sm btn-outline-secondary mb-75"><i class="fas fa-pencil-alt"></i> Edit Profil</button> -->
-                                            
-
-                                        </div>
+                                          </div>
                                     </div>
                                     <!--/ upload and reset button -->
                                 </div>
-                                <?php endforeach; ?>
+                               
                                 <!--/ header section -->
 
                                 <!-- form -->
-                                <?php foreach ($user as $usr) : ?>
-                                <form action="<?php echo base_url(). 'profil/edit_profil'; ?>" method="post" class="validate-form mt-2 pt-50">
-                                    <div class="row">
+                               
+                                    <div class="row mt-1">
                                         <div class="col-12 col-sm-6 mb-1">
                                             <label class="form-label" for="accountFirstName">Nama</label>
                                             <input type="text" class="form-control" id="accountFirstName" name="nama"  value="<?php echo $usr->nama ?>" data-msg="Please enter first name" required/>

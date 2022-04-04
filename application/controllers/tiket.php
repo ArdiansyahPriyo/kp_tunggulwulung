@@ -18,8 +18,10 @@ class Tiket extends CI_Controller {
     public function index()
     {
         $data['tiket'] = $this->model_tiket->tampil_data();
+        $data2['user'] = $this->model_profil->tampil_user();
+        $data['beli'] = $this->model_tiket->beli();
         $this->load->view('templates_home/header');
-        $this->load->view('templates_home/sidebar');
+        $this->load->view('templates_home/sidebar', $data2);
         $this->load->view('tiket', $data);
         $this->load->view('templates_home/footer');
     }
@@ -39,8 +41,9 @@ class Tiket extends CI_Controller {
         $id_subevent      = $this->input->post('id_subevent');
         $where = array('id_subevent' => $id_subevent);
         $data['tiket'] = $this->model_tiket->pesan_tiket($where, 't_subevent')->result();
+        $data2['user'] = $this->model_profil->tampil_user();
         $this->load->view('templates_home/header_midtrans');
-        $this->load->view('templates_home/sidebar');
+        $this->load->view('templates_home/sidebar', $data2);
         $this->load->view('pesan_tiket', $data);
         $this->load->view('templates_home/footer');
     }
@@ -65,11 +68,12 @@ class Tiket extends CI_Controller {
       $alamat = $this->input->post('alamat');
       $subevent = $this->input->post('subevent');
       $harga = $this->input->post('harga');
-      
+      $pajak = 5000;
+      $paj = 'Biaya Penanganan';
       // Required
       $transaction_details = array(
         'order_id' => $id_user.mt_rand(000000, 999999),
-        'gross_amount' => $harga, // no decimal allowed for creditcard
+        'gross_amount' => $harga+$pajak // no decimal allowed for creditcard
       );
 
       // Optional
@@ -81,15 +85,15 @@ class Tiket extends CI_Controller {
       );
 
       // Optional
-      // $item2_details = array(
-      //   'id' => 'a2',
-      //   'price' => 20000,
-      //   'quantity' => 2,
-      //   'name' => "Orange"
-      // );
+      $item2_details = array(
+        'id'  => 'F1',
+        'price' => $pajak,
+        'quantity' => 1,
+        'name' => $paj
+      );
 
       // Optional
-      $item_details = array ($item1_details);
+      $item_details = array ($item1_details,$item2_details);
 
       // Optional
       // $billing_address = array(
@@ -119,6 +123,7 @@ class Tiket extends CI_Controller {
         //'last_name'     => "Litani",
         'email'         => $email,
         'phone'         => $no_hp,
+        'address'       => $alamat,
         //'billing_address'  => $billing_address,
          'shipping_address' => $shipping_address
       );
@@ -152,6 +157,9 @@ class Tiket extends CI_Controller {
     public function finish()
     {
       $result = json_decode($this->input->post('result_data'),true);
+      // echo 'RESULT <br><pre>';
+      // var_dump($result);
+      // echo '</pre>' ;
 
       $nama = $this->input->post('nama'); 
       $id_user = $this->input->post('id_user');
@@ -162,32 +170,38 @@ class Tiket extends CI_Controller {
       $subevent = $this->input->post('subevent');
       $harga = $this->input->post('harga');
 
+       $data = array(
+     
+      'id_user'      => $id_user,
+      'id_subevent'  => $id_subevent,
+      'created_date' => date('Y-m-d H:i:s')
+      );
+
+     // $this->model_pesanan->tambah_pesanan('t_pesanan', $data);
+      // $this->db->insert('t_pesanan', $data2);
+      // return $this->db->insert_id();
+       
+      $id_pesanan = $this->model_pesanan->tambah_pesanan('t_pesanan', $data);
       $data1 = [
         'id_transaksi'       => $result['order_id'],
+        'id_pesanan'         => $id_pesanan,
         'gross_amount'       => $result['gross_amount'],
         'payment_type'       => $result['payment_type'],
         'transaction_time'   => $result['transaction_time'],
         'transaction_status' => $result['transaction_status'],
-        'bank'               => $result['va_numbers'][0]['bank'],
-        'va_number'          => $result['va_numbers'][0]['va_number'],
-        'pdf_url'            => $result['pdf_url'],
+        // 'bank'               => $result['va_numbers'][0]['bank'],
+        // 'va_number'          => $result['va_numbers'][0]['va_number'],
+        // 'pdf_url'            => $result['pdf_url'],
         'status_code'        => $result['status_code']
       ];
       
       $simpan = $this->db->insert('t_transaksi', $data1);
-      if ($simpan) {
-        echo "Sukses";
-      }else{
-        echo "Gagal";
-      }
-
-      $data2 = array(
-      'id_pesanan'   => $id_subevent.$id_user.mt_rand(0000, 9999), 
-      'id_user'      => $id_user,
-      'id_subevent'  => $id_subevent,
-      'id_transaksi' => $result['order_id']
-      );
-      $this->db->insert('t_pesanan', $data2);
+      $this->session->set_flashdata('sudahMembayar','<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+          <script type ="text/JavaScript">  
+          swal("Info !","Pembayaran Sedang Diproses","info")  
+          </script>'  
+        );
+      redirect('');
     }
 }
 

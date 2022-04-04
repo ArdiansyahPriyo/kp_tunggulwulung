@@ -95,7 +95,9 @@
             </li>
 
             <li class="menu-header">Event</li>
-            
+            <li <?=$this->uri->segment(2) == 'data_pesanan' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+              <a href="<?php echo base_url('admin/data_pesanan') ?>" class="nav-link"><i class="fas fa-file-invoice"></i><span>Pesanan Masuk</span></a>
+            </li>
             <li <?=$this->uri->segment(2) == 'data_suplier' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('admin/data_suplier') ?>" class="nav-link"><i class="fas fa-award"></i><span>Pemenang</span></a>
             </li> 

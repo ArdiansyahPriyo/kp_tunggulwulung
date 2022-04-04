@@ -35,22 +35,11 @@
                                     </span>
                                 </button>
                             </div>
-                            <div class="line">
-                                <i data-feather="chevron-right" class="font-medium-2"></i>
-                            </div>
-                            <div class="step" data-target="#social-links-modern" role="tab" id="social-links-modern-trigger">
-                                <button type="button" class="step-trigger">
-                                    <span class="bs-stepper-box">
-                                       <i class="fas fa-money-check-alt" class="font-medium-3"></i>
-                                    </span>
-                                    <span class="bs-stepper-label">
-                                        <span class="bs-stepper-title">Pembayaran</span>
-                                        <!-- <span class="bs-stepper-subtitle">Add Social Links</span> -->
-                                    </span>
-                                </button>
-                            </div>
+                            
                         </div>
+
                         <?php foreach($tiket as $tk) : ?>
+                            
                         <div class="bs-stepper-content">
                             <div id="account-details-modern" class="content" role="tabpanel" aria-labelledby="account-details-modern-trigger">
                                 <div class="content-header">
@@ -69,13 +58,49 @@
                                 </div>
                                 <div class="row">
                                     <div class="mb-1 form-password-toggle col-md-6">
-                                        <label class="form-label" for="modern-password">Password</label>
-                                        <input type="password" id="modern-password" class="form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                        <label class="form-label" for="modern-password">Pelaksanaan Event</label>
+                                        <input type="text" class="form-control" readonly value="<?php $hari = date("D",strtotime($tk->tanggal_pelaksanaan));
+                                                          if ($hari == "Sun") {echo "Minggu" ;
+                                                          }elseif ($hari == "Mon") {echo "Senin" ;
+                                                          }elseif ($hari == "Tue") {echo "Selasa" ;
+                                                          }elseif ($hari == "Wed") {echo "Rabu" ;
+                                                          }elseif ($hari == "Thu") {echo "Kamis" ;
+                                                          }elseif ($hari == "Fri") {echo "Jumat" ;
+                                                          }elseif ($hari == "Sat") {echo "Sabtu" ;
+                                                          }else{echo "";
+                                                          }
+                                                         ?>, <?php echo date("d", strtotime( $tk->tanggal_pelaksanaan)) ?> <?php 
+                                                          $bln = date("F",strtotime($tk->tanggal_pelaksanaan));
+                                                          if ($bln == "January") {
+                                                            echo "Januari" ;
+                                                          }elseif ($bln == "February") {
+                                                            echo "Februari" ;
+                                                          }elseif ($bln == "March") {
+                                                            echo "Maret" ;
+                                                          }elseif ($bln == "April") {
+                                                            echo "April" ;
+                                                          }elseif ($bln == "May") {
+                                                            echo "Mei" ;
+                                                          }elseif ($bln == "June") {
+                                                            echo "Juni" ;
+                                                          }elseif ($bln == "July") {
+                                                            echo "Juli" ;
+                                                          }elseif ($bln == "August") {
+                                                            echo "Agustus" ;
+                                                          }elseif ($bln == "September") {
+                                                            echo "September" ;
+                                                          }elseif ($bln == "October") {
+                                                            echo "Oktober" ;
+                                                          }elseif ($bln == "November") {
+                                                            echo "November" ;
+                                                          }elseif ($bln == "December") {
+                                                            echo "Desember" ;
+                                                          }else{
+                                                            echo "";
+                                                          }
+                                                         ?> <?php echo date("Y", strtotime($tk->tanggal_pelaksanaan)) ?>" />
                                     </div>
-                                    <div class="mb-1 form-password-toggle col-md-6">
-                                        <label class="form-label" for="modern-confirm-password">Confirm Password</label>
-                                        <input type="password" id="modern-confirm-password" class="form-control" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                    </div>
+                                    
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button class="btn btn-outline-secondary btn-prev" disabled>
@@ -90,7 +115,7 @@
                             </div>
                             <div id="personal-info-modern" class="content" role="tabpanel" aria-labelledby="personal-info-modern-trigger">
                                 <div class="content-header">
-                                    <h5 class="mb-0">Personal Info</h5>
+                                    <h5 class="mb-0">Data Pemesan</h5>
                                     <!-- <small>Enter Your Personal Info.</small> -->
                                 </div>
                                 <div class="row">
@@ -118,60 +143,25 @@
                                         <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
                                         <span class="align-middle d-sm-inline-block d-none">Previous</span>
                                     </button>
-                                    <button class="btn btn-primary btn-next">
-                                        <span class="align-middle d-sm-inline-block d-none">Next</span>
-                                        <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
-                                    </button>
+                                    <?php foreach($tiket as $tk) : ?>
+                                    <form id="payment-form" action="<?=site_url()?>tiket/finish" method="post">
+                                        <input type="hidden" name="nama" id="nama" value="<?php echo $this->session->userdata('nama') ?>">
+                                        <input type="hidden" name="id_user" id="id_user" value="<?php echo $this->session->userdata('id_user') ?>">
+                                        <input type="hidden" name="email" id="email" value="<?php echo $this->session->userdata('email') ?>">
+                                        <input type="hidden" name="no_hp" id="no_hp" value="<?php echo $this->session->userdata('no_hp') ?>">
+                                        <input type="hidden" name="alamat" id="alamat" value="<?php echo $this->session->userdata('alamat') ?>">
+                                        <input type="hidden" name="subevent" id="subevent" value="<?php echo $tk->subevent ?>">
+                                        <input type="hidden" name="id_subevent" id="id_subevent" value="<?php echo $tk->id_subevent ?>">
+                                        <input type="hidden" name="harga" id="harga" value="<?php echo $tk->harga ?>">
+                                        <input type="hidden" name="result_type" id="result-type" value="">
+                                        <input type="hidden" name="result_data" id="result-data" value="">
+                                        <button id="bayar" class="btn btn-success">Bayar</button>
+                                    </form>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
 
-                            <div id="social-links-modern" class="content" role="tabpanel" aria-labelledby="social-links-modern-trigger">
-                                <div class="content-header">
-                                    <h5 class="mb-0">Social Links</h5>
-                                    <small>Enter Your Social Links.</small>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-1 col-md-6">
-                                        <label class="form-label" for="modern-twitter">Twitter</label>
-                                        <input type="text" id="modern-twitter" class="form-control" placeholder="https://twitter.com/abc" />
-                                    </div>
-                                    <div class="mb-1 col-md-6">
-                                        <label class="form-label" for="modern-facebook">Facebook</label>
-                                        <input type="text" id="modern-facebook" class="form-control" placeholder="https://facebook.com/abc" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-1 col-md-6">
-                                        <label class="form-label" for="modern-google">Google+</label>
-                                        <input type="text" id="modern-google" class="form-control" placeholder="https://plus.google.com/abc" />
-                                    </div>
-                                    <div class="mb-1 col-md-6">
-                                        <label class="form-label" for="modern-linkedin">Linkedin</label>
-                                        <input type="text" id="modern-linkedin" class="form-control" placeholder="https://linkedin.com/abc" />
-                                    </div>
-                                </div>
-                                <?php foreach($tiket as $tk) : ?>
-                                <form id="payment-form" action="<?=site_url()?>/tiket/finish" method="post">
-                                <div class="d-flex justify-content-between">
-                                    <button class="btn btn-primary btn-prev">
-                                        <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
-                                        <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                                    </button>
-                                    <input type="hidden" name="nama" id="nama" value="<?php echo $this->session->userdata('nama') ?>">
-                                    <input type="hidden" name="id_user" id="id_user" value="<?php echo $this->session->userdata('id_user') ?>">
-                                    <input type="hidden" name="email" id="email" value="<?php echo $this->session->userdata('email') ?>">
-                                    <input type="hidden" name="no_hp" id="no_hp" value="<?php echo $this->session->userdata('no_hp') ?>">
-                                    <input type="hidden" name="alamat" id="alamat" value="<?php echo $this->session->userdata('alamat') ?>">
-                                    <input type="hidden" name="subevent" id="subevent" value="<?php echo $tk->subevent ?>">
-                                    <input type="hidden" name="id_subevent" id="id_subevent" value="<?php echo $tk->id_subevent ?>">
-                                    <input type="hidden" name="harga" id="harga" value="<?php echo $tk->harga ?>">
-                                    <input type="hidden" name="result_type" id="result-type" value="">
-                                    <input type="hidden" name="result_data" id="result-data" value="">
-                                    <button id="bayar" class="btn btn-success">Bayar</button>
-                                </div>
-                                </form>
-                              <?php endforeach; ?>
-                            </div>
+                            
                         </div>
                       <?php endforeach;?>
                     </div>

@@ -220,6 +220,13 @@
                         <!-- add new card  -->
                         <?php foreach ($tiket as $tk) : 
                         if (strtotime($tk->mulai) <= time() AND strtotime($tk->akhir) >= time()) :?>
+                        <?php foreach ($beli as $bl) : 
+                          $sub[] = $bl['id_subevent'];
+                          $use[] = $bl['id_user'];?>
+                        <?php endforeach; ?>  
+                        <?php if (in_array($tk->id_subevent, $sub) && in_array($this->session->userdata('id_user'), $use)) {?>
+
+                        <?php }else{ ?>
                         <div class="col-md-4">
                             <div class="card card-primary">
                                 <div class="card-body text-center">
@@ -296,8 +303,10 @@
                                 </div>
                             </div>
                         </div>
+                      <?php } ?>
                         <?php  endif; ?>
                         <!-- / add new card  -->
+                        
                         <?php endforeach; ?>
 
                     </div>

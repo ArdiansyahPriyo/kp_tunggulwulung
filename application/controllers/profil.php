@@ -8,7 +8,7 @@ class Profil extends CI_Controller {
     {
         $data['user'] = $this->model_profil->tampil_user();
         $this->load->view('templates_home/header');
-        $this->load->view('templates_home/sidebar');
+        $this->load->view('templates_home/sidebar', $data);
         $this->load->view('profil', $data);
         $this->load->view('templates_home/footer');
     }
@@ -43,17 +43,40 @@ class Profil extends CI_Controller {
         $no_hp          = $this->input->post('no_hp');
         $alamat         = $this->input->post('alamat');
         $email2         = $this->input->post('email2');
+        $foto           = $_FILES['foto']['name'];
+        if ($foto ='') {
+            
+        }else{
+            $config ['upload_path'] = './uploads';
+            $config ['allowed_types'] = 'jpg|jpeg|png';
+
+            $this->load->library('upload', $config);
+            if(!$this->upload->do_upload('foto')){
+                echo "File gagal diupload";
+            }else{
+                $foto = $this->upload->data('file_name');
+            }
+        }
         $sql = $this->db->query("SELECT email,password FROM t_user where email='$email' or password='$password'");
         $cek_email = $sql->num_rows();
 
         if ($email == $email2) {
+          if ($foto == null) {
             $data = array(
             'id_user'        => $id_user,
             'nama'           => $nama,
             'no_hp'          => $no_hp,  
             'alamat'         => $alamat
-        );
-
+            );
+          }else{
+            $data = array(
+            'id_user'        => $id_user,
+            'nama'           => $nama,
+            'no_hp'          => $no_hp,  
+            'alamat'         => $alamat,
+            'foto'           => $foto
+            );
+          }
             $this->db->where('id_user', $id_user);
             $this->db->update('t_user', $data);
             $this->session->set_flashdata('berhasilEditProfil','<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
@@ -70,15 +93,24 @@ class Profil extends CI_Controller {
         );
         redirect(site_url('profil'));
         }else{
-
-        $data = array(
+          if ($foto == null) {
+            $data = array(
             'id_user'        => $id_user,
             'nama'           => $nama,
             'email'          => $email,
             'no_hp'          => $no_hp,  
             'alamat'         => $alamat
-        );
-
+            );
+          }else{
+            $data = array(
+            'id_user'        => $id_user,
+            'nama'           => $nama,
+            'email'          => $email,
+            'no_hp'          => $no_hp,  
+            'alamat'         => $alamat,
+            'foto'           => $foto
+            );
+          }
             $this->db->where('id_user', $id_user);
             $this->db->update('t_user', $data);
             $this->session->set_flashdata('berhasilEditProfil','<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>

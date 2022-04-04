@@ -7,8 +7,9 @@ class Info extends CI_Controller {
     public function index()
     {
         $data['info'] = $this->model_info->tampil_data();
+        $data2['user'] = $this->model_profil->tampil_user();
         $this->load->view('templates_home/header');
-        $this->load->view('templates_home/sidebar');
+        $this->load->view('templates_home/sidebar', $data2);
         $this->load->view('informasi', $data);
         $this->load->view('templates_home/footer');
     }
@@ -18,8 +19,9 @@ class Info extends CI_Controller {
         $id_pengumuman      = $this->input->post('id_pengumuman');
         $where = array('id_pengumuman' => $id_pengumuman);
         $data['detailinfo'] = $this->model_info->detail_info($where, 't_pengumuman')->result();
+        $data2['user'] = $this->model_profil->tampil_user();
         $this->load->view('templates_home/header');
-        $this->load->view('templates_home/sidebar');
+        $this->load->view('templates_home/sidebar', $data2);
         $this->load->view('detail_info', $data);
         $this->load->view('templates_home/footer');
     }
