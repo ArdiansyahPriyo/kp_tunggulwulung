@@ -12,6 +12,7 @@ class Tiket extends CI_Controller {
         $this->load->library('midtrans');
         $this->midtrans->config($params);
         $this->load->helper('url'); 
+
     }
 
 
@@ -68,7 +69,7 @@ class Tiket extends CI_Controller {
       $alamat = $this->input->post('alamat');
       $subevent = $this->input->post('subevent');
       $harga = $this->input->post('harga');
-      $pajak = 5000;
+      $pajak = 2000;
       $paj = 'Biaya Penanganan';
       // Required
       $transaction_details = array(
@@ -157,9 +158,9 @@ class Tiket extends CI_Controller {
     public function finish()
     {
       $result = json_decode($this->input->post('result_data'),true);
-      // echo 'RESULT <br><pre>';
-      // var_dump($result);
-      // echo '</pre>' ;
+        // echo 'RESULT <br><pre>';
+        // var_dump($result);
+        // echo '</pre>' ;
 
       $nama = $this->input->post('nama'); 
       $id_user = $this->input->post('id_user');
@@ -170,38 +171,56 @@ class Tiket extends CI_Controller {
       $subevent = $this->input->post('subevent');
       $harga = $this->input->post('harga');
 
-       $data = array(
-     
-      'id_user'      => $id_user,
-      'id_subevent'  => $id_subevent,
-      'created_date' => date('Y-m-d H:i:s')
-      );
-
-     // $this->model_pesanan->tambah_pesanan('t_pesanan', $data);
-      // $this->db->insert('t_pesanan', $data2);
-      // return $this->db->insert_id();
+        //  $data = array(
+        
+        // 'id_user'      => $id_user,
+        // 'id_subevent'  => $id_subevent,
+        // 'created_date' => date('Y-m-d H:i:s')
+        // );
        
-      $id_pesanan = $this->model_pesanan->tambah_pesanan('t_pesanan', $data);
-      $data1 = [
-        'id_transaksi'       => $result['order_id'],
-        'id_pesanan'         => $id_pesanan,
-        'gross_amount'       => $result['gross_amount'],
-        'payment_type'       => $result['payment_type'],
-        'transaction_time'   => $result['transaction_time'],
-        'transaction_status' => $result['transaction_status'],
+      // $id_pesanan = $this->model_pesanan->tambah_pesanan('t_pesanan', $data);
+      // $data1 = [
+      //   'id_transaksi'       => $result['order_id'],
+      //   'id_pesanan'         => $id_pesanan,
+      //   'gross_amount'       => $result['gross_amount'],
+      //   'payment_type'       => $result['payment_type'],
+      //   'transaction_time'   => $result['transaction_time'],
+      //   'transaction_status' => $result['transaction_status'],
         // 'bank'               => $result['va_numbers'][0]['bank'],
         // 'va_number'          => $result['va_numbers'][0]['va_number'],
         // 'pdf_url'            => $result['pdf_url'],
-        'status_code'        => $result['status_code']
-      ];
+      //   'status_code'        => $result['status_code']
+      // ];
+      //$simpan = $this->db->insert('t_transaksi', $data1);
+
       
-      $simpan = $this->db->insert('t_transaksi', $data1);
+      $data = array(
+      'id_pesanan'         => $result['order_id'],
+      'id_user'            => $id_user,
+      'id_subevent'        => $id_subevent,
+      'gross_amount'       => $result['gross_amount'],
+      'payment_type'       => $result['payment_type'],
+      'transaction_time'   => $result['transaction_time'],
+      'transaction_status' => $result['transaction_status'],
+      'status_code'        => $result['status_code']
+      );
+
+      $simpan = $this->db->insert('t_pesanan', $data);
+
+      $data1 = array(
+        'id_tiket'       => 'KP.TW-'.$id_user.$id_subevent.date('d').date('m').date('Y'), 
+        'id_pesanan'     => $result['order_id'],
+        'status'         => 'belum_aktif',
+        'created_date'   => date('Y-m-d H:i:s')
+      );
+      $this->db->insert('t_tiket', $data1);
+
       $this->session->set_flashdata('sudahMembayar','<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
           <script type ="text/JavaScript">  
-          swal("Info !","Pembayaran Sedang Diproses","info")  
+          swal("Info","Selesaikan pembayaran dan lihat tiket Anda!","info")  
           </script>'  
         );
-      redirect('');
+      redirect('pesanan_saya');
     }
 }
 

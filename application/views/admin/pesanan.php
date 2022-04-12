@@ -8,23 +8,26 @@
             <div class="card-header">
               <h4>Data Pesanan</h4>
                <div class="card-header-action">
-                  <button class="btn btn-icon icon-left btn-primary mr-1" data-toggle="modal" data-target="#tambahDataSubEvent"><i class="fas fa-plus-circle"></i> Tambah Sub Event</button>
+                  
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
             </div>
             <div class="collapse show" id="event-collapse">
             <div class="card-body">
-              <?php echo $this->session->flashdata('berhasilTambahSubEvent');  ?>  
-              <?php echo $this->session->flashdata('berhasilEditSubEvent');  ?> 
-              <?php echo $this->session->flashdata('berhasilHapusSubEvent');  ?> 
+              <?php echo $this->session->flashdata('berhasilEditPesanan');  ?> 
+              <?php echo $this->session->flashdata('berhasilHapusPesanan');  ?> 
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
                   <thead>
                     <tr>
                       <th style="width: 5%;">No</th>
+                      <th>Nomor Pesanan</th>
                       <th>Nama Pemesan</th>
                       <th>Jenis Event</th>
-                      <th class="text-center" style="width: 5%;" colspan="2">Action</th>
+                      <th>Total Bayar</th>
+                      <th>Metode Pembayaran</th>
+                      <th>Status Pembayaran</th>
+                      <th class="text-center" style="width: 5%;">Action</th>
                    </tr>
                   </thead>
                   <tbody>
@@ -33,18 +36,23 @@
                     foreach($pesanan as $psn) : ?>
                     <tr>
                       <td><?php echo $no++ ?></td>
+                      <td><?php echo $psn->id_pesanan ?></td>
                       <td><?php echo $psn->nama ?></td>
                       <td><?php echo $psn->subevent ?></td>
-                      <td>
-                        <button class="btn btn-success btn-icon icon-left dropdown-item " data-toggle="modal" data-target="#lihatDataDetail<?php echo $psn->id_subevent ?>"><i class="fas fa-search-plus"></i> Detail</button>
+                      <td>Rp. <?php echo number_format($psn->gross_amount,0,'.','.') ?></td>
+                      <td><?php if ($psn->payment_type == 'qris') {
+                          echo 'Shopee Pay';
+                        }else{
+                          echo 'Gopay';
+                        } ?>
                       </td>
+                      <td style="text-transform: capitalize;"><?php echo $psn->transaction_status ?></td>
                       <td>
                         <div class="dropdown">
                           <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Options</a>
                           <div class="dropdown-menu">
-                            <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#editDataSubEvent<?php echo $psn->id_subevent ?>"><i class="far fa-edit"></i> Edit</button>
-                            <button class="btn btn-icon icon-left btn-light dropdown-item text-danger" data-toggle="modal" data-target="#hapusDataSubEvent<?php echo $psn->id_subevent ?>"><i class="fas fa-trash"></i> Hapus</button>
-                            <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#lihatDataFileSubEvent<?php echo $psn->id_subevent ?>"><i class="fas fa-file-image"></i> Lihat Brosur</button>
+                            <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#editDataPesanan<?php echo $psn->id_pesanan ?>"><i class="far fa-edit"></i> Edit</button>
+                            <button class="btn btn-icon icon-left btn-light dropdown-item text-danger" data-toggle="modal" data-target="#hapusDataPesanan<?php echo $psn->id_pesanan ?>"><i class="fas fa-trash"></i> Hapus</button>
                           </div>
                         </div>
                       </td>
@@ -153,249 +161,41 @@
   </div>
 </div>
 
-<!--Modal Lihat File  -->
-<?php foreach($subevent as $sbevt) : ?>
-<div class="modal fade bd-example-modal-lg" tabindex="-1" id="lihatDataFileSubEvents<?php echo $sbevt->id_subevent ?>" role="dialog" aria-labelledby="myLargeModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="myLargeModalLabel">File</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <embed src="<?php echo base_url().'/uploads/'.$sbevt->file ?>"
-                    frameborder="0" width="100%" height="600px">
-      </div>
-    </div>
-  </div>
-</div>
-<?php endforeach; ?>
-<!-- End modal -->
-
-<!-- basic modal -->
-<?php foreach($subevent as $sbevt) : ?>
-<div class="modal fade" id="lihatDataFileSubEvent<?php echo $sbevt->id_subevent ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">File</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <embed src="<?php echo base_url().'/uploads/'.$sbevt->file ?>"
-                    frameborder="0" width="100%" height="600px">
-      </div>
-      <div class="modal-footer bg-whitesmoke br">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<?php endforeach; ?>
-
-<!-- Modal Tambah Sub event -->
-<div class="modal fade" id="tambahDataSubEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Sub Event</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="<?php echo base_url(). 'admin/data_subevent/tambah_subevent'; ?>" method="post" enctype="multipart/form-data" >
-          <div class="form-group">
-            <label>Event</label>
-            <select class="form-control" name="id_event" required oninvalid="this.setCustomValidity('Data tidak boleh kosong. Isi data event terlebih dahulu!')" oninput="setCustomValidity('')">
-              <?php foreach($list_event as $evt) : ?>
-                <option value="<?php echo $evt->id_event ?>">
-                  <?php echo $evt->event ?>
-                </option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Sub Event</label>
-            <div class="input-group">
-              <input type="text" class="form-control" name="subevent" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Tanggal Pelaksanaan</label>
-            <div class="input-group">
-              <input type="date" class="form-control" id="tgl_plk" name="tanggal_pelaksanaan" min="2022-01-01" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" onclick="minimal_plk()">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Mulai</label>
-              <input type="time" class="form-control" id="inputMulai" placeholder="Email" name="tmmulai">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputPassword4">Selesai</label>
-              <input type="time" class="form-control" id="inputSelesai" placeholder="Password" name="tmselesai">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Harga Tiket</label>
-            <div class="input-group">
-              <input type="text" class="form-control" id="rupiah" name="harga" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" onkeyup="erpe()" placeholder="Rp.">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Stok Tiket</label>
-            <div class="input-group">
-              <input type="number" class="form-control"  name="stok" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" onkeyup="erpe()">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Jenis Hadiah</label>
-              <select class="form-control" name="jenis_hadiah">
-                <option value="potongan">Potongan Tiket</option>
-                <option value="langsung">Hadiah Langsung</option>
-              </select>
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputPassword4">Nominal</label>
-              <input type="text" class="form-control" id="rupiah2" name="nominal" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" onkeyup="erpe2()" placeholder="Rp. ">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Jumlah Lapak</label>
-            <div class="input-group">
-              <input type="number" class="form-control" placeholder="" name="jumlah_lapak" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Tanggal Mulai</label>
-            <div class="input-group">
-              <input type="date" class="form-control" id="tgl_ml" name="mulai" min="2022-01-01" max="2025-01-01" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" onclick="minimal_mul()">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Tanggal Berakhir</label>
-            <div class="input-group">
-              <input type="date" class="form-control" id="tgl_ak" name="akhir" min="2022-01-01" max="2025-01-01" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" onclick="minimal_mul()">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Brosur</label>
-            <div class="input-group">
-              <input type="file" class="form-control" name="file" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-            </div>
-          </div>
-       </div>
-      <div class="modal-footer bg-whitesmoke br">
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- akhir modal -->
+<!-- Modal -->
 
 <!--modal edit subevent-->
 <?php 
-foreach ($subevent as $sbevt) : ?>
-<div class="modal fade" id="editDataSubEvent<?php echo $sbevt->id_subevent?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+foreach ($pesanan as $psn) : ?>
+<div class="modal fade" id="editDataPesanan<?php echo $psn->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Sub Event</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Pesanan</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(). 'admin/data_subevent/edit_subevent'; ?>" method="post" enctype="multipart/form-data" >
+        <form action="<?php echo base_url(). 'admin/data_pesanan/edit_pesanan'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Sub Event</label>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="subevent" value="<?php echo $sbevt->subevent ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-              <input type="hidden" value="<?php echo $sbevt->id_subevent ?>" type="text" name="id_subevent">
-            </div>
+            <input type="hidden" value="<?php echo $psn->id_pesanan ?>" type="text" name="id_pesanan">
+            <label for="inputEmail4">Status Pembayaran</label>
+            <select class="form-control" name="transaction_status" required>
+              <option value="<?php echo $psn->transaction_status ?>"><?php if ($psn->transaction_status=='pending') {
+                  echo 'Pending';
+                }else{
+                  echo 'Success';
+                } ?>
+              </option>
+            <?php if ($psn->transaction_status=='pending') { ?>
+              <option value="success">Success</option>
+            <?php }elseif ($psn->transaction_status=='success') { ?>
+              <option value="pending">Pending</option>
+            <?php } ?>
+            </select>
           </div>
-          <div class="form-group">
-            <label>Tanggal Pelaksanaan</label>
-            <div class="input-group">
-              <input type="date" class="form-control" id="tgl_plk2" name="tanggal_pelaksanaan" min="2022-01-01" value="<?php echo $sbevt->tanggal_pelaksanaan ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" onclick="minimal_plk2()">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Harga Tiket</label>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="harga" value="<?php echo $sbevt->harga ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Stok Tiket</label>
-            <div class="input-group">
-              <input type="number" class="form-control" placeholder="" name="stok" value="<?php echo $sbevt->stok ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputEmail4">Jenis Hadiah</label>
-              <select class="form-control" name="jenis_hadiah" required>
-                <option value="<?php if($sbevt->jenis_hadiah == "potongan"){
-                  echo "potongan";
-                }elseif($sbevt->jenis_hadiah == "langsung"){
-                  echo "langsung";
-                } ?>"><?php if ($sbevt->jenis_hadiah == "potongan") {
-                  echo "Potongan Tiket";
-                }elseif($sbevt->jenis_hadiah == "langsung") {
-                  echo "Hadiah Langsung";
-                }?></option>
-                <?php if ($sbevt->jenis_hadiah == "potongan")  :?>
-                <option value="langsung">Hadiah Langsung</option>
-              <?php else : ?>
-                <option value="potongan">Potongan Tiket</option>
-                <?php endif;?>
-              </select>
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputPassword4">Nominal</label>
-              <input type="text" class="form-control" id="rupiah3" name="nominal" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" onkeyup="erpe3()" placeholder="Nominal" value="<?php echo $sbevt->nominal ?>">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Jumlah Lapak</label>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="jumlah_lapak" value="<?php echo $sbevt->jumlah_lapak ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Tanggal Mulai</label>
-            <div class="input-group">
-              <input type="date" class="form-control" id="edtml" name="mulai" min="2021-02-01" value="<?php echo $sbevt->mulai ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" >
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Tanggal Berakhir</label>
-            <div class="input-group">
-              <input type="date" class="form-control" id="edtak" name="akhir" min="2021-02-01" value="<?php echo $sbevt->akhir ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" >
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Brosur</label>
-            <div class="input-group">
-              <input type="file" class="form-control" name="file" >
-            </div>
-          </div>
-       </div>
+      </div>
       <div class="modal-footer bg-whitesmoke br">
         <button type="submit" class="btn btn-primary">Simpan</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -407,131 +207,11 @@ foreach ($subevent as $sbevt) : ?>
 <?php endforeach; ?>
 <!-- Akhir modal -->
 
-<!-- Detail Subevent -->
-<?php 
-foreach ($subevent as $sbevt) : ?>
-<div class="modal fade" id="lihatDataDetail<?php echo $sbevt->id_subevent ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Detail Sub Event</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="py-4">
-          <p class="clearfix">
-            <span class="float-left">
-              Event
-            </span>
-            <span class="float-right ">
-              <b><?php echo $sbevt->event ?></b>
-            </span>
-          </p>
-          <p class="clearfix">
-            <span class="float-left">
-              Sub Event
-            </span>
-            <span class="float-right ">
-              <b><?php echo $sbevt->subevent ?></b>
-            </span>
-          </p>
-          <p class="clearfix">
-            <span class="float-left">
-              Tanggal Pelaksanaan
-            </span>
-            <span class="float-right ">
-              <b><?php echo date("d-m-Y", strtotime($sbevt->tanggal_pelaksanaan)) ?></b>
-            </span>
-          </p>
-          <p class="clearfix">
-            <span class="float-left">
-              Waktu Pelaksanaan
-            </span>
-            <span class="float-right ">
-              <b><?php echo substr($sbevt->jam_mulai, 0,5) ?> WIB s/d <?php echo substr($sbevt->jam_selesai, 0,5)  ?> WIB</b>
-            </span>
-          </p>
-          <p class="clearfix">
-            <span class="float-left">
-              Jumlah Lapak
-            </span>
-            <span class="float-right ">
-              <b><?php echo $sbevt->jumlah_lapak ?></b>
-            </span>
-          </p>
-          <p class="clearfix">
-            <span class="float-left">
-              Harga Tiket
-            </span>
-            <span class="float-right badge badge-light">
-              <b>Rp. <?php echo number_format($sbevt->harga,0,'.','.') ?></b>
-            </span>
-          </p>
-          <p class="clearfix">
-            <span class="float-left">
-              Jenis Hadiah
-            </span>
-            <span class="float-right ">
-              <b><?php if ($sbevt->jenis_hadiah == "langsung") {
-                echo "Hadiah Langsung";
-              }elseif($sbevt->jenis_hadiah == "potongan"){
-                echo "Potongan Tiket";
-              } ?></b>
-            </span>
-          </p>
-          <p class="clearfix">
-            <span class="float-left">
-              Nominal <?php if ($sbevt->jenis_hadiah == "langsung") {
-                echo "Hadiah";
-              }elseif($sbevt->jenis_hadiah == "potongan"){
-                echo "Potongan (Per Tiket)";
-              } ?>
-            </span>
-            <span class="float-right ">
-              <b>Rp. <?= number_format($sbevt->nominal,0,'.','.') ?></b>
-            </span>
-          </p>
-          <p class="clearfix">
-            <span class="float-left">
-              Stok Tiket
-            </span>
-            <span class="float-right ">
-              <b><?php echo $sbevt->stok ?></b>
-            </span>
-          </p>
-          <p class="clearfix">
-            <span class="float-left">
-              Tanggal Mulai
-            </span>
-            <span class="float-right ">
-              <b><?php echo date("d-m-Y", strtotime($sbevt->mulai)) ?></b>
-            </span>
-          </p>
-          <p class="clearfix">
-            <span class="float-left">
-              Tanggal Berakhir
-            </span>
-            <span class="float-right ">
-              <b><?php echo date("d-m-Y", strtotime($sbevt->akhir)) ?></b>
-            </span>
-          </p>
-        </div>
-       </div>
-      <div class="modal-footer bg-whitesmoke br">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-<?php endforeach; ?>
+
 
 <!-- modal hapus subevent-->
-<?php foreach ($subevent as $sbevt) : ?>
-<div class="modal fade" id="hapusDataSubEvent<?php echo $sbevt->id_subevent ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<?php foreach ($pesanan as $psn) : ?>
+<div class="modal fade" id="hapusDataPesanan<?php echo $psn->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" >
     <div class="modal-content">
@@ -541,8 +221,8 @@ foreach ($subevent as $sbevt) : ?>
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?php echo base_url('admin/data_subevent/hapus_subevent') ?>" method="post">
-        <input hidden value="<?php echo $sbevt->id_subevent ?>" type="text" name="id_subevent">
+      <form action="<?php echo base_url('admin/data_pesanan/hapus_pesanan') ?>" method="post">
+        <input hidden value="<?php echo $psn->id_pesanan ?>" type="text" name="id_pesanan">
         <div class="modal-body">
           Apakah anda yakin ingin menghapus data ini ?
         </div>

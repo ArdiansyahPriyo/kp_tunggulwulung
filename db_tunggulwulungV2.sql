@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Apr 2022 pada 03.39
+-- Waktu pembuatan: 12 Apr 2022 pada 06.24
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_tunggulwulung`
+-- Database: `db_tunggulwulung2`
 --
 
 -- --------------------------------------------------------
@@ -125,8 +125,30 @@ CREATE TABLE `t_pesanan` (
   `id_pesanan` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_subevent` int(11) NOT NULL,
-  `created_date` datetime DEFAULT NULL
+  `gross_amount` varchar(100) NOT NULL,
+  `payment_type` varchar(100) NOT NULL,
+  `transaction_time` varchar(100) NOT NULL,
+  `transaction_status` varchar(100) NOT NULL,
+  `status_code` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `t_pesanan`
+--
+
+INSERT INTO `t_pesanan` (`id_pesanan`, `id_user`, `id_subevent`, `gross_amount`, `payment_type`, `transaction_time`, `transaction_status`, `status_code`) VALUES
+(274279, 27, 15, '122000.00', 'qris', '2022-04-12 11:22:49', 'pending', '201');
+
+--
+-- Trigger `t_pesanan`
+--
+DELIMITER $$
+CREATE TRIGGER `pesan_tiket` AFTER INSERT ON `t_pesanan` FOR EACH ROW BEGIN
+	UPDATE t_subevent SET stok = stok-1
+    WHERE id_subevent = NEW.id_subevent;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -156,8 +178,8 @@ CREATE TABLE `t_subevent` (
 --
 
 INSERT INTO `t_subevent` (`id_subevent`, `id_event`, `subevent`, `harga`, `jenis_hadiah`, `nominal`, `stok`, `tanggal_pelaksanaan`, `jam_mulai`, `jam_selesai`, `jumlah_lapak`, `mulai`, `akhir`, `file`) VALUES
-(15, 9, 'Lomba Mancing HUT ke 4', '120000', 'langsung', '10000000', 140, '2022-04-30', '09:00:00', '15:00:00', 140, '2022-03-24', '2022-04-09', 'file41.jpeg'),
-(19, 9, 'Lomba Menyambut Ramadhan 1943 H', '120000', 'langsung', '5000000', 100, '2022-04-30', '06:53:00', '15:53:00', 100, '2022-04-04', '2022-04-22', 'WhatsApp_Image_2022-02-24_at_11_31_41_(1)2.jpeg');
+(15, 9, 'Lomba Mancing HUT ke 4', '120000', 'langsung', '10000000', 129, '2022-05-01', '09:00:00', '15:00:00', 140, '2022-03-24', '2022-04-23', 'file41.jpeg'),
+(19, 9, 'Lomba Menyambut Ramadhan 1943 H', '100000', 'langsung', '5000000', 94, '2022-04-24', '06:53:00', '15:53:00', 100, '2022-04-04', '2022-04-22', 'WhatsApp_Image_2022-02-24_at_11_31_41_(1)2.jpeg');
 
 -- --------------------------------------------------------
 
@@ -184,21 +206,22 @@ INSERT INTO `t_supplier` (`id_supplier`, `nama_supplier`, `alamat_supplier`, `no
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `t_transaksi`
+-- Struktur dari tabel `t_tiket`
 --
 
-CREATE TABLE `t_transaksi` (
-  `id_transaksi` int(20) NOT NULL,
+CREATE TABLE `t_tiket` (
+  `id_tiket` varchar(20) NOT NULL,
   `id_pesanan` int(11) NOT NULL,
-  `gross_amount` varchar(30) NOT NULL,
-  `payment_type` varchar(100) NOT NULL,
-  `transaction_time` varchar(100) NOT NULL,
-  `transaction_status` varchar(100) NOT NULL,
-  `bank` varchar(50) DEFAULT NULL,
-  `va_number` varchar(100) DEFAULT NULL,
-  `pdf_url` varchar(150) DEFAULT NULL,
-  `status_code` varchar(100) NOT NULL
+  `status` varchar(20) NOT NULL,
+  `created_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `t_tiket`
+--
+
+INSERT INTO `t_tiket` (`id_tiket`, `id_pesanan`, `status`, `created_date`) VALUES
+('KP.TW-271512042022', 274279, 'belum_aktif', '2022-04-12 06:23:07');
 
 -- --------------------------------------------------------
 
@@ -232,7 +255,8 @@ INSERT INTO `t_user` (`id_user`, `nama`, `email`, `no_hp`, `alamat`, `password`,
 (23, 'Kristianto', 'kristianto@mail.com', '083723627283', 'Kupuk, Bungkal, Ponorogo', '13f68eead65a8f008165af7682ff39ca', 'panitia', 'aktif', NULL, '0000-00-00 00:00:00'),
 (26, 'Wasis', 'wasis@mail.com', '082736254893', 'Kupuk, Bungkal, Ponorogo', '054d4a4653a16b49c49c49e000075d10', 'panitia', 'aktif', NULL, '0000-00-00 00:00:00'),
 (27, 'Imam Sunarto', 'imam@mail.com', '084526352637', 'Turi, Jetis, Ponorogo', 'eaccb8ea6090a40a98aa28c071810371', 'pemancing', 'aktif', 'images_3.png', '0000-00-00 00:00:00'),
-(32, 'Dadang Hermawan', 'dadang@mail.com', '086524351625', 'Siman, Siman, Ponorogo', '0037bb978d51e84d1ad5478e85430f26', 'pemancing', 'aktif', 'images.png', '2022-03-12 05:49:50');
+(32, 'Dadang Hermawan', 'dadang@mail.com', '086524351625', 'Siman, Siman, Ponorogo', '0037bb978d51e84d1ad5478e85430f26', 'pemancing', 'aktif', 'images.png', '2022-03-12 05:49:50'),
+(33, 'Bebben Bojinov', 'bebben@mail.com', '085654356567', 'Kupuk, Bungkal, Ponorogo', 'e26c9c4e695ff04df9991f773b3b121d', 'pemancing', 'aktif', 'images_4.png', '2022-04-05 05:09:08');
 
 --
 -- Indexes for dumped tables
@@ -289,10 +313,10 @@ ALTER TABLE `t_supplier`
   ADD PRIMARY KEY (`id_supplier`);
 
 --
--- Indeks untuk tabel `t_transaksi`
+-- Indeks untuk tabel `t_tiket`
 --
-ALTER TABLE `t_transaksi`
-  ADD PRIMARY KEY (`id_transaksi`),
+ALTER TABLE `t_tiket`
+  ADD PRIMARY KEY (`id_tiket`),
   ADD KEY `id_pesanan` (`id_pesanan`);
 
 --
@@ -333,7 +357,7 @@ ALTER TABLE `t_pengumuman`
 -- AUTO_INCREMENT untuk tabel `t_pesanan`
 --
 ALTER TABLE `t_pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33688235;
 
 --
 -- AUTO_INCREMENT untuk tabel `t_subevent`
@@ -351,7 +375,7 @@ ALTER TABLE `t_supplier`
 -- AUTO_INCREMENT untuk tabel `t_user`
 --
 ALTER TABLE `t_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -385,10 +409,10 @@ ALTER TABLE `t_subevent`
   ADD CONSTRAINT `t_subevent_ibfk_1` FOREIGN KEY (`id_event`) REFERENCES `t_event` (`id_event`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `t_transaksi`
+-- Ketidakleluasaan untuk tabel `t_tiket`
 --
-ALTER TABLE `t_transaksi`
-  ADD CONSTRAINT `t_transaksi_ibfk_1` FOREIGN KEY (`id_pesanan`) REFERENCES `t_pesanan` (`id_pesanan`) ON DELETE CASCADE;
+ALTER TABLE `t_tiket`
+  ADD CONSTRAINT `t_tiket_ibfk_1` FOREIGN KEY (`id_pesanan`) REFERENCES `t_pesanan` (`id_pesanan`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

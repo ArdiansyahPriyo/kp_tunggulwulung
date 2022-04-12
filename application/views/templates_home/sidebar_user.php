@@ -100,61 +100,6 @@
 <!-- END: Header-->
 
 
-<!-- BEGIN: Main Menu-->
-<div class="horizontal-menu-wrapper">
-    <div class="header-navbar navbar-expand-sm navbar navbar-horizontal floating-nav navbar-light navbar-shadow menu-border container-xxl" role="navigation" data-menu="menu-wrapper" data-menu-type="floating-nav">
-        <div class="navbar-header">
-            <ul class="nav navbar-nav flex-row">
-                <li class="nav-item me-auto">
-                  <a class="navbar-brand" href="../../../html/ltr/horizontal-menu-template/index.html">
-                    <span class="brand-logo">
-                    </span>
-                    <h5 class="text-primary">KP TUNGGUL WULUNG</h5>
-                  </a>
-                </li>
-                <li class="nav-item nav-toggle">
-                  <a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse">
-                    <i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i>
-                  </a>
-                </li>
-            </ul>
-        </div>
-        <div class="shadow-bottom"></div>
-        <!-- Horizontal menu content-->
-        <div class="navbar-container main-menu-content" data-menu="menu-container">
-            <!-- include ../../../includes/mixins-->
-            <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
-              <li  <?=$this->uri->segment(1) == 'home' || $this->uri->segment(1) == '' ? 'class="nav-item active"' : 'class="nav-item"'?>>
-                <a class="nav-link d-flex align-items-center" href="<?php echo base_url('')?>">
-                  <i data-feather="home"></i><span data-i18n="Dashboards">Home</span>
-                </a>
-              </li>
-              <li <?=$this->uri->segment(1) == 'tiket' || $this->uri->segment(2) == 'pesan_tiket' ? 'class="nav-item active"' : 'class="nav-item"'?>>
-                <a class="nav-link d-flex align-items-center" href="<?php echo base_url('tiket') ?>">
-                  <i data-feather="shopping-cart"></i><span data-i18n="Dashboards">Tiket</span>
-                </a>
-              </li>
-              <li <?=$this->uri->segment(1) == 'info' || $this->uri->segment(2) == 'detail_info' ? 'class="nav-item active"' : 'class="nav-item"'?>>
-                <a class="nav-link d-flex align-items-center" href="<?php echo base_url('info') ?>">
-                  <i data-feather="info"></i><span data-i18n="Dashboards">Info Kolam</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="index.html" data-bs-toggle="dropdown">
-                  <i data-feather="image"></i><span data-i18n="Dashboards">Galeri</span>
-                </a>
-              </li>
-              <li <?=$this->uri->segment(1) == 'contact' ? 'class="nav-item active"' : 'class="nav-item"'?>>
-                <a class="nav-link d-flex align-items-center" href="<?php echo base_url('contact') ?>">
-                  <i data-feather="message-circle"></i><span data-i18n="Dashboards">Contact</span>
-                </a>
-              </li>
-              
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- END: Main Menu-->
 
 <!-- modal -->
 <div class="modal fade" id="logout_usersss" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

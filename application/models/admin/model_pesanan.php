@@ -6,6 +6,7 @@ class Model_pesanan extends CI_Model{
 		$this->db->from('t_pesanan');
 		$this->db->join('t_user','t_user.id_user = t_pesanan.id_user');
 		$this->db->join('t_subevent', 't_subevent.id_subevent = t_pesanan.id_subevent');
+		//$this->db->join('t_transaksi', 't_transaksi.id_transaksi = t_pesanan.id_transaksi');
 		$query = $this->db->get();
     return $query->result();
 	} 
