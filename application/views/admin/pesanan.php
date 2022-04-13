@@ -25,9 +25,8 @@
                       <th>Nama Pemesan</th>
                       <th>Jenis Event</th>
                       <th>Total Bayar</th>
-                      <th>Metode Pembayaran</th>
                       <th>Status Pembayaran</th>
-                      <th class="text-center" style="width: 5%;">Action</th>
+                      <th class="text-center" style="width: 5%;" colspan="2">Action</th>
                    </tr>
                   </thead>
                   <tbody>
@@ -40,13 +39,16 @@
                       <td><?php echo $psn->nama ?></td>
                       <td><?php echo $psn->subevent ?></td>
                       <td>Rp. <?php echo number_format($psn->gross_amount,0,'.','.') ?></td>
-                      <td><?php if ($psn->payment_type == 'qris') {
+                      <!-- <td><?php if ($psn->payment_type == 'qris') {
                           echo 'Shopee Pay';
                         }else{
                           echo 'Gopay';
                         } ?>
-                      </td>
+                      </td> -->
                       <td style="text-transform: capitalize;"><?php echo $psn->transaction_status ?></td>
+                      <td>
+                        <button class="btn btn-success btn-icon icon-left dropdown-item " data-toggle="modal" data-target="#lihatDetailPesanan<?php echo $psn->id_pesanan ?>"><i class="fas fa-search-plus"></i> Detail</button>
+                      </td>
                       <td>
                         <div class="dropdown">
                           <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Options</a>
@@ -163,7 +165,7 @@
 
 <!-- Modal -->
 
-<!--modal edit subevent-->
+<!--modal edit pesanan-->
 <?php 
 foreach ($pesanan as $psn) : ?>
 <div class="modal fade" id="editDataPesanan<?php echo $psn->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -205,11 +207,11 @@ foreach ($pesanan as $psn) : ?>
   </div>
 </div>
 <?php endforeach; ?>
-<!-- Akhir modal -->
+<!-- end modal -->
 
 
 
-<!-- modal hapus subevent-->
+<!-- modal hapus pesanan-->
 <?php foreach ($pesanan as $psn) : ?>
 <div class="modal fade" id="hapusDataPesanan<?php echo $psn->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -235,5 +237,138 @@ foreach ($pesanan as $psn) : ?>
   </div>
 </div>
 <?php endforeach; ?>
-<!-- akhir modal -->
+<!-- end modal -->
+
+
+<!-- modal detail Pesanan -->
+<?php 
+foreach ($pesanan as $psn) : ?>
+<div class="modal fade" id="lihatDetailPesanan<?php echo $psn->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detail Pesanan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="py-4">
+          <p class="clearfix">
+            <span class="float-left">
+              Nomor Pesanan
+            </span>
+            <span class="float-right ">
+              <b><?php echo $psn->id_pesanan ?></b>
+            </span>
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              Nama Pemesan
+            </span>
+            <span class="float-right ">
+              <b><?php echo $psn->nama ?></b>
+            </span>
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              Jenis Event
+            </span>
+            <span class="float-right ">
+              <b><?php echo $psn->subevent ?></b>
+            </span>
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              Total Bayar 
+            </span>
+            <span class="float-right badge badge-light">
+              <b>Rp. <?php echo number_format($psn->gross_amount,0,'.','.') ?></b>
+            </span>
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              Status Pembayaran
+            </span>
+            <span class="float-right ">
+              <b><?php if ($psn->transaction_status == 'pending') {
+                echo 'Pending';
+              }elseif ($psn->transaction_status == 'settlement'){
+                echo 'Success';
+              }elseif ($psn->transaction_status == 'expire') {
+                echo 'Expire';
+              }?></b>
+            </span>
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              Jenis Pembayaran
+            </span>
+            <span class="float-right ">
+              <b><?php if ($psn->payment_type == 'qris') {
+                echo 'ShopeePay';
+              }elseif ($psn->payment_type == 'echannel'){
+                echo 'E-Channel';
+              }elseif ($psn->payment_type == 'bank_transfer') {
+                echo 'Bank Transfer';
+              }elseif ($psn->payment_type == 'gopay') {
+                echo 'Gopay';
+              }
+              ?></b>
+            </span>
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              Bank
+            </span>
+            <span class="float-right ">
+              <b><?php if ($psn->bank == 'bri') {
+                echo 'BRI';
+              }elseif ($psn->bank == 'bni'){
+                echo 'BNI';
+              }elseif ($psn->bank == 'bca'){
+                echo 'BCA';
+              }elseif ($psn->payment_type == 'echannel'){
+                echo 'Mandiri';
+              }elseif ($psn->bank == '-'){
+                echo '-';
+              }
+              ?></b>
+            </span>
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              VA Number
+            </span>
+            <span class="float-right ">
+              <b><?php echo $psn->va_number ?></b>
+            </span>
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              Bill Key
+            </span>
+            <span class="float-right ">
+              <b><?php echo $psn->bill_key ?></b>
+            </span>
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              Biller Code
+            </span>
+            <span class="float-right ">
+              <b><?php echo $psn->biller_code ?></b>
+            </span>
+          </p>
+        </div>
+       </div>
+      <div class="modal-footer bg-whitesmoke br">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>
 
