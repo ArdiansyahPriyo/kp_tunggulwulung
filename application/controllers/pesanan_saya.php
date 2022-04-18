@@ -22,6 +22,8 @@ class Pesanan_saya extends CI_Controller {
     {
         $data['user'] = $this->model_profil->tampil_user();
         $data['pesanan'] = $this->model_pesanan_user->tampil_pesanan();
+        $data['belum_bayar'] = $this->model_pesanan_user->belum_bayar();
+        $data['dibatalkan'] = $this->model_pesanan_user->dibatalkan();
         $this->load->view('templates_home/header');
         $this->load->view('templates_home/sidebar', $data);
         $this->load->view('tiket_saya');
