@@ -24,57 +24,10 @@
                     </div>
                 </div>
             </div>
-            <!-- Horizontal Wizard -->
-
-               <!-- <section class="horizontal-wizard">
-
-                    <div class="bs-stepper horizontal-wizard-example">
-
-                        <div class="bs-stepper-header" role="tablist">
-                            <h4 class="mb-0">Pembayaran</h4>
-                        </div>
-                        <div class="bs-stepper-header" role="tablist">
-                            <div class="step active" data-target="#account-details" role="tab" id="account-details-trigger">
-                                <button type="button" class="step-trigger">
-                                    <span class="bs-stepper-box">1</span>
-                                    <span class="bs-stepper-label">
-                                        <span class="bs-stepper-title">Belum Dibayar</span>
-                                        <span class="bs-stepper-subtitle">Setup Account Details</span>
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="line">
-                                <i data-feather="chevron-right" class="font-medium-2"></i>
-                            </div>
-                            <div class="step" data-target="#personal-info" role="tab" id="personal-info-trigger">
-                                <button type="button" class="step-trigger">
-                                    <span class="bs-stepper-box">2</span>
-                                    <span class="bs-stepper-label">
-                                        <span class="bs-stepper-title">Menunggu Konfirmasi</span>
-                                        <span class="bs-stepper-subtitle">Add Personal Info</span>
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="line">
-                                <i data-feather="chevron-right" class="font-medium-2"></i>
-                            </div>
-                            <div class="step" data-target="#address-step" role="tab" id="address-step-trigger">
-                                <button type="button" class="step-trigger">
-                                    <span class="bs-stepper-box">3</span>
-                                    <span class="bs-stepper-label">
-                                        <span class="bs-stepper-title">Pembayaran Berhasil</span>
-                                        <span class="bs-stepper-subtitle">Add Address</span>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>  -->
-                <!-- /Horizontal Wizard -->
+            
             <div class="content-body col d-flex justify-content-center">
               <!-- Tabs with Icon starts -->
-
-                        <div class="col-lg-10">
+                          <div class="col-lg-10">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Pesanan Saya</h4> 
@@ -136,6 +89,41 @@
                                         <?php endforeach; ?>
                                         </div>
 
+                                         <!-- divide -->
+                                        <div class="tab-pane" id="profileIcon" aria-labelledby="profileIcon-tab" role="tabpanel">
+                                            <div class="d-flex mt-2">
+                                            <div class="d-flex justify-content-between flex-grow-1">
+                                                <div class="me-1">
+                                                    <p class="fw-bolder mb-0">Event B1</p>
+                                                    <span>Event Sedang Aktif</span>
+                                                </div>
+                                                <div class="mt-50 mt-sm-0">
+                                                    <button type="button" class="btn btn-icon btn-outline-secondary">
+                                                        <i data-feather="eye" class="font-medium-3"></i> Tiket
+                                                    </button>
+                                                </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <!-- divide -->
+                                        <div class="tab-pane" id="aboutIcon" aria-labelledby="aboutIcon-tab" role="tabpanel">
+                                            <div class="d-flex mt-2">
+                                            <div class="d-flex justify-content-between flex-grow-1">
+                                                <div class="me-1">
+                                                    <p class="fw-bolder mb-0">Event C1</p>
+                                                    <span>Event telah selesai</span>
+                                                </div>
+                                                <div class="mt-50 mt-sm-0">
+                                                    <button type="button" class="btn btn-icon btn-outline-secondary">
+                                                        <i data-feather="eye" class="font-medium-3"></i> Tiket
+                                                    </button>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          
+                                        </div>
+
                                         <div class="tab-pane" id="dibatalkan" aria-labelledby="dibatalkan-tab" role="tabpanel">
                                         <?php foreach ($dibatalkan as $btl) : ?>
                                           <div class="d-flex mt-2">
@@ -153,213 +141,14 @@
                                           </div>
                                         <?php endforeach; ?>
                                         </div>
-                                        
-
                                         <!-- divide -->
-                                        <div class="tab-pane" id="profileIcon" aria-labelledby="profileIcon-tab" role="tabpanel">
-                                            <div class="d-flex mt-2">
-                                            <div class="d-flex justify-content-between flex-grow-1">
-                                                <div class="me-1">
-                                                    <p class="fw-bolder mb-0">Event B1</p>
-                                                    <span>Not Connected</span>
-                                                </div>
-                                                <div class="mt-50 mt-sm-0">
-                                                    <button type="button" class="btn btn-icon btn-outline-secondary">
-                                                        <i data-feather="eye" class="font-medium-3"></i> Tiket
-                                                    </button>
-                                                </div>
-                                            </div>
-                                          </div>
-                                          
-                                        </div>
-
-                                        <!-- divide -->
-                                        <div class="tab-pane" id="aboutIcon" aria-labelledby="aboutIcon-tab" role="tabpanel">
-                                            <div class="d-flex mt-2">
-                                            <div class="d-flex justify-content-between flex-grow-1">
-                                                <div class="me-1">
-                                                    <p class="fw-bolder mb-0">Event C1</p>
-                                                    <span>Not Connected</span>
-                                                </div>
-                                                <div class="mt-50 mt-sm-0">
-                                                    <button type="button" class="btn btn-icon btn-outline-secondary">
-                                                        <i data-feather="eye" class="font-medium-3"></i> Tiket
-                                                    </button>
-                                                </div>
-                                            </div>
-                                          </div>
-                                          
-                                        </div>
-                                        <!-- divide -->
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Tabs with Icon ends -->
-
-                        
                     </div>
-               
-                <!-- Basic Tabs end -->
-              <!-- <div class="col-md-6 col-12">
-                  <div class="card">
-                      <div class="card-header border-bottom">
-                          <h4 class="card-title">Tiket Saya</h4>
-                      </div>
-                      <div class="card-body pt-2">
-                         
-                          
-                          <div class="d-flex mt-2">
-                              
-                              <div class="d-flex justify-content-between flex-grow-1">
-                                  <div class="me-1">
-                                      <p class="fw-bolder mb-0">Event</p>
-                                      <span>Not Connected</span>
-                                  </div>
-                                  <div class="mt-50 mt-sm-0">
-                                      <button type="button" class="btn btn-icon btn-outline-secondary">
-                                          <i data-feather="eye" class="font-medium-3"></i>
-                                      </button>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="d-flex align-items-start mt-2">
-                              
-                              <div class="d-flex justify-content-between flex-grow-1">
-                                  <div class="me-1">
-                                      <p class="fw-bolder mb-0">Event</p>
-                                      <a href="https://twitter.com/pixinvent" target="_blank">@pixinvent</a>
-                                  </div>
-                                  <div class="mt-50 mt-sm-0">
-                                      <button type="button" class="btn btn-icon btn-outline-secondary">
-                                          <i data-feather="eye" class="font-medium-3"></i>
-                                      </button>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="d-flex mt-2">
-                              
-                              <div class="d-flex justify-content-between flex-grow-1">
-                                  <div class="me-1">
-                                      <p class="fw-bolder mb-0">Event</p>
-                                      <a href="https://www.linkedin.com/company/pixinvent" target="_blank"> @pixinvent </a>
-                                  </div>
-                                  <div class="mt-50 mt-sm-0">
-                                      <button type="button" class="btn btn-icon btn-outline-secondary">
-                                          <i data-feather="eye" class="font-medium-3"></i>
-                                      </button>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="d-flex mt-2">
-                              
-                              <div class="d-flex justify-content-between flex-grow-1">
-                                  <div class="me-1">
-                                      <p class="fw-bolder mb-0">Event</p>
-                                      <span>Not Connected</span>
-                                  </div>
-                                  <div class="mt-50 mt-sm-0">
-                                      <button type="button" class="btn btn-icon btn-outline-secondary">
-                                          <i data-feather="eye" class="font-medium-3"></i>
-                                      </button>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="d-flex mt-2">
-                              
-                              <div class="d-flex justify-content-between flex-grow-1">
-                                  <div class="me-1">
-                                      <p class="fw-bolder mb-0">Event</p>
-                                      <span>Not Connected</span>
-                                  </div>
-                                  <div class="mt-50 mt-sm-0">
-                                      <button type="button" class="btn btn-icon btn-outline-secondary">
-                                          <i data-feather="eye" class="font-medium-3"></i>
-                                      </button>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                  </div>
-              </div> -->
-               <!-- Vertical Wizard -->
-               <!-- <div class="row">
-                <div class="col-md-5 col-12">
-                    <div class="card">
-                        <div class="card-header border-bottom">
-                            <h4 class="card-title">Pembayaran</h4>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <ul class="timeline">
-                                        <li class="timeline-item">
-                                            <span class="timeline-point timeline-point-indicator"></span>
-                                            <div class="timeline-event">
-                                                <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
-                                                    <h6>Belum Dibayar</h6>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="timeline-item">
-                                            <span class="timeline-point timeline-point-secondary timeline-point-indicator"></span>
-                                            <div class="timeline-event">
-                                                <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
-                                                    <h6>Menunggu Konfirmasi</h6>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="timeline-item">
-                                            <span class="timeline-point timeline-point-secondary timeline-point-indicator"></span>
-                                            <div class="timeline-event">
-                                                <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
-                                                    <h6>Pembayaran Berhasil</h6>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-               
-                <div class="col-md-6 col-12">
-                  <div class="card">
-                      <div class="card-header border-bottom">
-                          <h4 class="card-title">Tiket Saya</h4>
-                      </div>
-                      <div class="card-body pt-2">
-                         <iframe src="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf" width="100%" height="240px"></iframe>
-                      </div>
-                  </div>
-              </div> -->
-
-
-              <!--           
-              </div>
-             
-                <div class="row">
-                    <div class="col-12">
-                    
-                        <div class="card">
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title">Tiket Saya</h4>
-                            </div>
-                            <div class="card-body py-2 my-25"> -->
-                              <?php foreach ($user as $usr) : ?>
-                              <!-- <div id="adobe-dc-view" style="width: 100%;"></div> -->
-                              <!-- <iframe src="https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf" width="100%" height="500px"></iframe>
-                              <input type="hidden" name="foto" id="foto" value="<?php echo $usr->foto ?>">
-                             <?php endforeach;?>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-               <!--  end -->
-
-            </div>
+               </div>
         </div>
 <?php foreach ($pesanan as $ps) : ?>
   <div class="modal fade text-start" id="detailTiketSaya<?php echo $ps->id_pesanan ?>" tabindex="-1" aria-labelledby="myModalLabel17"  aria-hidden="true">
@@ -374,8 +163,7 @@
                 <section class="invoice-preview-wrapper">
                     <div class="row invoice-preview">
                         <!-- Invoice -->
-                        
-                          <div class="col-12">
+                        <div class="col-12">
                             <div class="card invoice-preview-card">
                                 <div class="card-body pb-0">
                                     <!-- Header starts -->
@@ -505,7 +293,13 @@
               </div>  
             </div>
             <div class="modal-footer">
-                <a class="btn btn-primary" href="#" target="_blank"> Download </a>
+              <form action="<?php echo base_url(). 'pesanan_saya/download'; ?>" method="post">
+                <input type="hidden" name="id_pesanan" value="<?php echo $ps->id_pesanan?>">
+                <button type="submit" class="btn btn-primary" target="_blank">
+                 Downlaod
+                </button> 
+              </form>
+                <!-- <a class="btn btn-primary" href="<?php echo base_url('pesanan_saya/download') ?>" target="_blank"> Download </a> -->
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
@@ -528,16 +322,29 @@
                       <li class="list-group-item"><b><h5 class="text-primary"><?php echo $blb->subevent ?></h5></b></li>
                       <li class="list-group-item"><b>Metode Pembayaran</b> <br> <small><?php if ($blb->payment_type == 'bank_transfer') {
                         echo 'Transfer Bank ';
+                      }elseif($blb->payment_type == 'echannel'){
+                        echo 'E Channel ';
+                      }elseif($blb->payment_type == 'qris'){
+                        echo 'ShopeePay';
+                      }elseif($blb->payment_type == 'gopay'){
+                        echo 'Gopay';
                       }?><?php if ($blb->payment_type == 'echannel') {
-                        echo "Mandiri";
+                        echo "(Mandiri)";
                       }elseif($blb->bank == 'bri'){
-                        echo "BRI";
+                        echo "(BRI)";
                       }elseif($blb->bank == 'bni'){
-                        echo "BNI";
+                        echo "(BNI)";
                       }elseif($blb->bank == 'bca'){
-                        echo "BCA";
+                        echo "(BCA)";
                       } ?></small></li>
+                      <?php if ($blb->va_number == '-' and $blb->bill_key != '-') { ?>
+                      <li class="list-group-item"><b>Biller Code : </b><br> <?php echo $blb->biller_code ?></li>
+                      <li class="list-group-item"><b>Bill Key : </b><br> <?php echo $blb->bill_key ?></li>
+                    <?php }elseif($blb->qr_url != '') {?>
+                     <li class="list-group-item"><b>QR Image : </b><br> <a href="<?php echo $blb->qr_url ?>" target="_blank" class="btn btn-sm btn-outline-primary">View QR</a></li>
+                     <?php }else { ?>
                       <li class="list-group-item"><b>No. Rekening : </b><br> <?php echo $blb->va_number ?></li>
+                      <?php } ?>
                       <li class="list-group-item"><b>Total Pembayaran : </b><br><span class="badge bg-primary">Rp.<?php echo number_format($blb->gross_amount,0,'.','.') ?></span></li>
                   </ul>
               </div>
@@ -550,33 +357,8 @@
 </div>
 <?php endforeach; ?>
 <!--/ bayar  -->
-
-<!-- <?php foreach ($belum_bayar as $blb) : ?>
-<div class="modal fade text-start modal-primary" id="bayarr<?php echo $blb->id_pesanan ?>" tabindex="-1" aria-labelledby="myModalLabel160" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel160">Rincian Pesanan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <label><h4>Metode Pembayaran</h4></label>
-                <p><?php if ($blb->payment_type == 'bank_transfer') {
-                  echo 'Transfer Bank';
-                }?></p>
-                <p>Bank : <?php echo $blb->bank ?></p>
-                <p>VA Number : <?php echo $blb->va_number ?></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>
-            </div>
-        </div>
-    </div>
-</div>
-<?php endforeach; ?> -->
-    
-    <!-- END: Content-->
-    <!-- Modal -->
+<!-- END: Content-->
+<!-- Modal -->
     
 <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
 <script type="text/javascript">

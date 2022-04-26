@@ -41,7 +41,8 @@ class Register extends CI_Controller {
                 'email'     => $this->input->post('email'),
                 'alamat'    => $this->input->post('alamat'),
                 'password'  => md5($this->input->post('password1')),
-                'hak_akses' => 'pemancing'
+                'hak_akses' => 'pemancing',
+                'status'    => 'aktif'
             );
 
             $this->db->insert('t_user',$data);

@@ -44,6 +44,12 @@ class Snap extends CI_Controller {
 		  'gross_amount' => 94000, // no decimal allowed for creditcard
 		);
 
+		$payment_type => 'gopay',
+    	$gopay => array(
+        'enable_callback' => true,                // optional
+        'callback_url' => 'someapps://callback'   // optional
+    )
+
 		// Optional
 		$item1_details = array(
 		  'id' => 'a1',
@@ -113,6 +119,7 @@ class Snap extends CI_Controller {
             'customer_details'   => $customer_details,
             'credit_card'        => $credit_card,
             'expiry'             => $custom_expiry
+            		
         );
 
 		error_log(json_encode($transaction_data));

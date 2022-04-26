@@ -29,5 +29,28 @@ class Pesanan_saya extends CI_Controller {
         $this->load->view('tiket_saya');
         $this->load->view('templates_home/footer');
     }
+
+    public function download()
+    {
+        $this->load->library('dompdf_gen');
+
+
+        $data['pesanan'] = $this->model_pesanan_user->tampil_pesanan();
+
+        $id_pesanan      = $this->input->post('id_pesanan');
+      //  $where = array('id_pesanan' => $id_pesanan);
+        $data['pesanan'] = $this->model_pesanan_user->download($id_pesanan);
+
+        $this->load->view('download_tiket', $data);
+
+        $paper_size   = 'A5';
+        $orientation  = 'landscape';
+        $html         = $this->output->get_output();
+        $this->dompdf->set_paper($paper_size, $orientation);
+
+        $this->dompdf->load_html($html);
+        $this->dompdf->render();
+        $this->dompdf->stream("tiket.pdf", array('attachment' => 0));
+    }
 }
 ?>

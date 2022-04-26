@@ -39,13 +39,11 @@
                       <td><?php echo $psn->nama ?></td>
                       <td><?php echo $psn->subevent ?></td>
                       <td>Rp. <?php echo number_format($psn->gross_amount,0,'.','.') ?></td>
-                      <!-- <td><?php if ($psn->payment_type == 'qris') {
-                          echo 'Shopee Pay';
-                        }else{
-                          echo 'Gopay';
-                        } ?>
-                      </td> -->
-                      <td style="text-transform: capitalize;"><?php echo $psn->transaction_status ?></td>
+                      <td style="text-transform: capitalize;"><?php if ($psn->transaction_status == "settlement") {
+                        echo 'Success';
+                      }else{
+                        echo 'Pending';
+                      }?></td>
                       <td>
                         <button class="btn btn-success btn-icon icon-left dropdown-item " data-toggle="modal" data-target="#lihatDetailPesanan<?php echo $psn->id_pesanan ?>"><i class="fas fa-search-plus"></i> Detail</button>
                       </td>
@@ -191,8 +189,8 @@ foreach ($pesanan as $psn) : ?>
                 } ?>
               </option>
             <?php if ($psn->transaction_status=='pending') { ?>
-              <option value="success">Success</option>
-            <?php }elseif ($psn->transaction_status=='success') { ?>
+              <option value="settlement">Success</option>
+            <?php }elseif ($psn->transaction_status=='settlement') { ?>
               <option value="pending">Pending</option>
             <?php } ?>
             </select>

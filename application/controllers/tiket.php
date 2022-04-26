@@ -223,23 +223,69 @@ class Tiket extends CI_Controller {
       //$simpan = $this->db->insert('t_transaksi', $data1);
 
 //fix 
-      $data = [
-      'id_pesanan'         => $result->order_id,
-      'id_user'            => $id_user,
-      'id_subevent'        => $id_subevent,
-      'gross_amount'       => $result->gross_amount,
-      'payment_type'       => $result->payment_type,
-      'transaction_time'   => $result->transaction_time,
-      'transaction_status' => $result->transaction_status,
-      'status_code'        => $result->status_code,
-      //tambahan
-      'status_message'     => $result->status_message,
-      'bank'               => $bank,
-      'va_number'          => $va_number,
-      'bill_key'           => $bill_key,
-      'biller_code'        => $biller_code
-      ];
-      $simpan = $this->db->insert('t_pesanan', $data);
+      if ($result->payment_type == 'qris') 
+      {
+        $data = [
+        'id_pesanan'         => $result->order_id,
+        'id_user'            => $id_user,
+        'id_subevent'        => $id_subevent,
+        'gross_amount'       => $result->gross_amount,
+        'payment_type'       => $result->payment_type,
+        'transaction_time'   => $result->transaction_time,
+        'transaction_status' => $result->transaction_status,
+        'status_code'        => $result->status_code,
+        //tambahan
+        'status_message'     => $result->status_message,
+        'bank'               => $bank,
+        'va_number'          => $va_number,
+        'bill_key'           => $bill_key,
+        'biller_code'        => $biller_code,
+        'qr_url'             => 'https://api.sandbox.veritrans.co.id/v2/qris/'.$result->transaction_id.'/qr-code'         
+        ];
+        $simpan = $this->db->insert('t_pesanan', $data);
+      }
+      
+      elseif ($result->payment_type == 'gopay') 
+      {
+        $data = [
+        'id_pesanan'         => $result->order_id,
+        'id_user'            => $id_user,
+        'id_subevent'        => $id_subevent,
+        'gross_amount'       => $result->gross_amount,
+        'payment_type'       => $result->payment_type,
+        'transaction_time'   => $result->transaction_time,
+        'transaction_status' => $result->transaction_status,
+        'status_code'        => $result->status_code,
+        //tambahan
+        'status_message'     => $result->status_message,
+        'bank'               => $bank,
+        'va_number'          => $va_number,
+        'bill_key'           => $bill_key,
+        'biller_code'        => $biller_code,
+        'qr_url'             => 'https://api.sandbox.veritrans.co.id/v2/gopay/'.$result->transaction_id.'/qr-code'         
+        ];
+        $simpan = $this->db->insert('t_pesanan', $data);
+      }
+
+      else{
+        $data = [
+        'id_pesanan'         => $result->order_id,
+        'id_user'            => $id_user,
+        'id_subevent'        => $id_subevent,
+        'gross_amount'       => $result->gross_amount,
+        'payment_type'       => $result->payment_type,
+        'transaction_time'   => $result->transaction_time,
+        'transaction_status' => $result->transaction_status,
+        'status_code'        => $result->status_code,
+        //tambahan
+        'status_message'     => $result->status_message,
+        'bank'               => $bank,
+        'va_number'          => $va_number,
+        'bill_key'           => $bill_key,
+        'biller_code'        => $biller_code     
+        ];
+        $simpan = $this->db->insert('t_pesanan', $data);
+      }
 
       $data1 = [
         'id_tiket'       => 'KP.TW-'.$id_user.$id_subevent.date('d').date('m').date('Y'), 
