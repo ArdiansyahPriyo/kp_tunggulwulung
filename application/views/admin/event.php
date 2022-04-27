@@ -6,9 +6,9 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Data Event</h4>
+              <h4>Data Sistem Mancing</h4>
                <div class="card-header-action">
-                  <button class="btn btn-icon icon-left btn-primary mr-1" data-toggle="modal" data-target="#tambahDataEvent"><i class="fas fa-plus-circle"></i> Tambah Event</button>
+                  <button class="btn btn-icon icon-left btn-primary mr-1" data-toggle="modal" data-target="#tambahDataEvent"><i class="fas fa-plus-circle"></i> Tambah Data</button>
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                   <thead>
                     <tr>
                       <th style="width: 10%;">No</th>
-                      <th>Event</th>
+                      <th>Sistem Mancing</th>
                       <th class="text-center" style="width: 20%;" colspan="2">Action</th>
                    </tr>
                   </thead>
@@ -146,7 +146,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Event</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -154,7 +154,7 @@
       <div class="modal-body">
         <form action="<?php echo base_url(). 'admin/data_event/tambah_event'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Event</label>
+            <label>Sistem Mancing</label>
             <div class="input-group">
               <input type="text" class="form-control" placeholder="" name="event" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
             </div>
@@ -179,7 +179,7 @@ foreach ($event as $evt) : ?>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Event</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -187,7 +187,7 @@ foreach ($event as $evt) : ?>
       <div class="modal-body">
         <form action="<?php echo base_url(). 'admin/data_event/edit_event'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Event</label>
+            <label>Sistem Mancing</label>
             <div class="input-group">
               <input type="text" class="form-control" placeholder="" name="event" value="<?php echo $evt->event ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
               <input type="hidden" value="<?php echo $evt->id_event ?>" type="text" name="id_event">

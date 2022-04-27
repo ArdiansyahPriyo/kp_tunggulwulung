@@ -6,9 +6,9 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Data Sub Event</h4>
+              <h4>Data Event</h4>
                <div class="card-header-action">
-                  <button class="btn btn-icon icon-left btn-primary mr-1" data-toggle="modal" data-target="#tambahDataSubEvent"><i class="fas fa-plus-circle"></i> Tambah Sub Event</button>
+                  <button class="btn btn-icon icon-left btn-primary mr-1" data-toggle="modal" data-target="#tambahDataSubEvent"><i class="fas fa-plus-circle"></i> Tambah Event</button>
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
             </div>
@@ -22,8 +22,8 @@
                   <thead>
                     <tr>
                       <th style="width: 5%;">No</th>
+                      <th>Sistem</th>
                       <th>Event</th>
-                      <th>Sub Event</th>
                       <th>Tanggal Pelaksanaan</th>
                       <!-- <th>Start</th>
                       <th>End</th>
@@ -229,7 +229,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Sub Event</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Event</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -237,7 +237,7 @@
       <div class="modal-body">
         <form action="<?php echo base_url(). 'admin/data_subevent/tambah_subevent'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Event</label>
+            <label>Sistem</label>
             <select class="form-control" name="id_event" required oninvalid="this.setCustomValidity('Data tidak boleh kosong. Isi data event terlebih dahulu!')" oninput="setCustomValidity('')">
               <?php foreach($list_event as $evt) : ?>
                 <option value="<?php echo $evt->id_event ?>">
@@ -247,7 +247,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Sub Event</label>
+            <label>Event</label>
             <div class="input-group">
               <input type="text" class="form-control" name="subevent" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
             </div>
@@ -336,7 +336,7 @@ foreach ($subevent as $sbevt) : ?>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Sub Event</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Event</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -344,7 +344,7 @@ foreach ($subevent as $sbevt) : ?>
       <div class="modal-body">
         <form action="<?php echo base_url(). 'admin/data_subevent/edit_subevent'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Sub Event</label>
+            <label> Event</label>
             <div class="input-group">
               <input type="text" class="form-control" placeholder="" name="subevent" value="<?php echo $sbevt->subevent ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
               <input type="hidden" value="<?php echo $sbevt->id_subevent ?>" type="text" name="id_subevent">
@@ -439,7 +439,7 @@ foreach ($subevent as $sbevt) : ?>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Detail Sub Event</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Detail Event</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -448,7 +448,7 @@ foreach ($subevent as $sbevt) : ?>
         <div class="py-4">
           <p class="clearfix">
             <span class="float-left">
-              Event
+              Sistem
             </span>
             <span class="float-right ">
               <b><?php echo $sbevt->event ?></b>
@@ -456,7 +456,7 @@ foreach ($subevent as $sbevt) : ?>
           </p>
           <p class="clearfix">
             <span class="float-left">
-              Sub Event
+              Event
             </span>
             <span class="float-right ">
               <b><?php echo $sbevt->subevent ?></b>

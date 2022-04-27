@@ -21,7 +21,7 @@
                   <thead>
                     <tr>
                       <th style="width: 10%;">No</th>
-                      <th >Sub Event</th>
+                      <th >Event</th>
                       <th class="text-center" colspan="2" style="width: 30%;">Action</th>
                    </tr>
                   </thead>
@@ -154,7 +154,7 @@
       <div class="modal-body">
         <form action="<?php echo base_url(). 'admin/data_panitia/tambah_panitia'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Sub Event</label>
+            <label>Event</label>
             <div class="input-group">
               <input type="text" class="form-control" name="" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" value="<?php echo $sbevt->subevent ?>" readonly>
             </div>

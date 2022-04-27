@@ -29,12 +29,15 @@ class Validasi extends CI_Controller{
 	public function tiket()
 	{
 		$id_tiket		= $this->input->post('id_tiket');
+		$date = date("Y-m-d");
 
-		$sql = $this->db->query("SELECT * FROM t_tiket where id_tiket ='$id_tiket' and status = 'aktif'")->result(); 
+		$sql = $this->db->query("SELECT t_tiket.*, t_pesanan.*, t_subevent.* FROM t_tiket 
+			INNER JOIN t_pesanan ON t_pesanan.id_pesanan = t_tiket.id_pesanan INNER JOIN t_subevent ON t_subevent.id_subevent = t_pesanan.id_subevent where t_tiket.id_tiket ='$id_tiket' and t_tiket.status_tiket	 = 'belum_validasi' and t_subevent.tanggal_pelaksanaan = '$date'")->result();
+		//$sql = $this->db->query("SELECT * FROM t_tiket where id_tiket ='$id_tiket' ")->result();  
 		if ($sql) {
 		$data = array(
 			'id_tiket' 		 				=> $id_tiket,
-			'status' 		=> 'selesai' 
+			'status_tiket' 		=> 'sudah_validasi' 
 		);
 
 		$this->db->where('id_tiket', $id_tiket);
@@ -48,7 +51,7 @@ class Validasi extends CI_Controller{
 		}else{
 			$this->session->set_flashdata('tidak_valid','<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
       <script type ="text/JavaScript">  
-      swal("Gagal","Nomor tiket salah atau tiket sudah digunakan!","error")  
+      swal("Gagal","Data tiket tidak valid!","error")  
       </script>'  
   	);
 		redirect('panitia/validasi');

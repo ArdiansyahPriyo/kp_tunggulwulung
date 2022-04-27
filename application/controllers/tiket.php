@@ -290,7 +290,7 @@ class Tiket extends CI_Controller {
       $data1 = [
         'id_tiket'       => 'KP.TW-'.$id_user.$id_subevent.date('d').date('m').date('Y'), 
         'id_pesanan'     => $result->order_id,
-        'status'         => 'belum_aktif',
+        'status_tiket'   => 'belum_aktif',
         'created_date'   => date('Y-m-d H:i:s')
       ];
       $this->db->insert('t_tiket', $data1);

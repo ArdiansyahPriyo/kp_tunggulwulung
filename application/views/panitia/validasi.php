@@ -2,8 +2,9 @@
   <?php echo $this->session->flashdata('valid') ?>
   <?php echo $this->session->flashdata('tidak_valid') ?>
   <?php
-    $id_user    = $this->session->userdata('id_user'); 
-    $sql = $this->db->query("SELECT * FROM t_panitia where id_user ='$id_user'")->result(); 
+    $id_user    = $this->session->userdata('id_user');
+    $tgl        = date("Y-m-d");
+    $sql = $this->db->query("SELECT t_panitia.*, t_subevent.* FROM t_panitia INNER JOIN t_subevent ON t_subevent.id_subevent = t_panitia.id_subevent where t_panitia.id_user ='$id_user' and t_subevent.tanggal_pelaksanaan = '$tgl' ")->result(); 
     if (!$sql) { ?>
       <div class="card">
         <div class="card-header">
@@ -19,6 +20,8 @@
           </div>
       </div>
       </div>
+     
+   
    <?php  }else {?>
     <div class="card" id="sample-login">
       <form action="<?php echo base_url(). 'panitia/validasi/tiket'; ?>" method="post">

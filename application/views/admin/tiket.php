@@ -6,7 +6,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Data Pesanan</h4>
+              <h4>Data Tiket</h4>
                <div class="card-header-action">
                   
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
@@ -14,49 +14,34 @@
             </div>
             <div class="collapse show" id="event-collapse">
             <div class="card-body">
-              <?php echo $this->session->flashdata('berhasilEditPesanan');  ?> 
-              <?php echo $this->session->flashdata('berhasilHapusPesanan');  ?> 
+              <?php echo $this->session->flashdata('berhasilEditTiketAdmin');  ?> 
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
                   <thead>
                     <tr>
-                      <th style="width: 5%;">No</th>
-                      <th>Nomor Pesanan</th>
+                      <th>No</th>
+                      <th>Nomor Tiket</th>
                       <th>Nama Pemesan</th>
                       <th>Jenis Event</th>
-                      <th>Total Bayar</th>
-                      <th>Status Pembayaran</th>
+                      <th>Status</th>
                       <th class="text-center">Action</th>
                    </tr>
                   </thead>
                   <tbody>
                     <?php 
                     $no=1;
-                    foreach($pesanan as $psn) : ?>
+                    foreach($tiket as $tkt) : ?>
                     <tr>
                       <td><?php echo $no++ ?></td>
-                      <td><?php echo $psn->id_pesanan ?></td>
-                      <td><?php echo $psn->nama ?></td>
-                      <td><?php echo $psn->subevent ?></td>
-                      <td>Rp. <?php echo number_format($psn->gross_amount,0,'.','.') ?></td>
-                      <td style="text-transform: capitalize;"><?php if ($psn->transaction_status == "settlement") {
-                        echo 'Success';
-                      }else{
-                        echo 'Pending';
+                      <td><?php echo $tkt->id_tiket ?></td>
+                      <td><?php echo $tkt->nama ?></td>
+                      <td><?php echo $tkt->subevent ?></td>
+                      <td><?php if ($tkt->status_tiket == 'belum_validasi') {
+                        echo "Belum Validasi";
+                      } elseif ($tkt->status_tiket == 'sudah_validasi') {
+                        echo "Sudah Validasi";
                       }?></td>
-                      <!-- <td>
-                        <button class="btn btn-success btn-icon icon-left dropdown-item " data-toggle="modal" data-target="#lihatDetailPesanan<?php echo $psn->id_pesanan ?>"><i class="fas fa-search-plus"></i> Detail</button>
-                      </td> -->
-                      <td>
-                        <div class="dropdown">
-                          <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Options</a>
-                          <div class="dropdown-menu">
-                            <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#lihatDetailPesanan<?php echo $psn->id_pesanan ?>"><i class="fas fa-search-plus"></i> Detail</button>
-                            <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#editDataPesanan<?php echo $psn->id_pesanan ?>"><i class="far fa-edit"></i> Edit</button>
-                            <button class="btn btn-icon icon-left btn-light dropdown-item text-danger" data-toggle="modal" data-target="#hapusDataPesanan<?php echo $psn->id_pesanan ?>"><i class="fas fa-trash"></i> Hapus</button>
-                          </div>
-                        </div>
-                      </td>
+                      <td class="text-center"><button class="btn btn-light btn-icon icon-left" data-toggle="modal" data-target="#tiketEdit<?php echo substr($tkt->id_tiket, 6) ?>"><i class="far fa-edit"></i> Edit</button></td> 
                     </tr>
                     <?php endforeach; ?>
                   </tbody>
@@ -165,34 +150,37 @@
 <!-- Modal -->
 
 <!--modal edit pesanan-->
-<?php 
-foreach ($pesanan as $psn) : ?>
-<div class="modal fade" id="editDataPesanan<?php echo $psn->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<?php foreach ($tiket as $tkt) : ?>
+<div class="modal fade" id="tiketEdit<?php echo substr($tkt->id_tiket, 6) ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Pesanan</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Tiket</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(). 'admin/data_pesanan/edit_pesanan'; ?>" method="post" enctype="multipart/form-data" >
+        <form action="<?php echo base_url(). 'admin/data_tiket/edit'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <input type="hidden" value="<?php echo $psn->id_pesanan ?>" type="text" name="id_pesanan">
-            <label for="inputEmail4">Status Pembayaran</label>
-            <select class="form-control" name="transaction_status" required>
-              <option value="<?php echo $psn->transaction_status ?>"><?php if ($psn->transaction_status=='pending') {
-                  echo 'Pending';
+            <label>Nomor Tiket</label>
+            <input type="text" class="form-control" value="<?php echo $tkt->id_tiket ?>" readonly>
+          </div>
+          <div class="form-group">
+            <input type="hidden" value="<?php echo $tkt->id_tiket ?>" type="text" name="id_tiket">
+            <label for="inputEmail4">Status Tiket</label>
+            <select class="form-control" name="status_tiket" required>
+              <option value="<?php echo $tkt->status_tiket ?>"><?php if ($tkt->status_tiket=='belum_validasi') {
+                  echo 'Belum Validasi';
                 }else{
-                  echo 'Success';
+                  echo 'Sudah Validasi';
                 } ?>
               </option>
-            <?php if ($psn->transaction_status=='pending') { ?>
-              <option value="settlement">Success</option>
-            <?php }elseif ($psn->transaction_status=='settlement') { ?>
-              <option value="pending">Pending</option>
+            <?php if ($tkt->status_tiket=='belum_validasi') { ?>
+              <option value="sudah_validasi">Sudah Validasi</option>
+            <?php }elseif ($tkt->status_tiket=='sudah_validasi') { ?>
+              <option value="belum_validasi">Belum Validasi</option>
             <?php } ?>
             </select>
           </div>
@@ -205,13 +193,12 @@ foreach ($pesanan as $psn) : ?>
     </div>
   </div>
 </div>
-<?php endforeach; ?>
+<?php endforeach; ?>  
 <!-- end modal -->
 
 
-
 <!-- modal hapus pesanan-->
-<?php foreach ($pesanan as $psn) : ?>
+<!-- <?php foreach ($pesanan as $psn) : ?>
 <div class="modal fade" id="hapusDataPesanan<?php echo $psn->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" >
@@ -235,12 +222,12 @@ foreach ($pesanan as $psn) : ?>
     </div>
   </div>
 </div>
-<?php endforeach; ?>
+<?php endforeach; ?> -->
 <!-- end modal -->
 
 
 <!-- modal detail Pesanan -->
-<?php 
+<!-- <?php 
 foreach ($pesanan as $psn) : ?>
 <div class="modal fade" id="lihatDetailPesanan<?php echo $psn->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -302,30 +289,22 @@ foreach ($pesanan as $psn) : ?>
           </p>
           <p class="clearfix">
             <span class="float-left">
-              Metode Pembayaran
+              Jenis Pembayaran
             </span>
             <span class="float-right ">
-              <b><?php if ($psn->payment_type == 'bank_transfer') {
-                  echo 'Transfer Bank ';
-                }elseif($psn->payment_type == 'echannel'){
-                  echo 'E Channel ';
-                }elseif($psn->payment_type == 'qris'){
-                  echo 'ShopeePay';
-                }elseif($psn->payment_type == 'gopay'){
-                  echo 'Gopay';
-                }?>
-                <?php if ($psn->payment_type == 'echannel') {
-                  echo "(Mandiri)";
-                }elseif($psn->bank == 'bri'){
-                  echo "(BRI)";
-                }elseif($psn->bank == 'bni'){
-                  echo "(BNI)";
-                }elseif($psn->bank == 'bca'){
-                  echo "(BCA)";
-                } ?></b>
+              <b><?php if ($psn->payment_type == 'qris') {
+                echo 'ShopeePay';
+              }elseif ($psn->payment_type == 'echannel'){
+                echo 'E-Channel';
+              }elseif ($psn->payment_type == 'bank_transfer') {
+                echo 'Bank Transfer';
+              }elseif ($psn->payment_type == 'gopay') {
+                echo 'Gopay';
+              }
+              ?></b>
             </span>
           </p>
-          <!-- <p class="clearfix">
+          <p class="clearfix">
             <span class="float-left">
               Bank
             </span>
@@ -343,47 +322,31 @@ foreach ($pesanan as $psn) : ?>
               }
               ?></b>
             </span>
-          </p> -->
-
-          <?php if ($psn->va_number == '-' and $psn->bill_key != '-') { ?>
-            <p class="clearfix">
-              <span class="float-left">
-                Biller Code
-              </span>
-              <span class="float-right ">
-                <b><?php echo $psn->biller_code ?></b>
-              </span>
-            </p>
-            <p class="clearfix">
-              <span class="float-left">
-                Bill Key
-              </span>
-              <span class="float-right ">
-                <b><?php echo $psn->bill_key ?></b>
-              </span>
-            </p>
-          <?php } elseif ($psn->qr_url != '') {  ?>
-            <p class="clearfix">
-              <span class="float-left">
-                QR Code
-              </span>
-              <span class="float-right ">
-                <a href="<?php echo $psn->qr_url ?>" target="_blank" class="btn btn-sm btn-outline-primary">View QR</a>
-              </span>
-            </p>
-          <?php }else { ?>
-            <p class="clearfix">
-              <span class="float-left">
-                VA Number
-              </span>
-              <span class="float-right ">
-                <b><?php echo $psn->va_number ?></b>
-              </span>
-            </p>
-          <?php } ?>
-          
-          
-          
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              VA Number
+            </span>
+            <span class="float-right ">
+              <b><?php echo $psn->va_number ?></b>
+            </span>
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              Bill Key
+            </span>
+            <span class="float-right ">
+              <b><?php echo $psn->bill_key ?></b>
+            </span>
+          </p>
+          <p class="clearfix">
+            <span class="float-left">
+              Biller Code
+            </span>
+            <span class="float-right ">
+              <b><?php echo $psn->biller_code ?></b>
+            </span>
+          </p>
         </div>
        </div>
       <div class="modal-footer bg-whitesmoke br">
@@ -393,5 +356,5 @@ foreach ($pesanan as $psn) : ?>
     </div>
   </div>
 </div>
-<?php endforeach; ?>
+<?php endforeach; ?> -->
 

@@ -32,6 +32,23 @@ class Data_pesanan extends CI_Controller{
 		$id_pesanan	 					= $this->input->post('id_pesanan');
 		$transaction_status 	= $this->input->post('transaction_status');
 
+		if ($transaction_status == 'settlement') {
+				$data1 = array(
+				'id_pesanan' 		 				=> $id_pesanan,
+				'status_tiket' 					=> 'belum_validasi' 
+			);
+			$this->db->where('id_pesanan', $id_pesanan);
+			$this->db->update('t_tiket', $data1);
+		}elseif($transaction_status == 'pending'){
+			$data2 = array(
+				'id_pesanan' 		 				=> $id_pesanan,
+				'status_tiket' 					=> 'belum_aktif' 
+			);
+			$this->db->where('id_pesanan', $id_pesanan);
+			$this->db->update('t_tiket', $data2);
+		}
+
+		
 		$data = array(
 			'id_pesanan' 		 				=> $id_pesanan,
 			'transaction_status' 		=> $transaction_status 

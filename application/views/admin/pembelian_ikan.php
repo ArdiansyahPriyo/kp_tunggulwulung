@@ -23,7 +23,7 @@
                   <thead>
                     <tr>
                       <th style="width: 5%;">No</th>
-                      <th>Sub Event</th>
+                      <th>Event</th>
                       <th>Supplier</th>
                       <th>Jenis Ikan</th>
                       <th>Berat Ikan</th>
@@ -176,7 +176,7 @@
       <div class="modal-body">
         <form action="<?php echo base_url(). 'admin/data_pembelian/tambah_pembelian'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Subevent</label>
+            <label>Event</label>
             <select class="form-control" name="id_subevent" required oninvalid="this.setCustomValidity('Data tidak boleh kosong. Isi data sub event terlebih dahulu!')" oninput="setCustomValidity('')">
               <?php foreach($list_subevent as $lsbevt) : ?>
                 <option value="<?php echo $lsbevt->id_subevent ?>">
@@ -293,7 +293,7 @@ foreach($pembelian as $pmb) : ?>
       <div class="modal-body">
         <form action="<?php echo base_url(). 'admin/data_pembelian/edit_pembelian'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Sub Event</label>
+            <label>Event</label>
             <div class="input-group">
               <!-- <h5 class="form-control"><?php echo $pmb->subevent ?></h5> -->
              <input type="text" disabled class="form-control" placeholder="" name="subevent" value="<?php echo $pmb->subevent ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')"> 
