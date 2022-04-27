@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Apr 2022 pada 06.24
+-- Waktu pembuatan: 27 Apr 2022 pada 07.53
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.9
 
@@ -63,8 +63,8 @@ CREATE TABLE `t_panitia` (
 INSERT INTO `t_panitia` (`id_panitia`, `id_subevent`, `id_user`, `nama`, `created_by`, `created_date`) VALUES
 (32, 15, 22, '', 'Admin Tunggul Wulung', '2022-03-07'),
 (33, 15, 23, '', 'Admin Tunggul Wulung', '2022-03-07'),
-(36, 19, 23, '', 'Admin Tunggul Wulung', '2022-04-04'),
-(37, 19, 26, '', 'Admin Tunggul Wulung', '2022-04-04');
+(37, 19, 26, '', 'Admin Tunggul Wulung', '2022-04-04'),
+(38, 19, 21, '', 'Admin Tunggul Wulung', '2022-04-27');
 
 -- --------------------------------------------------------
 
@@ -129,15 +129,28 @@ CREATE TABLE `t_pesanan` (
   `payment_type` varchar(100) NOT NULL,
   `transaction_time` varchar(100) NOT NULL,
   `transaction_status` varchar(100) NOT NULL,
-  `status_code` varchar(10) NOT NULL
+  `status_code` varchar(10) NOT NULL,
+  `status_message` varchar(100) NOT NULL,
+  `bank` varchar(10) NOT NULL,
+  `va_number` varchar(50) NOT NULL,
+  `bill_key` varchar(50) NOT NULL,
+  `biller_code` varchar(50) NOT NULL,
+  `qr_url` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `t_pesanan`
 --
 
-INSERT INTO `t_pesanan` (`id_pesanan`, `id_user`, `id_subevent`, `gross_amount`, `payment_type`, `transaction_time`, `transaction_status`, `status_code`) VALUES
-(274279, 27, 15, '122000.00', 'qris', '2022-04-12 11:22:49', 'pending', '201');
+INSERT INTO `t_pesanan` (`id_pesanan`, `id_user`, `id_subevent`, `gross_amount`, `payment_type`, `transaction_time`, `transaction_status`, `status_code`, `status_message`, `bank`, `va_number`, `bill_key`, `biller_code`, `qr_url`) VALUES
+(358477, 35, 19, '102000.00', 'qris', '2022-04-20 11:25:11', 'pending', '201', 'Success, transaction is found', '-', '-', '-', '-', 'https://api.sandbox.veritrans.co.id/v2/qris/c4a724db-c92a-4c10-830c-ef5140f93e2b/qr-code'),
+(2791915, 27, 19, '102000.00', 'echannel', '2022-04-20 11:37:03', 'settlement', '201', 'Transaksi sedang diproses', '-', '-', '236317152566', '70012', ''),
+(3575416, 35, 15, '122000.00', 'gopay', '2022-04-20 11:24:52', 'settlement', '201', 'Success, transaction is found', '-', '-', '-', '-', 'https://api.sandbox.veritrans.co.id/v2/gopay/50871d16-919b-4906-ba6e-dbd18cad373a/qr-code'),
+(18346944, 18, 15, '122000.00', 'gopay', '2022-04-20 11:39:31', 'settlement', '201', 'Success, transaction is found', '-', '-', '-', '-', 'https://api.sandbox.veritrans.co.id/v2/gopay/1b2e086c-ce35-42db-8ba7-34addad941cf/qr-code'),
+(18383954, 18, 19, '102000.00', 'bank_transfer', '2022-04-13 11:00:32', 'pending', '201', 'Transaksi sedang diproses', 'bri', '127483919279282973', '-', '-', ''),
+(27179718, 27, 15, '122000.00', 'qris', '2022-04-20 11:27:16', 'pending', '201', 'Success, transaction is found', '-', '-', '-', '-', 'https://api.sandbox.veritrans.co.id/v2/qris/c4a01b4a-89b8-4c43-a5ea-f6eba91aee99/qr-code'),
+(33451340, 33, 15, '122000.00', 'bank_transfer', '2022-04-13 10:56:21', 'settlement', '201', 'Transaksi sedang diproses', 'bni', '9881274895264850', '-', '-', ''),
+(33595837, 33, 19, '102000.00', 'bank_transfer', '2022-04-13 10:58:16', 'pending', '201', 'Transaksi sedang diproses', 'bca', '12748246376', '-', '-', '');
 
 --
 -- Trigger `t_pesanan`
@@ -178,8 +191,8 @@ CREATE TABLE `t_subevent` (
 --
 
 INSERT INTO `t_subevent` (`id_subevent`, `id_event`, `subevent`, `harga`, `jenis_hadiah`, `nominal`, `stok`, `tanggal_pelaksanaan`, `jam_mulai`, `jam_selesai`, `jumlah_lapak`, `mulai`, `akhir`, `file`) VALUES
-(15, 9, 'Lomba Mancing HUT ke 4', '120000', 'langsung', '10000000', 129, '2022-05-01', '09:00:00', '15:00:00', 140, '2022-03-24', '2022-04-23', 'file41.jpeg'),
-(19, 9, 'Lomba Menyambut Ramadhan 1943 H', '100000', 'langsung', '5000000', 94, '2022-04-24', '06:53:00', '15:53:00', 100, '2022-04-04', '2022-04-22', 'WhatsApp_Image_2022-02-24_at_11_31_41_(1)2.jpeg');
+(15, 9, 'Lomba Mancing HUT ke 4', '120000', 'langsung', '10000000', 109, '2022-05-01', '09:00:00', '15:00:00', 140, '2022-03-24', '2022-04-28', 'file41.jpeg'),
+(19, 9, 'Lomba Menyambut Ramadhan 1943 H', '100000', 'langsung', '5000000', 84, '2022-04-24', '06:53:00', '15:53:00', 100, '2022-04-04', '2022-04-22', 'WhatsApp_Image_2022-02-24_at_11_31_41_(1)2.jpeg');
 
 -- --------------------------------------------------------
 
@@ -212,7 +225,7 @@ INSERT INTO `t_supplier` (`id_supplier`, `nama_supplier`, `alamat_supplier`, `no
 CREATE TABLE `t_tiket` (
   `id_tiket` varchar(20) NOT NULL,
   `id_pesanan` int(11) NOT NULL,
-  `status` varchar(20) NOT NULL,
+  `status_tiket` varchar(20) NOT NULL,
   `created_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -220,8 +233,15 @@ CREATE TABLE `t_tiket` (
 -- Dumping data untuk tabel `t_tiket`
 --
 
-INSERT INTO `t_tiket` (`id_tiket`, `id_pesanan`, `status`, `created_date`) VALUES
-('KP.TW-271512042022', 274279, 'belum_aktif', '2022-04-12 06:23:07');
+INSERT INTO `t_tiket` (`id_tiket`, `id_pesanan`, `status_tiket`, `created_date`) VALUES
+('KP.TW-181520042022', 18346944, 'belum_validasi', '2022-04-20 06:39:39'),
+('KP.TW-181913042022', 18383954, 'belum_aktif', '2022-04-13 06:00:35'),
+('KP.TW-271520042022', 27179718, 'belum_aktif', '2022-04-20 06:27:24'),
+('KP.TW-271920042022', 2791915, 'belum_validasi', '2022-04-20 06:37:10'),
+('KP.TW-331513042022', 33451340, 'belum_validasi', '2022-04-13 05:56:24'),
+('KP.TW-331913042022', 33595837, 'belum_aktif', '2022-04-13 05:58:20'),
+('KP.TW-351520042022', 3575416, 'belum_validasi', '2022-04-20 06:25:01'),
+('KP.TW-351920042022', 358477, 'belum_aktif', '2022-04-20 06:25:19');
 
 -- --------------------------------------------------------
 
@@ -256,7 +276,10 @@ INSERT INTO `t_user` (`id_user`, `nama`, `email`, `no_hp`, `alamat`, `password`,
 (26, 'Wasis', 'wasis@mail.com', '082736254893', 'Kupuk, Bungkal, Ponorogo', '054d4a4653a16b49c49c49e000075d10', 'panitia', 'aktif', NULL, '0000-00-00 00:00:00'),
 (27, 'Imam Sunarto', 'imam@mail.com', '084526352637', 'Turi, Jetis, Ponorogo', 'eaccb8ea6090a40a98aa28c071810371', 'pemancing', 'aktif', 'images_3.png', '0000-00-00 00:00:00'),
 (32, 'Dadang Hermawan', 'dadang@mail.com', '086524351625', 'Siman, Siman, Ponorogo', '0037bb978d51e84d1ad5478e85430f26', 'pemancing', 'aktif', 'images.png', '2022-03-12 05:49:50'),
-(33, 'Bebben Bojinov', 'bebben@mail.com', '085654356567', 'Kupuk, Bungkal, Ponorogo', 'e26c9c4e695ff04df9991f773b3b121d', 'pemancing', 'aktif', 'images_4.png', '2022-04-05 05:09:08');
+(33, 'Bebben Bojinov', 'bebben@mail.com', '085654356567', 'Kupuk, Bungkal, Ponorogo', 'e26c9c4e695ff04df9991f773b3b121d', 'pemancing', 'aktif', 'images_4.png', '2022-04-05 05:09:08'),
+(35, 'Bayu Krisna', 'bayu@mail.com', '084627263517', 'Ngasinan, Sukorejo, Ponorogo', 'a430e06de5ce438d499c2e4063d60fd6', 'pemancing', 'aktif', 'images22.png', '0000-00-00 00:00:00'),
+(36, 'Yanto ', 'yanto@mail.com', '084652635197', 'Kupuk, Bungkal, Ponorogo', '7849816e52e7d1596c51f3e36f21c498', 'panitia', 'aktif', 'images23.png', '2022-04-26 05:03:41'),
+(37, 'Yuda Prasetya Saputra', 'yuda@mail.com', '086452413209', 'Beton, Siman, Ponorogo', 'ac9053a8bd7632586c3eb663a6cf15e4', 'pemancing', 'aktif', 'images11.png', '2022-04-27 06:34:50');
 
 --
 -- Indexes for dumped tables
@@ -339,7 +362,7 @@ ALTER TABLE `t_event`
 -- AUTO_INCREMENT untuk tabel `t_panitia`
 --
 ALTER TABLE `t_panitia`
-  MODIFY `id_panitia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_panitia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT untuk tabel `t_pembelianikan`
@@ -357,7 +380,7 @@ ALTER TABLE `t_pengumuman`
 -- AUTO_INCREMENT untuk tabel `t_pesanan`
 --
 ALTER TABLE `t_pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33688235;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37833200;
 
 --
 -- AUTO_INCREMENT untuk tabel `t_subevent`
@@ -375,7 +398,7 @@ ALTER TABLE `t_supplier`
 -- AUTO_INCREMENT untuk tabel `t_user`
 --
 ALTER TABLE `t_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
