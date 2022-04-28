@@ -73,11 +73,35 @@
                                        <!-- divide -->
                                         <div class="tab-pane" id="homeIcon" aria-labelledby="homeIcon-tab" role="tabpanel">
                                           <?php foreach ($pesanan as $ps) : ?>
+                                            <?php $tgl1 = date("Y-m-d");
+                                            if (strtotime($tgl1) < strtotime($ps->tanggal_pelaksanaan) ) { ?>
+                                            <div class="d-flex mt-2">
+                                              <div class="d-flex justify-content-between flex-grow-1">
+                                                  <div class="me-1">
+                                                      <p class="fw-bolder mb-0"><?php echo $ps->subevent ?></p>
+                                                      <span>Event belum dimulai</span>
+                                                  </div>
+                                                  <div class="mt-50 mt-sm-0">
+                                                      <button type="button" class="btn btn-icon btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#detailTiketSaya<?php echo $ps->id_pesanan ?>">
+                                                          <i data-feather="eye" class="font-medium-3"></i> Tiket
+                                                      </button>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                          <?php } ?>
+                                          <?php endforeach; ?>
+                                        </div>
+
+                                         <!-- divide -->
+                                        <div class="tab-pane" id="profileIcon" aria-labelledby="profileIcon-tab" role="tabpanel">
+                                        <?php foreach ($pesanan as $ps) : ?>
+                                          <?php $tgl2 = date("Y-m-d");
+                                          if (strtotime($ps->tanggal_pelaksanaan) == strtotime($tgl2) ) { ?>
                                           <div class="d-flex mt-2">
                                             <div class="d-flex justify-content-between flex-grow-1">
                                                 <div class="me-1">
                                                     <p class="fw-bolder mb-0"><?php echo $ps->subevent ?></p>
-                                                    <span>Tiket belum digunakan</span>
+                                                    <span>Event Sedang Aktif</span>
                                                 </div>
                                                 <div class="mt-50 mt-sm-0">
                                                     <button type="button" class="btn btn-icon btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#detailTiketSaya<?php echo $ps->id_pesanan ?>">
@@ -86,42 +110,30 @@
                                                 </div>
                                             </div>
                                           </div>
+                                          <?php } ?>
                                         <?php endforeach; ?>
-                                        </div>
-
-                                         <!-- divide -->
-                                        <div class="tab-pane" id="profileIcon" aria-labelledby="profileIcon-tab" role="tabpanel">
-                                            <div class="d-flex mt-2">
-                                            <div class="d-flex justify-content-between flex-grow-1">
-                                                <div class="me-1">
-                                                    <p class="fw-bolder mb-0">Event B1</p>
-                                                    <span>Event Sedang Aktif</span>
-                                                </div>
-                                                <div class="mt-50 mt-sm-0">
-                                                    <button type="button" class="btn btn-icon btn-outline-secondary">
-                                                        <i data-feather="eye" class="font-medium-3"></i> Tiket
-                                                    </button>
-                                                </div>
-                                            </div>
-                                          </div>
                                         </div>
 
                                         <!-- divide -->
                                         <div class="tab-pane" id="aboutIcon" aria-labelledby="aboutIcon-tab" role="tabpanel">
+                                          <?php foreach ($pesanan as $ps) : ?>
+                                            <?php $tgl3 = date("Y-m-d");
+                                            if (strtotime($tgl1) > strtotime($ps->tanggal_pelaksanaan) ) { ?>
                                             <div class="d-flex mt-2">
-                                            <div class="d-flex justify-content-between flex-grow-1">
-                                                <div class="me-1">
-                                                    <p class="fw-bolder mb-0">Event C1</p>
-                                                    <span>Event telah selesai</span>
-                                                </div>
-                                                <div class="mt-50 mt-sm-0">
-                                                    <button type="button" class="btn btn-icon btn-outline-secondary">
-                                                        <i data-feather="eye" class="font-medium-3"></i> Tiket
-                                                    </button>
-                                                </div>
+                                              <div class="d-flex justify-content-between flex-grow-1">
+                                                  <div class="me-1">
+                                                      <p class="fw-bolder mb-0"><?php echo $ps->subevent ?></p>
+                                                      <span>Event telah selesai</span>
+                                                  </div>
+                                                  <!-- <div class="mt-50 mt-sm-0">
+                                                      <button type="button" class="btn btn-icon btn-outline-secondary">
+                                                          <i data-feather="eye" class="font-medium-3"></i> Tiket
+                                                      </button>
+                                                  </div> -->
+                                              </div>
                                             </div>
-                                          </div>
-                                          
+                                            <?php } ?>
+                                          <?php endforeach; ?>
                                         </div>
 
                                         <div class="tab-pane" id="dibatalkan" aria-labelledby="dibatalkan-tab" role="tabpanel">
@@ -129,7 +141,7 @@
                                           <div class="d-flex mt-2">
                                             <div class="d-flex justify-content-between flex-grow-1">
                                                 <div class="me-1">
-                                                    <p class="fw-bolder mb-0"><?php echo $blb->subevent ?></p>
+                                                    <p class="fw-bolder mb-0"><?php echo $btl->subevent ?></p>
                                                     <span>Pesanan dibatalkan</span>
                                                 </div>
                                                 <!-- <div class="mt-50 mt-sm-0">

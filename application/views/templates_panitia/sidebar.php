@@ -61,7 +61,7 @@
             <li <?=$this->uri->segment(2) == 'validasi' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('panitia/validasi') ?>" class="nav-link"><i class="fas fa-clipboard-check"></i><span>Validasi Tiket</span></a>
             </li>
-            <li <?=$this->uri->segment(2) == 'rangking' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+            <li <?=$this->uri->segment(2) == 'penimbangan_ikan' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('panitia/penimbangan_ikan') ?>" class="nav-link"><i class="fas fa-weight"></i><span>Penimbangan Ikan</span></a>
             </li>
           </ul>

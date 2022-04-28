@@ -1,10 +1,11 @@
 <!-- Main Content -->
 <div class="main-content">
-  <?php echo $this->session->flashdata('valid') ?>
-  <?php echo $this->session->flashdata('tidak_valid') ?>
+  <?php echo $this->session->flashdata('berhasil_timbang') ?>
+  <?php echo $this->session->flashdata('gagal_timbang') ?>
   <?php
     $id_user    = $this->session->userdata('id_user'); 
-    $sql = $this->db->query("SELECT * FROM t_panitia where id_user ='$id_user'")->result(); 
+    $tgl        = date("Y-m-d");
+    $sql = $this->db->query("SELECT t_panitia.*, t_subevent.* FROM t_panitia INNER JOIN t_subevent ON t_subevent.id_subevent = t_panitia.id_subevent where t_panitia.id_user ='$id_user' and t_subevent.tanggal_pelaksanaan = '$tgl' ")->result(); 
     if (!$sql) { ?>
       <div class="card">
         <div class="card-header">
@@ -30,36 +31,48 @@
               <h4>Penimbangan Ikan</h4>
                <div class="card-header-action">
                   <button class="btn btn-icon icon-left btn-primary mr-1" data-toggle="modal" data-target="#tambahDataEvent"><i class="fas fa-plus-circle"></i> Timbang</button>
+                  <button class="btn btn-icon icon-left btn-success mr-1" data-toggle="modal" data-target="#ranking"><i class="fas fa-trophy"></i> Ranking</button>
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
             </div>
             <div class="collapse show" id="event-collapse">
             <div class="card-body">
-              <?php echo $this->session->flashdata('berhasilTambahEvent');  ?>  
+              <!-- <?php echo $this->session->flashdata('berhasilTambahEvent');  ?>  
               <?php echo $this->session->flashdata('berhasilEditEvent');  ?> 
-              <?php echo $this->session->flashdata('berhasilHapusEvent');  ?> 
+              <?php echo $this->session->flashdata('berhasilHapusEvent');  ?>  -->
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
                   <thead>
                     <tr>
-                      <th style="width: 10%;">No</th>
+                      <th style="width: 5%;">No</th>
                       <th>Nomor Tiket</th>
                       <th>Pemancing</th>
                       <th>Berat Ikan</th>
-                      <!-- <th class="text-center" style="width: 20%;" colspan="2">Action</th> -->
+                      <th style="width: 20%;" class="text-center">Action</th> 
                    </tr>
                   </thead>
                   <tbody>
-                   <!--  <?php 
+                   <?php 
                     $no=1;
-                    foreach($event as $evt) : ?>
+                    foreach($timbang as $tb) : ?>
                     <tr>
-                      <td><?php echo $no++ ?></td>
-                      <td><?php echo $evt->event ?></td>
-                      <td><button class="btn btn-light btn-icon icon-left dropdown-item" data-toggle="modal" data-target="#editDataEvent<?php echo $evt->id_event ?>"><i class="far fa-edit"></i> Edit</button></td>
-                      <td><button class="btn btn-light btn-icon icon-left dropdown-item text-danger " data-toggle="modal" data-target="#hapusDataEvent<?php echo $evt->id_event ?>"><i class="fas fa-trash"></i> Hapus</button></td>
+                      <td class="text-center"><?php echo $no++ ?></td>
+                      <td><?php echo $tb->id_tiket ?></td>
+                      <td><?php echo $tb->nama ?></td>
+                      <td><?php echo $tb->berat_ikan ?> Kg</td>
+                      <td class="text-center">
+                        <div class="dropdown">
+                          <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Options</a>
+                          <div class="dropdown-menu">
+                            <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#editDataTimbang<?php echo $tb->id_timbangikan?>"><i class="far fa-edit"></i> Edit</button>
+                            <button class="btn btn-icon icon-left btn-light dropdown-item text-danger" data-toggle="modal" data-target="#hapusDataTimbang<?php echo $tb->id_timbangikan ?>"><i class="fas fa-trash"></i> Hapus</button>
+                          </div>
+                        </div>
+                      </td>
+                      <!-- <td class="text-center"><button class="btn btn-light btn-icon icon-left " data-toggle="modal" data-target="#editDataTimbang<?php echo $tb->id_timbangikan ?>"><i class="far fa-edit"></i> Edit</button></td> -->
+                      <!--<td><button class="btn btn-light btn-icon icon-left dropdown-item text-danger " data-toggle="modal" data-target="#hapusDataEvent<?php echo $evt->id_event ?>"><i class="fas fa-trash"></i> Hapus</button></td> -->
                     </tr>
-                    <?php endforeach; ?> -->
+                    <?php endforeach; ?> 
                   </tbody>
                 </table>
               </div>
@@ -180,11 +193,13 @@
           <div class="form-group">
             <label>Nomor Tiket</label>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="event" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
+              <input type="text" class="form-control" placeholder="" name="id_tiket" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
             </div>
-            <label>Berat Ikan</label>
+          </div>
+          <div class="form-group">
+            <label>Berat Ikan (Kg)</label>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="event" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
+              <input type="text" class="form-control" placeholder="" name="berat_ikan" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
             </div>
           </div>
        </div>

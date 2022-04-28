@@ -25,7 +25,7 @@
                       <th>Nama Pemesan</th>
                       <th>Jenis Event</th>
                       <th>Total Bayar</th>
-                      <th>Status Pembayaran</th>
+                      <th class="text-center">Status Pembayaran</th>
                       <th class="text-center">Action</th>
                    </tr>
                   </thead>
@@ -39,15 +39,17 @@
                       <td><?php echo $psn->nama ?></td>
                       <td><?php echo $psn->subevent ?></td>
                       <td>Rp. <?php echo number_format($psn->gross_amount,0,'.','.') ?></td>
-                      <td style="text-transform: capitalize;"><?php if ($psn->transaction_status == "settlement") {
+                      <td class="text-center" style="text-transform: capitalize;"><?php if ($psn->transaction_status == "settlement") {
                         echo 'Success';
-                      }else{
+                      }elseif($psn->transaction_status == "pending"){
                         echo 'Pending';
+                      }else{
+                        echo 'Expire';
                       }?></td>
                       <!-- <td>
                         <button class="btn btn-success btn-icon icon-left dropdown-item " data-toggle="modal" data-target="#lihatDetailPesanan<?php echo $psn->id_pesanan ?>"><i class="fas fa-search-plus"></i> Detail</button>
                       </td> -->
-                      <td>
+                      <td class="text-center">
                         <div class="dropdown">
                           <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Options</a>
                           <div class="dropdown-menu">
@@ -185,13 +187,20 @@ foreach ($pesanan as $psn) : ?>
             <select class="form-control" name="transaction_status" required>
               <option value="<?php echo $psn->transaction_status ?>"><?php if ($psn->transaction_status=='pending') {
                   echo 'Pending';
-                }else{
+                }elseif($psn->transaction_status=='settlement'){
                   echo 'Success';
+                }else{
+                  echo 'Expire';
                 } ?>
               </option>
             <?php if ($psn->transaction_status=='pending') { ?>
               <option value="settlement">Success</option>
+              <option value="expire">Expire</option>
             <?php }elseif ($psn->transaction_status=='settlement') { ?>
+              <option value="pending">Pending</option>
+              <option value="expire">Expire</option>
+            <?php }elseif($psn->transaction_status == 'expire'){ ?>
+              <option value="settlement">Success</option>
               <option value="pending">Pending</option>
             <?php } ?>
             </select>
