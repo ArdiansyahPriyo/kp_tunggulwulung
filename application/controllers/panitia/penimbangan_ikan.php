@@ -38,6 +38,7 @@ class Penimbangan_ikan extends CI_Controller{
 		$data = array(
 			'id_tiket' 		 				=> $id_tiket,
 			'berat_ikan' 		      => $berat_ikan,
+			'status_timbang'			=> 'belum_dirangking',
 			'created_date'				=> date('Y-m-d H:i:s') 
 		);
 
