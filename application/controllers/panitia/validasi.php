@@ -31,8 +31,8 @@ class Validasi extends CI_Controller{
 		$id_tiket		= $this->input->post('id_tiket');
 		$date = date("Y-m-d");
 
-		$sql = $this->db->query("SELECT t_tiket.*, t_pesanan.*, t_subevent.* FROM t_tiket 
-			INNER JOIN t_pesanan ON t_pesanan.id_pesanan = t_tiket.id_pesanan INNER JOIN t_subevent ON t_subevent.id_subevent = t_pesanan.id_subevent where t_tiket.id_tiket ='$id_tiket' and t_tiket.status_tiket	 = 'belum_validasi' and t_subevent.tanggal_pelaksanaan = '$date'")->result();
+		$sql = $this->db->query("SELECT t_tiket.*, t_pesanan.*, t_event.* FROM t_tiket 
+			INNER JOIN t_pesanan ON t_pesanan.id_pesanan = t_tiket.id_pesanan INNER JOIN t_event ON t_event.id_event = t_pesanan.id_event where t_tiket.id_tiket ='$id_tiket' and t_tiket.status_tiket	 = 'belum_validasi' and t_event.tanggal_pelaksanaan = '$date'")->result();
 		//$sql = $this->db->query("SELECT * FROM t_tiket where id_tiket ='$id_tiket' ")->result();  
 		if ($sql) {
 		$data = array(

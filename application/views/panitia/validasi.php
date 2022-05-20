@@ -4,7 +4,7 @@
   <?php
     $id_user    = $this->session->userdata('id_user');
     $tgl        = date("Y-m-d");
-    $sql = $this->db->query("SELECT t_panitia.*, t_subevent.* FROM t_panitia INNER JOIN t_subevent ON t_subevent.id_subevent = t_panitia.id_subevent where t_panitia.id_user ='$id_user' and t_subevent.tanggal_pelaksanaan = '$tgl' ")->result(); 
+    $sql = $this->db->query("SELECT t_panitia.*, t_event.* FROM t_panitia INNER JOIN t_event ON t_event.id_event = t_panitia.id_event where t_panitia.id_user ='$id_user' and t_event.tanggal_pelaksanaan = '$tgl' ")->result(); 
     if (!$sql) { ?>
       <div class="card">
         <div class="card-header">
@@ -38,7 +38,7 @@
                   <i class="fas fa-money-check"></i>
                 </div>
               </div>
-              <input type="text" class="form-control" name="id_tiket" placeholder="">
+              <input type="text" class="form-control" name="id_tiket" placeholder="" required oninvalid="this.setCustomValidity('Data harus diisi!')" oninput="setCustomValidity('')">
             </div>
           </div>
         </div>

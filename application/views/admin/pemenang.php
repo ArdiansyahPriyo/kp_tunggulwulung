@@ -6,41 +6,83 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Data Tiket</h4>
+              <h4>Data Pemenang</h4>
                <div class="card-header-action">
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
             </div>
             <div class="collapse show" id="event-collapse">
             <div class="card-body">
-              <?php echo $this->session->flashdata('berhasilEditTiketAdmin');  ?> 
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
                   <thead>
                     <tr>
-                      <th>No</th>
-                      <th>Nomor Tiket</th>
-                      <th>Nama Pemesan</th>
-                      <th>Jenis Event</th>
-                      <th>Status</th>
-                      <th class="text-center">Action</th>
+                      <th style="width: 5%;">No</th>
+                      <th>Event</th>
+                      <th>Hari/Tanggal</th>
+                      <th class="text-center" style="width: 20%;">Action</th>
                    </tr>
                   </thead>
                   <tbody>
                     <?php 
                     $no=1;
-                    foreach($tiket as $tkt) : ?>
+                    foreach ($event as $evt):?>
                     <tr>
                       <td><?php echo $no++ ?></td>
-                      <td><?php echo $tkt->id_tiket ?></td>
-                      <td><?php echo $tkt->nama ?></td>
-                      <td><?php echo $tkt->event ?></td>
-                      <td><?php if ($tkt->status_tiket == 'belum_validasi') {
-                        echo "Belum Validasi";
-                      } elseif ($tkt->status_tiket == 'sudah_validasi') {
-                        echo "Sudah Validasi";
-                      }?></td>
-                      <td class="text-center"><button class="btn btn-light btn-icon icon-left" data-toggle="modal" data-target="#tiketEdit<?php echo substr($tkt->id_tiket, 6) ?>"><i class="far fa-edit"></i> Edit</button></td> 
+                      <td><?php echo $evt->event ?></td>
+                      <td><?php 
+                      $hari = date("D",strtotime($evt->tanggal_pelaksanaan));
+                      if ($hari == "Sun") {
+                        echo "Minggu" ;
+                      }elseif ($hari == "Mon") {
+                        echo "Senin" ;
+                      }elseif ($hari == "Tue") {
+                        echo "Selasa" ;
+                      }elseif ($hari == "Wed") {
+                        echo "Rabu" ;
+                      }elseif ($hari == "Thu") {
+                        echo "Kamis" ;
+                      }elseif ($hari == "Fri") {
+                        echo "Jumat" ;
+                      }elseif ($hari == "Sat") {
+                        echo "Sabtu" ;
+                      }else{
+                        echo "";
+                      }
+                     ?>, <?php echo date("d", strtotime($evt->tanggal_pelaksanaan)) ?>
+
+                     <?php 
+                      $bln = date("F",strtotime($evt->tanggal_pelaksanaan));
+                      if ($bln == "January") {
+                        echo "Januari" ;
+                      }elseif ($bln == "February") {
+                        echo "Februari" ;
+                      }elseif ($bln == "March") {
+                        echo "Maret" ;
+                      }elseif ($bln == "April") {
+                        echo "April" ;
+                      }elseif ($bln == "May") {
+                        echo "Mei" ;
+                      }elseif ($bln == "June") {
+                        echo "Juni" ;
+                      }elseif ($bln == "July") {
+                        echo "Juli" ;
+                      }elseif ($bln == "August") {
+                        echo "Agustus" ;
+                      }elseif ($bln == "September") {
+                        echo "September" ;
+                      }elseif ($bln == "October") {
+                        echo "Oktober" ;
+                      }elseif ($bln == "November") {
+                        echo "November" ;
+                      }elseif ($bln == "December") {
+                        echo "Desember" ;
+                      }else{
+                        echo "";
+                      }
+                     ?>
+                     <?php echo date("Y", strtotime($evt->tanggal_pelaksanaan)) ?></td>
+                      <td class="text-center"><button class="btn btn-light btn-icon icon-left " data-toggle="modal" data-target="#lihatDataPemenang<?php echo strtotime($evt->tanggal_pelaksanaan) ?>" ><i class="fas fa-search-plus"></i> Detail</button></td>
                     </tr>
                     <?php endforeach; ?>
                   </tbody>
@@ -146,83 +188,62 @@
   </div>
 </div>
 
-<!-- Modal -->
 
-<!--modal edit status tiket-->
-<?php foreach ($tiket as $tkt) : ?>
-<div class="modal fade" id="tiketEdit<?php echo substr($tkt->id_tiket, 6) ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+
+<!-- detail modal -->
+<?php foreach ($event as $evt) : ?>
+<div class="modal fade bd-example-modal-lg" id="lihatDataPemenang<?php echo strtotime($evt->tanggal_pelaksanaan) ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
   aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Tiket</h5>
+        <h5 class="modal-title" id="myLargeModalLabel">Data Peringkat</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(). 'admin/data_tiket/edit'; ?>" method="post" enctype="multipart/form-data" >
-          <div class="form-group">
-            <label>Nomor Tiket</label>
-            <input type="text" class="form-control" value="<?php echo $tkt->id_tiket ?>" readonly>
-          </div>
-          <div class="form-group">
-            <input type="hidden" value="<?php echo $tkt->id_tiket ?>" type="text" name="id_tiket">
-            <label for="inputEmail4">Status Tiket</label>
-            <select class="form-control" name="status_tiket" required>
-              <option value="<?php echo $tkt->status_tiket ?>"><?php if ($tkt->status_tiket=='belum_validasi') {
-                  echo 'Belum Validasi';
-                }else{
-                  echo 'Sudah Validasi';
-                } ?>
-              </option>
-            <?php if ($tkt->status_tiket=='belum_validasi') { ?>
-              <option value="sudah_validasi">Sudah Validasi</option>
-            <?php }elseif ($tkt->status_tiket=='sudah_validasi') { ?>
-              <option value="belum_validasi">Belum Validasi</option>
-            <?php } ?>
-            </select>
-          </div>
+        
+        <div class="table-responsive">
+          <table class="table table-striped" id="table-1">
+            <thead>
+              <tr>
+                <th class="text-center" style="width: 10%;">No</th>
+                <th>Nomor Tiket</th>
+                <th>Nama</th>
+                <th class="text-center">Berat Ikan</th>
+                <th class="text-center">Peringkat</th>
+                <!-- <th class="text-center" style="width: 30%;">Action</th> -->
+             </tr>
+            </thead>
+            <tbody>
+              <?php 
+              $no=1;
+              foreach($ranking as $rk) : ?>
+                <?php if (strtotime($rk->created_date) == strtotime($evt->tanggal_pelaksanaan)) {  ?>
+                  <tr>
+                    <td class="text-center"><?php echo $no++ ?></td>
+                    <td><?php echo $rk->id_tiket ?></td>
+                    <td><?php echo $rk->nama ?></td>
+                    <td class="text-center"><?php echo $rk->berat_ikan ?></td>
+                    <td class="text-center"> 
+                      <div class="badge badge-success badge-shadow"><?php echo $rk->urutan ?></div>
+                    </td>
+                   
+                    <!-- <td class="text-center"><?php echo anchor('admin/data_pemenang/hapus/' .$rk->id_ranking, '<div class="btn btn-light btn-icon icon-left text-danger"><i class="fas fa-trash"></i> Hapus</div>') ?></td> -->
+                  </tr>
+                <?php } ?> 
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        </div>  
       </div>
       <div class="modal-footer bg-whitesmoke br">
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
-      </form>
     </div>
   </div>
 </div>
-<?php endforeach; ?>  
-<!-- end modal -->
-
-
-<!-- modal hapus pesanan-->
-<!-- <?php foreach ($pesanan as $psn) : ?>
-<div class="modal fade" id="hapusDataPesanan<?php echo $psn->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="<?php echo base_url('admin/data_pesanan/hapus_pesanan') ?>" method="post">
-        <input hidden value="<?php echo $psn->id_pesanan ?>" type="text" name="id_pesanan">
-        <div class="modal-body">
-          Apakah anda yakin ingin menghapus data ini ?
-        </div>
-        <div class="modal-footer bg-whitesmoke br">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-          <button type="submit" class="btn btn-primary">Ya</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<?php endforeach; ?> -->
-<!-- end modal -->
-
-
+<?php endforeach;?>
+<!-- End modal -->
 

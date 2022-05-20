@@ -37,7 +37,7 @@
                       <td><?php echo $no++ ?></td>
                       <td><?php echo $psn->id_pesanan ?></td>
                       <td><?php echo $psn->nama ?></td>
-                      <td><?php echo $psn->subevent ?></td>
+                      <td><?php echo $psn->event ?></td>
                       <td>Rp. <?php echo number_format($psn->gross_amount,0,'.','.') ?></td>
                       <td class="text-center" style="text-transform: capitalize;"><?php if ($psn->transaction_status == "settlement") {
                         echo 'Success';
@@ -284,7 +284,7 @@ foreach ($pesanan as $psn) : ?>
               Jenis Event
             </span>
             <span class="float-right ">
-              <b><?php echo $psn->subevent ?></b>
+              <b><?php echo $psn->event ?></b>
             </span>
           </p>
           <p class="clearfix">

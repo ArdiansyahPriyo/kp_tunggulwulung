@@ -70,11 +70,11 @@
             <li <?=$this->uri->segment(2) == 'dashboard' || $this->uri->segment(2) == '' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('admin/dashboard') ?>" class="nav-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
             </li>
-            <li <?=$this->uri->segment(2) == 'data_event' ? 'class="dropdown active"' : 'class="dropdown"'?>>
-              <a href="<?php echo base_url('admin/data_event') ?>" class="nav-link"><i class="fas fa-bars"></i><span>Sistem Mancing</span></a>
+            <li <?=$this->uri->segment(2) == 'data_sistem_mancing' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+              <a href="<?php echo base_url('admin/data_sistem_mancing') ?>" class="nav-link"><i class="fas fa-bars"></i><span>Sistem Mancing</span></a>
             </li>
-            <li <?=$this->uri->segment(2) == 'data_subevent' ? 'class="dropdown active"' : 'class="dropdown"'?>>
-              <a href="<?php echo base_url('admin/data_subevent') ?>" class="nav-link"><i class="fas fa-stream"></i></i><span>Event</span></a>
+            <li <?=$this->uri->segment(2) == 'data_event' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+              <a href="<?php echo base_url('admin/data_event') ?>" class="nav-link"><i class="fas fa-stream"></i></i><span>Event</span></a>
             </li>
             <li <?=$this->uri->segment(2) == 'data_panitia' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('admin/data_panitia') ?>" class="nav-link"><i class="fas fa-user-cog"></i><span>Panitia</span></a>
@@ -86,7 +86,7 @@
               <a href="#" class="menu-toggle nav-link has-dropdown"><i class="fas fa-fish"></i><span>Ikan</span></a>
               <ul class="dropdown-menu">
                 <li <?=$this->uri->segment(2) == 'data_supplier' ? 'class="active"' : 'class=""'?>><a class="nav-link" href="<?php echo base_url('admin/data_supplier') ?>">Supplier</a></li>
-                <li><a class="nav-link" href="<?php echo base_url('admin/data_pembelian') ?>">Pembelian</a></li>
+                <li <?=$this->uri->segment(2) == 'data_pembelian' ? 'class="active"' : 'class=""'?> ><a class="nav-link" href="<?php echo base_url('admin/data_pembelian') ?>">Pembelian</a></li>
               </ul>
             </li>
             
@@ -104,6 +104,16 @@
             <li <?=$this->uri->segment(2) == 'data_pemenang' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('admin/data_pemenang') ?>" class="nav-link"><i class="fas fa-award"></i><span>Pemenang</span></a>
             </li> 
+
+            <li class="menu-header">Laporan</li>
+            <li <?=$this->uri->segment(2) == 'data_pengeluaran' || $this->uri->segment(2) == 'data_penjualan' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i class="fas fa-file"></i><span>Laporan</span></a>
+              <ul class="dropdown-menu">
+                <li <?=$this->uri->segment(2) == 'data_penjualan' ? 'class="active"' : 'class=""'?>><a class="nav-link" href="<?php echo base_url('admin/data_penjualan') ?>">Penjualan Tiket</a></li>
+                <li <?=$this->uri->segment(2) == 'data_pengeluaran' ? 'class="active"' : 'class=""'?> ><a class="nav-link" href="<?php echo base_url('admin/data_pengeluaran') ?>">Pengeluaran</a></li>
+                <li <?=$this->uri->segment(2) == 'data_laporan' ? 'class="active"' : 'class=""'?> ><a class="nav-link" href="<?php echo base_url('admin/data_laporan') ?>">Laporan Keuntungan</a></li>
+              </ul>
+            </li>
             
             <li class="menu-header">Account</li>
             <li <?=$this->uri->segment(2) == 'data_user' ? 'class="dropdown active"' : 'class="dropdown"'?>>

@@ -75,7 +75,7 @@
                               </h4>
                               <div class="">
                                   <label class=" mb-0"><i>event</i></label>
-                                  <h5 class="text-primary mb-30"><b><?php echo $ps->subevent ?></b></h5>
+                                  <h5 class="text-primary mb-30"><b><?php echo $ps->event ?></b></h5>
                               </div>
                               <div class="">
                                   <label class="invoice-date-title mb-0"><i>tanggal</i></label>
@@ -154,7 +154,7 @@
                           </div>
                           <div class="col-xl-6 p-0 ">
                             <label><i>sistem</i></label>
-                            <h5><?php echo $ps->event ?></h5>
+                            <h5><?php echo $ps->sistem ?></h5>
                             <label><i>start - finish</i></label>
                             <h5><?php echo substr($ps->jam_mulai, 0,5) ?> - <?php echo substr($ps->jam_selesai, 0,5) ?></h5>
                             

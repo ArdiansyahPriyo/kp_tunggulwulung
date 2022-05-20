@@ -55,15 +55,22 @@
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
-            <li <?=$this->uri->segment(2) == 'dashboard' || $this->uri->segment(2) == '' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+            <!-- <li <?=$this->uri->segment(2) == 'dashboard' || $this->uri->segment(2) == '' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('panitia/dashboard') ?>" class="nav-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
-            </li>
+            </li> -->
             <li <?=$this->uri->segment(2) == 'validasi' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('panitia/validasi') ?>" class="nav-link"><i class="fas fa-clipboard-check"></i><span>Validasi Tiket</span></a>
             </li>
-            <li <?=$this->uri->segment(2) == 'penimbangan_ikan' ? 'class="dropdown active"' : 'class="dropdown"'?>>
-              <a href="<?php echo base_url('panitia/penimbangan_ikan') ?>" class="nav-link"><i class="fas fa-weight"></i><span>Penimbangan Ikan</span></a>
+            <li <?=$this->uri->segment(2) == 'penimbangan_ikan' || $this->uri->segment(2) == 'ranking' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i class="fas fa-list"></i><span>Data Event</span></a>
+              <ul class="dropdown-menu">
+                <li <?=$this->uri->segment(2) == 'penimbangan_ikan' ? 'class="active"' : 'class=""'?>><a class="nav-link" href="<?php echo base_url('panitia/penimbangan_ikan') ?>">Timbang Ikan</a></li>
+                <li <?=$this->uri->segment(2) == 'ranking' ? 'class="active"' : 'class=""'?> ><a class="nav-link" href="<?php echo base_url('panitia/ranking') ?>">Ranking Peserta</a></li>
+              </ul>
             </li>
+            <!-- <li <?=$this->uri->segment(2) == 'penimbangan_ikan' ? 'class="dropdown active"' : 'class="dropdown"'?>>
+              <a href="<?php echo base_url('panitia/penimbangan_ikan') ?>" class="nav-link"><i class="fas fa-weight"></i><span>Penimbangan Ikan</span></a>
+            </li> -->
           </ul>
         </aside>
       </div>

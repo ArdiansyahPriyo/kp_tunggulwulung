@@ -2,9 +2,9 @@
 
 class Model_panitia extends CI_Model{
 
-	public function tampil_subevent(){
+	public function tampil_event(){
 		$this->db->select('*');
-      	$this->db->from('t_subevent');
+      	$this->db->from('t_event');
         $query = $this->db->get();
         return $query->result();
 	}
@@ -31,21 +31,21 @@ class Model_panitia extends CI_Model{
         return $query->result();
 	} 
 
-	public function tampil_data2($id_subevent){
-		$this->db->select('t_panitia.id_user,t_panitia.id_subevent, t_user.nama');
+	public function tampil_data2($id_event){
+		$this->db->select('t_panitia.id_user,t_panitia.id_event, t_user.nama');
 		$this->db->from('t_panitia');
-		$this->db->join('t_subevent','t_subevent.id_subevent = t_panitia.id_subevent');
+		$this->db->join('t_event','t_event.id_event = t_panitia.id_event');
 		$this->db->join('t_user', 't_user.id_user = t_panitia.id_user');
-		$this->db->where('t_panitia.id_subevent', $id_subevent);
+		$this->db->where('t_panitia.id_event', $id_event);
 		//$this->db->where('id_subevent', $id_subevent);
 		//$result = $this->db->where('id_subevent', $id_subevent);
 		$query = $this->db->get();
         return $query->result();
 	} 
 
-	public function ambil_id_subevent($id_subevent)
+	public function ambil_id_event($id_event)
 	{
-		$result = $this->db->where('id_subevent', $id_subevent)->limit(1)->get('t_subevent');
+		$result = $this->db->where('id_event', $id_subevent)->limit(1)->get('t_event');
 		if($result->num_rows() >= 0){
 			return $result->row();
 		}else{
@@ -53,12 +53,12 @@ class Model_panitia extends CI_Model{
 		}
 	}
 
-	public function nama_panitia($id_subevent){
+	public function nama_panitia($id_event){
 
 		$this->db->select('t_panitia.*,t_user.*');
 		$this->db->from('t_panitia');
 		$this->db->join('t_user','t_user.id_user = t_panitia.id_user');
-		$this->db->where('id_subevent', $id_subevent);
+		$this->db->where('id_event', $id_event);
 		//$result = $this->db->where('id_subevent', $id_subevent);
 		$query = $this->db->get();
         return $query->result();

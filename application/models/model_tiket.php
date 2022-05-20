@@ -4,10 +4,10 @@ class Model_tiket extends CI_Model{
 
 
 	public function tampil_data(){
-		$this->db->select('t_subevent.*,t_event.*, t_pembelianikan.*');
-		$this->db->from('t_subevent');
-		$this->db->join('t_event','t_event.id_event = t_subevent.id_event');
-		$this->db->join('t_pembelianikan','t_pembelianikan.id_subevent = t_subevent.id_subevent');
+		$this->db->select('t_event.*,t_sistem.*, t_pembelianikan.*');
+		$this->db->from('t_event');
+		$this->db->join('t_sistem','t_sistem.id_sistem = t_event.id_sistem');
+		$this->db->join('t_pembelianikan','t_pembelianikan.id_event = t_event.id_event');
 		
 		$query = $this->db->get();
         return $query->result();

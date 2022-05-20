@@ -41,7 +41,7 @@ class Pesanan_saya extends CI_Controller {
       //  $where = array('id_pesanan' => $id_pesanan);
         $data['pesanan'] = $this->model_pesanan_user->download($id_pesanan);
 
-        $this->load->view('download_tiket', $data);
+        $this->load->view('download_tiket3', $data);
 
         $paper_size   = 'A5';
         $orientation  = 'landscape';
@@ -50,7 +50,7 @@ class Pesanan_saya extends CI_Controller {
 
         $this->dompdf->load_html($html);
         $this->dompdf->render();
-        $this->dompdf->stream("tiket.pdf", array('attachment' => 0));
+        $this->dompdf->stream("tunggul_wulung_tiket.pdf", array('attachment' => 0));
     }
 }
 ?>

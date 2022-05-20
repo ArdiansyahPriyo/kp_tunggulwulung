@@ -32,14 +32,14 @@ class Penimbangan_ikan extends CI_Controller{
 		$berat_ikan		= $this->input->post('berat_ikan');
 		$tgl = date("Y-m-d");
 
-		$sql = $this->db->query("SELECT t_tiket.*, t_pesanan.*, t_subevent.* FROM t_tiket 
-			     INNER JOIN t_pesanan ON t_pesanan.id_pesanan = t_tiket.id_pesanan INNER JOIN t_subevent ON t_subevent.id_subevent = t_pesanan.id_subevent where t_tiket.id_tiket ='$id_tiket' and t_tiket.status_tiket	 = 'sudah_validasi' and t_subevent.tanggal_pelaksanaan = '$tgl'")->result();
+		$sql = $this->db->query("SELECT t_tiket.*, t_pesanan.*, t_event.* FROM t_tiket 
+			     INNER JOIN t_pesanan ON t_pesanan.id_pesanan = t_tiket.id_pesanan INNER JOIN t_event ON t_event.id_event = t_pesanan.id_event where t_tiket.id_tiket ='$id_tiket' and t_tiket.status_tiket	 = 'sudah_validasi' and t_event.tanggal_pelaksanaan = '$tgl'")->result();
 		if ($sql) {
 		$data = array(
 			'id_tiket' 		 				=> $id_tiket,
 			'berat_ikan' 		      => $berat_ikan,
 			'status_timbang'			=> 'belum_dirangking',
-			'created_date'				=> date('Y-m-d H:i:s') 
+			'created_date'				=> date('Y-m-d') 
 		);
 
 		$this->db->insert('t_timbangikan', $data);
@@ -57,6 +57,40 @@ class Penimbangan_ikan extends CI_Controller{
     );
     redirect('panitia/penimbangan_ikan');
 		}
+	}
+
+	public function edit(){
+
+		$id_timbangikan	 	= $this->input->post('id_timbangikan');
+		$berat_ikan 	    = $this->input->post('berat_ikan');
+
+		$data = array(
+			'id_timbangikan' 		=> $id_timbangikan,
+			'berat_ikan' 				=> $berat_ikan 
+		);
+
+		$this->db->where('id_timbangikan', $id_timbangikan);
+		$this->db->update('t_timbangikan', $data);
+		$this->session->set_flashdata('berhasil_edit','<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+      <script type ="text/JavaScript">  
+      swal("Sukses","Data berhasil diubah","success") 
+      </script>'
+    );
+		redirect('panitia/penimbangan_ikan');
+	}
+
+	public function hapus()
+	{
+		$id_timbangikan 	= $this->input->post('id_timbangikan');
+
+		$where = array('id_timbangikan' => $id_timbangikan);
+    $this->db->delete('t_timbangikan', $where);
+		$this->session->set_flashdata('berhasil_hapus','<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+	    <script type ="text/JavaScript">  
+	    swal("Sukses","Data berhasil dihapus","success") 
+	    </script>'
+    );
+		redirect('panitia/penimbangan_ikan');
 	}
 
 }

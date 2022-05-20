@@ -50,7 +50,7 @@
                                         <div>
                                             <span class="h3 d-block"><b><?php echo $usr->nama ?></b></span>
                                             <!-- <span class="d-block"><?php echo $this->session->userdata('email') ?></span> -->
-                                            <label for="account-upload" class="btn btn-sm btn-outline-secondary mb-75 me-75"><i class="fas fa-pencil-alt"></i> Pilih Gambar</label>
+                                            <label for="account-upload" class="btn btn-sm btn-outline-secondary mb-75 me-75"><i class="fas fa-pencil-alt"></i> Pilih Foto</label>
                                             <input type="file" id="account-upload" name="foto" hidden accept="image/*"/>
                                             <small class="d-block">Format Gambar (JPEG/PNG)</label>
                                             <!-- <button type="button" id="account-reset" class="btn btn-sm btn-outline-secondary mb-75"><i class="fas fa-pencil-alt"></i> Edit Profil</button> -->

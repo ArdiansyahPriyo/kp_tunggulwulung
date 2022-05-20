@@ -19,7 +19,7 @@ class Data_pembelian extends CI_Controller{
 	public function index()
 	{
 		$data['pembelian']        = $this->model_pembelian->tampil_data2();
-		$data['list_subevent']    = $this->model_pembelian->list_nama_subevent();
+		$data['list_event']       = $this->model_pembelian->list_nama_event();
 		$data['list_supplier']    = $this->model_pembelian->list_nama_supplier();
 		$this->load->view('templates_admin/header');
 		$this->load->view('templates_admin/sidebar');
@@ -30,15 +30,15 @@ class Data_pembelian extends CI_Controller{
 
 	public function tambah_pembelian()
 	{
-		$id_subevent							= $this->input->post('id_subevent');
+		$id_event							= $this->input->post('id_event');
 		$id_supplier							= $this->input->post('id_supplier');
 		$jenis_ikan								= $this->input->post('jenis_ikan');
 		$berat_ikan								= $this->input->post('berat_ikan');
 		$total_harga							= $this->input->post('total_harga');
 
-		$sql = $this->db->query("SELECT id_subevent FROM t_pembelianikan where id_subevent='$id_subevent' ");	
-		$cek_subevent = $sql->num_rows();
-		if ( $cek_subevent > 0 ) {
+		$sql = $this->db->query("SELECT id_event FROM t_pembelianikan where id_event='$id_event' ");	
+		$cek_event = $sql->num_rows();
+		if ( $cek_event > 0 ) {
 			$this->session->set_flashdata('pembelianSudahAda','<div class="alert alert-danger alert-dismissible fade show" role="alert"><i class="fas fa-times-circle"></i>
 	  				Gagal, Data pembelian pada subevent sudah ada!
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -48,7 +48,7 @@ class Data_pembelian extends CI_Controller{
 			header('Location: ' . $_SERVER['HTTP_REFERER']);
 		}else{
 			$data = array(
-			'id_subevent' 						=> $id_subevent, 
+			'id_event' 						=> $id_event, 
 			'id_supplier' 						=> $id_supplier,
 			'jenis_ikan' 							=> $jenis_ikan,
 			'berat_ikan'							=> $berat_ikan,

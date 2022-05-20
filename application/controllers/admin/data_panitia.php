@@ -19,7 +19,7 @@ class Data_panitia extends CI_Controller{
 
 	public function index()
 	{
-		$data['subevent']      = $this->model_panitia->tampil_subevent();
+		$data['event']      = $this->model_panitia->tampil_event();
 		$data['list_user']     = $this->model_panitia->list_nama_user();
 		$data['panitia']       = $this->model_panitia->tampil_data();
 
@@ -50,10 +50,10 @@ class Data_panitia extends CI_Controller{
 	{
 		$created_by		  = $this->session->userdata('nama');
 		$id_user				= $this->input->post('id_user');
-		$id_subevent		= $this->input->post('id_subevent');
+		$id_event		    = $this->input->post('id_event');
 
 
-		$sql = $this->db->query("SELECT id_user FROM t_panitia where id_user='$id_user' AND id_subevent='$id_subevent'");	
+		$sql = $this->db->query("SELECT id_user FROM t_panitia where id_user='$id_user' AND id_event='$id_event'");	
 		$cek_user = $sql->num_rows();
 		if ( $cek_user > 0 ) {
 			$this->session->set_flashdata('panitiaSudahAda','<div class="alert alert-danger alert-dismissible fade show" role="alert"><i class="fas fa-times-circle"></i>
@@ -66,7 +66,7 @@ class Data_panitia extends CI_Controller{
 		}else{
 			$data = array(
 				'id_user' 	      => $id_user,
-				'id_subevent' 	  => $id_subevent, 
+				'id_event' 	      => $id_event, 
 				'created_date'	  => date('Y-m-d H:i:s'),
 				'created_by'	    => $created_by
 			);

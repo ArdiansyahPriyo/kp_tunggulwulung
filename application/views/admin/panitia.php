@@ -28,12 +28,12 @@
                   <tbody>
                     <?php 
                     $no=1;
-                    foreach ($subevent as $sbevt):?>
+                    foreach ($event as $evt):?>
                     <tr>
                       <td><?php echo $no++ ?></td>
-                      <td><?php echo $sbevt->subevent ?></td>
-                      <td class="text-center"><button class="btn btn-light btn-icon icon-left" data-toggle="modal" data-target="#tambahDataPanitia<?php echo $sbevt->id_subevent ?>"><i class="fas fa-plus-circle"></i> Tambah Panitia</button></td>
-                      <td class="text-center"><a href="" class="btn btn-light btn-icon icon-left " data-toggle="modal" data-target="#lihatDataPanitia<?php echo $sbevt->id_subevent ?>" ><i class="fas fa-search-plus"></i> Detail</a></td>
+                      <td><?php echo $evt->event ?></td>
+                      <td class="text-center"><button class="btn btn-light btn-icon icon-left" data-toggle="modal" data-target="#tambahDataPanitia<?php echo $evt->id_event ?>"><i class="fas fa-plus-circle"></i> Tambah Panitia</button></td>
+                      <td class="text-center"><a href="" class="btn btn-light btn-icon icon-left " data-toggle="modal" data-target="#lihatDataPanitia<?php echo $evt->id_event ?>" ><i class="fas fa-search-plus"></i> Detail</a></td>
                     </tr>
                     <?php endforeach; ?>
                   </tbody>
@@ -140,8 +140,8 @@
 </div>
 
 <!-- Tambah modal -->
-<?php foreach ($subevent as $sbevt) : ?>
-<div class="modal fade" id="tambahDataPanitia<?php echo $sbevt->id_subevent ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<?php foreach ($event as $evt) : ?>
+<div class="modal fade" id="tambahDataPanitia<?php echo $evt->id_event ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -156,7 +156,7 @@
           <div class="form-group">
             <label>Event</label>
             <div class="input-group">
-              <input type="text" class="form-control" name="" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" value="<?php echo $sbevt->subevent ?>" readonly>
+              <input type="text" class="form-control" name="" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" value="<?php echo $evt->event ?>" readonly>
             </div>
           </div>
           <div class="form-group">
@@ -169,7 +169,7 @@
               <?php endforeach; ?>
             </select>
           </div>
-          <input type="hidden" name="id_subevent" value="<?php echo $sbevt->id_subevent ?>">
+          <input type="hidden" name="id_event" value="<?php echo $evt->id_event ?>">
       </div>
       <div class="modal-footer bg-whitesmoke br">
         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -184,8 +184,8 @@
 
 
 <!-- detail modal -->
-<?php foreach ($subevent as $sbevt) : ?>
-<div class="modal fade" id="lihatDataPanitia<?php echo $sbevt->id_subevent ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<?php foreach ($event as $evt) : ?>
+<div class="modal fade" id="lihatDataPanitia<?php echo $evt->id_event ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -210,7 +210,7 @@
               <?php 
               $no=1;
               foreach($panitia as $pnt) : ?>
-                <?php if ($pnt->id_subevent == $sbevt->id_subevent) {  ?>
+                <?php if ($pnt->id_event == $evt->id_event) {  ?>
                   <tr>
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $pnt->nama ?></td>

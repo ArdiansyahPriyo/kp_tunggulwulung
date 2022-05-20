@@ -49,7 +49,7 @@
                                 <div class="row">
                                     <div class="mb-1 col-md-6">
                                         <label class="form-label" for="modern-username">Event</label>
-                                        <input type="text" readonly class="form-control" value="<?php echo $tk->subevent ?>" />
+                                        <input type="text" readonly class="form-control" value="<?php echo $tk->event ?>" />
                                     </div>
                                     <div class="mb-1 col-md-6">
                                         <label class="form-label" for="modern-email">Harga Tiket</label>
@@ -150,8 +150,8 @@
                                         <input type="hidden" name="email" id="email" value="<?php echo $this->session->userdata('email') ?>">
                                         <input type="hidden" name="no_hp" id="no_hp" value="<?php echo $this->session->userdata('no_hp') ?>">
                                         <input type="hidden" name="alamat" id="alamat" value="<?php echo $this->session->userdata('alamat') ?>">
-                                        <input type="hidden" name="subevent" id="subevent" value="<?php echo $tk->subevent ?>">
-                                        <input type="hidden" name="id_subevent" id="id_subevent" value="<?php echo $tk->id_subevent ?>">
+                                        <input type="hidden" name="event" id="event" value="<?php echo $tk->event ?>">
+                                        <input type="hidden" name="id_event" id="id_event" value="<?php echo $tk->id_event ?>">
                                         <input type="hidden" name="harga" id="harga" value="<?php echo $tk->harga ?>">
                                         <input type="hidden" name="result_type" id="result-type" value="">
                                         <input type="hidden" name="result_data" id="result-data" value="">
@@ -180,16 +180,16 @@
 
     var nama = $("#nama").val();
     var id_user = $("#id_user").val();
-    var id_subevent = $("#id_subevent").val();
+    var id_event = $("#id_event").val();
     var email = $("#email").val(); 
     var no_hp = $("#no_hp").val(); 
     var alamat = $("#alamat").val(); 
-    var subevent = $("#subevent").val();    
+    var event = $("#event").val();    
     var harga = $("#harga").val(); 
     $.ajax({
       type: "POST",
       url: "<?php echo base_url('tiket/token')?>",
-      data: {nama:nama,id_user:id_user,id_subevent:id_subevent,email:email,no_hp:no_hp,alamat:alamat,subevent:subevent,harga:harga},
+      data: {nama:nama,id_user:id_user,id_event:id_event,email:email,no_hp:no_hp,alamat:alamat,event:event,harga:harga},
       cache: false,
 
       success: function(data) {

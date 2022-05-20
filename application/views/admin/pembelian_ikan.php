@@ -37,7 +37,7 @@
                     foreach($pembelian as $pmb) : ?>
                     <tr>
                       <td><?php echo $no++ ?></td>
-                      <td><?php echo $pmb->subevent ?></td>
+                      <td><?php echo $pmb->event ?></td>
                       <td><?php echo $pmb->nama_supplier ?></td>
                       <td><?php if ($pmb->jenis_ikan == "patin") {
                         echo "Ikan Patin";
@@ -177,61 +177,10 @@
         <form action="<?php echo base_url(). 'admin/data_pembelian/tambah_pembelian'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
             <label>Event</label>
-            <select class="form-control" name="id_subevent" required oninvalid="this.setCustomValidity('Data tidak boleh kosong. Isi data sub event terlebih dahulu!')" oninput="setCustomValidity('')">
-              <?php foreach($list_subevent as $lsbevt) : ?>
-                <option value="<?php echo $lsbevt->id_subevent ?>">
-                  <?php echo $lsbevt->subevent; echo ' ( ';
-                                        $hari = date("D",strtotime($lsbevt->tanggal_pelaksanaan));
-                                        if ($hari == "Sun") {
-                                          echo "Minggu" ;
-                                        }elseif ($hari == "Mon") {
-                                          echo "Senin" ;
-                                        }elseif ($hari == "Tue") {
-                                          echo "Selasa" ;
-                                        }elseif ($hari == "Wed") {
-                                          echo "Rabu" ;
-                                        }elseif ($hari == "Thu") {
-                                          echo "Kamis" ;
-                                        }elseif ($hari == "Fri") {
-                                          echo "Jumat" ;
-                                        }elseif ($hari == "Sat") {
-                                          echo "Sabtu" ;
-                                        }else{
-                                          echo "";
-                                        }
-                                       ?>, <?php echo date("d", strtotime($lsbevt->tanggal_pelaksanaan)) ?>
-
-                                       <?php 
-                                        $bln = date("F",strtotime($lsbevt->tanggal_pelaksanaan));
-                                        if ($bln == "January") {
-                                          echo "Januari" ;
-                                        }elseif ($bln == "February") {
-                                          echo "Februari" ;
-                                        }elseif ($bln == "March") {
-                                          echo "Maret" ;
-                                        }elseif ($bln == "April") {
-                                          echo "April" ;
-                                        }elseif ($bln == "May") {
-                                          echo "Mei" ;
-                                        }elseif ($bln == "June") {
-                                          echo "Juni" ;
-                                        }elseif ($bln == "July") {
-                                          echo "Juli" ;
-                                        }elseif ($bln == "August") {
-                                          echo "Agustus" ;
-                                        }elseif ($bln == "September") {
-                                          echo "September" ;
-                                        }elseif ($bln == "October") {
-                                          echo "Oktober" ;
-                                        }elseif ($bln == "November") {
-                                          echo "November" ;
-                                        }elseif ($bln == "December") {
-                                          echo "Desember" ;
-                                        }else{
-                                          echo "";
-                                        }
-                                       ?>
-                                       <?php echo date("Y", strtotime($lsbevt->tanggal_pelaksanaan)) .' )'?> 
+            <select class="form-control" name="id_event" required oninvalid="this.setCustomValidity('Data tidak boleh kosong. Isi data sub event terlebih dahulu!')" oninput="setCustomValidity('')">
+              <?php foreach($list_event as $lsbevt) : ?>
+                <option value="<?php echo $lsbevt->id_event ?>">
+                  <?php echo $lsbevt->event; ?>
                 </option>
               <?php endforeach; ?>
             </select>
@@ -277,7 +226,7 @@
 </div>
 <!-- akhir modal -->
 
-<!--modal edit subevent-->
+<!--modal edit pembelian-->
 <?php 
 foreach($pembelian as $pmb) : ?>
 <div class="modal fade" id="editDataPembelian<?php echo $pmb->id_pembelianikan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -295,8 +244,8 @@ foreach($pembelian as $pmb) : ?>
           <div class="form-group">
             <label>Event</label>
             <div class="input-group">
-              <!-- <h5 class="form-control"><?php echo $pmb->subevent ?></h5> -->
-             <input type="text" disabled class="form-control" placeholder="" name="subevent" value="<?php echo $pmb->subevent ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')"> 
+              
+             <input type="text" disabled class="form-control" placeholder="" name="event" value="<?php echo $pmb->event ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')"> 
               <input hidden value="<?php echo $pmb->id_pembelianikan ?>" name="id_pembelianikan">
             </div>
           </div>

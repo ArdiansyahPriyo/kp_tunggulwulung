@@ -57,7 +57,7 @@
                                           <div class="d-flex mt-2">
                                             <div class="d-flex justify-content-between flex-grow-1">
                                                 <div class="me-1">
-                                                    <p class="fw-bolder mb-0"><?php echo $blb->subevent ?></p>
+                                                    <p class="fw-bolder mb-0"><?php echo $blb->event ?></p>
                                                     <span>Pesanan belum dibayar</span>
                                                 </div>
                                                 <div class="mt-50 mt-sm-0">
@@ -78,7 +78,7 @@
                                             <div class="d-flex mt-2">
                                               <div class="d-flex justify-content-between flex-grow-1">
                                                   <div class="me-1">
-                                                      <p class="fw-bolder mb-0"><?php echo $ps->subevent ?></p>
+                                                      <p class="fw-bolder mb-0"><?php echo $ps->event ?></p>
                                                       <span>Event belum dimulai</span>
                                                   </div>
                                                   <div class="mt-50 mt-sm-0">
@@ -100,7 +100,7 @@
                                           <div class="d-flex mt-2">
                                             <div class="d-flex justify-content-between flex-grow-1">
                                                 <div class="me-1">
-                                                    <p class="fw-bolder mb-0"><?php echo $ps->subevent ?></p>
+                                                    <p class="fw-bolder mb-0"><?php echo $ps->event ?></p>
                                                     <span>Event Sedang Aktif</span>
                                                 </div>
                                                 <div class="mt-50 mt-sm-0">
@@ -122,7 +122,7 @@
                                             <div class="d-flex mt-2">
                                               <div class="d-flex justify-content-between flex-grow-1">
                                                   <div class="me-1">
-                                                      <p class="fw-bolder mb-0"><?php echo $ps->subevent ?></p>
+                                                      <p class="fw-bolder mb-0"><?php echo $ps->event ?></p>
                                                       <span>Event telah selesai</span>
                                                   </div>
                                                   <!-- <div class="mt-50 mt-sm-0">
@@ -141,7 +141,7 @@
                                           <div class="d-flex mt-2">
                                             <div class="d-flex justify-content-between flex-grow-1">
                                                 <div class="me-1">
-                                                    <p class="fw-bolder mb-0"><?php echo $btl->subevent ?></p>
+                                                    <p class="fw-bolder mb-0"><?php echo $btl->event ?></p>
                                                     <span>Pesanan dibatalkan</span>
                                                 </div>
                                                 <!-- <div class="mt-50 mt-sm-0">
@@ -195,7 +195,7 @@
                                             </h4>
                                             <div class="">
                                                 <label class=" mb-0"><i>event</i></label>
-                                                <h5 class="text-primary mb-30"><b><?php echo $ps->subevent ?></b></h5>
+                                                <h5 class="text-primary mb-30"><b><?php echo $ps->event ?></b></h5>
                                             </div>
                                             <div class="">
                                                 <label class="invoice-date-title mb-0"><i>tanggal</i></label>
@@ -274,7 +274,7 @@
                                         </div>
                                         <div class="col-xl-6 p-0 ">
                                           <label><i>sistem</i></label>
-                                          <h5><?php echo $ps->event ?></h5>
+                                          <h5><?php echo $ps->sistem ?></h5>
                                           <label><i>start - finish</i></label>
                                           <h5><?php echo substr($ps->jam_mulai, 0,5) ?> - <?php echo substr($ps->jam_selesai, 0,5) ?></h5>
                                           
@@ -308,8 +308,12 @@
               <form action="<?php echo base_url(). 'pesanan_saya/download'; ?>" method="post">
                 <input type="hidden" name="id_pesanan" value="<?php echo $ps->id_pesanan?>">
                 <button type="submit" class="btn btn-primary" target="_blank">
+                  <i data-feather="download" class="me-25"></i>
+                  <span>Download</span>
+                </button>
+                <!-- <button type="submit" class="btn btn-primary" target="_blank">
                  Downlaod
-                </button> 
+                </button> --> 
               </form>
                 <!-- <a class="btn btn-primary" href="<?php echo base_url('pesanan_saya/download') ?>" target="_blank"> Download </a> -->
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -331,7 +335,7 @@
           <div class="modal-body">
               <div class="card mb-1 mt-1">
                   <ul class="list-group list-group-flush">
-                      <li class="list-group-item"><b><h5 class="text-primary"><?php echo $blb->subevent ?></h5></b></li>
+                      <li class="list-group-item"><b><h5 class="text-primary"><?php echo $blb->event ?></h5></b></li>
                       <li class="list-group-item"><b>Metode Pembayaran</b> <br> <small><?php if ($blb->payment_type == 'bank_transfer') {
                         echo 'Transfer Bank ';
                       }elseif($blb->payment_type == 'echannel'){

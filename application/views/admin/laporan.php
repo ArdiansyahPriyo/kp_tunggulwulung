@@ -6,41 +6,38 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Data Tiket</h4>
+              <h4>Laporan Keuntungan</h4>
                <div class="card-header-action">
+                  
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
             </div>
             <div class="collapse show" id="event-collapse">
             <div class="card-body">
-              <?php echo $this->session->flashdata('berhasilEditTiketAdmin');  ?> 
+              <?php echo $this->session->flashdata('berhasilTambahSistem');  ?>  
+              <?php echo $this->session->flashdata('berhasilEditSistem');  ?> 
+              <?php echo $this->session->flashdata('berhasilHapusSistem');  ?> 
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
                   <thead>
                     <tr>
-                      <th>No</th>
-                      <th>Nomor Tiket</th>
-                      <th>Nama Pemesan</th>
-                      <th>Jenis Event</th>
-                      <th>Status</th>
-                      <th class="text-center">Action</th>
+                      
+                      <th class="text-center">Pemasukan</th>
+                      <th class="text-center">Pengeluaran</th>
+                      <th class="text-center">Total Pendapatan</th>
                    </tr>
                   </thead>
                   <tbody>
                     <?php 
                     $no=1;
-                    foreach($tiket as $tkt) : ?>
+                    foreach($laporan_penjualan as $lpnj) : ?>
                     <tr>
-                      <td><?php echo $no++ ?></td>
-                      <td><?php echo $tkt->id_tiket ?></td>
-                      <td><?php echo $tkt->nama ?></td>
-                      <td><?php echo $tkt->event ?></td>
-                      <td><?php if ($tkt->status_tiket == 'belum_validasi') {
-                        echo "Belum Validasi";
-                      } elseif ($tkt->status_tiket == 'sudah_validasi') {
-                        echo "Sudah Validasi";
-                      }?></td>
-                      <td class="text-center"><button class="btn btn-light btn-icon icon-left" data-toggle="modal" data-target="#tiketEdit<?php echo substr($tkt->id_tiket, 6) ?>"><i class="far fa-edit"></i> Edit</button></td> 
+                      
+                      <td class="text-center">Rp. <?php echo number_format($lpnj->total_penjualan,0,'.','.') ?></td>
+                      <?php foreach($laporan_pengeluaran as $lpng) : ?>
+                      <td class="text-center">Rp. <?php echo number_format($lpng->total_pengeluaran,0,'.','.') ?></td>
+                      <td class="text-center"><b>Rp. <?php echo number_format($lpnj->total_penjualan-$lpng->total_pengeluaran,0,'.','.') ?></b></td>
+                       <?php endforeach; ?>
                     </tr>
                     <?php endforeach; ?>
                   </tbody>
@@ -145,84 +142,4 @@
     </div>
   </div>
 </div>
-
-<!-- Modal -->
-
-<!--modal edit status tiket-->
-<?php foreach ($tiket as $tkt) : ?>
-<div class="modal fade" id="tiketEdit<?php echo substr($tkt->id_tiket, 6) ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Tiket</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="<?php echo base_url(). 'admin/data_tiket/edit'; ?>" method="post" enctype="multipart/form-data" >
-          <div class="form-group">
-            <label>Nomor Tiket</label>
-            <input type="text" class="form-control" value="<?php echo $tkt->id_tiket ?>" readonly>
-          </div>
-          <div class="form-group">
-            <input type="hidden" value="<?php echo $tkt->id_tiket ?>" type="text" name="id_tiket">
-            <label for="inputEmail4">Status Tiket</label>
-            <select class="form-control" name="status_tiket" required>
-              <option value="<?php echo $tkt->status_tiket ?>"><?php if ($tkt->status_tiket=='belum_validasi') {
-                  echo 'Belum Validasi';
-                }else{
-                  echo 'Sudah Validasi';
-                } ?>
-              </option>
-            <?php if ($tkt->status_tiket=='belum_validasi') { ?>
-              <option value="sudah_validasi">Sudah Validasi</option>
-            <?php }elseif ($tkt->status_tiket=='sudah_validasi') { ?>
-              <option value="belum_validasi">Belum Validasi</option>
-            <?php } ?>
-            </select>
-          </div>
-      </div>
-      <div class="modal-footer bg-whitesmoke br">
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-<?php endforeach; ?>  
-<!-- end modal -->
-
-
-<!-- modal hapus pesanan-->
-<!-- <?php foreach ($pesanan as $psn) : ?>
-<div class="modal fade" id="hapusDataPesanan<?php echo $psn->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" >
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="<?php echo base_url('admin/data_pesanan/hapus_pesanan') ?>" method="post">
-        <input hidden value="<?php echo $psn->id_pesanan ?>" type="text" name="id_pesanan">
-        <div class="modal-body">
-          Apakah anda yakin ingin menghapus data ini ?
-        </div>
-        <div class="modal-footer bg-whitesmoke br">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-          <button type="submit" class="btn btn-primary">Ya</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<?php endforeach; ?> -->
-<!-- end modal -->
-
-
 

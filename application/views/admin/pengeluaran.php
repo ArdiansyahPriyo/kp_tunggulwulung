@@ -6,52 +6,79 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Data Supplier</h4>
+              <h4>Data Pengeluaran</h4>
                <div class="card-header-action">
-                  <button class="btn btn-icon icon-left btn-primary mr-1" data-toggle="modal" data-target="#tambahDataSupplier"><i class="fas fa-plus-circle"></i> Tambah Supplier</button>
+                  <button class="btn btn-icon icon-left btn-primary mr-1" data-toggle="modal" data-target="#tambahDataPengeluaran"><i class="fas fa-plus-circle"></i> Tambah Data</button>
+                  <a class="btn btn-icon icon-left btn-success mr-1" href="<?php echo base_url('admin/data_pengeluaran/report') ?>"><i class="fas fa-print"></i> Cetak</a>
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
             </div>
             <div class="collapse show" id="event-collapse">
             <div class="card-body">
-              <?php echo $this->session->flashdata('berhasilTambahSupplier');  ?>  
-              <?php echo $this->session->flashdata('berhasilEditSupplier');  ?> 
-              <?php echo $this->session->flashdata('berhasilHapusSupplier');  ?>  
+              <?php echo $this->session->flashdata('berhasilTambahPengeluaran');  ?>  
+              <?php echo $this->session->flashdata('berhasilEditPengeluaran');  ?> 
+              <?php echo $this->session->flashdata('berhasilHapusPengeluaran');  ?> 
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
                   <thead>
                     <tr>
-                      <th style="width: 5%;">No</th>
-                      <th>Nama Supplier</th>
-                      <th>Alamat</th>
-                      <th>Nomor HP</th>
+                      <th style="width: 10%;">No</th>
+                      <th>Nama Pengeluaran</th>
+                      <th>Tanggal</th>
+                      <th>Total Pengeluaran</th>
                       <th class="text-center" style="width: 20%;" >Action</th>
                    </tr>
                   </thead>
                   <tbody>
                     <?php 
                     $no=1;
-                    foreach($supplier as $spl) : ?>
+                    foreach($pengeluaran as $png) : ?>
                     <tr>
                       <td><?php echo $no++ ?></td>
-                      <td><?php echo $spl->nama_supplier ?></td>
-                      <td><?php echo $spl->alamat_supplier ?></td>
-                      <td><?php echo $spl->no_hp_supplier ?></td>
+                      <td><?php echo $png->nama_pengeluaran ?></td>
+                      <td><?php echo date("d", strtotime($png->created_date)) ?>
+
+                        <?php 
+                        $bln = date("F",strtotime($png->created_date));
+                        if ($bln == "January") {
+                          echo "Januari" ;
+                        }elseif ($bln == "February") {
+                          echo "Februari" ;
+                        }elseif ($bln == "March") {
+                          echo "Maret" ;
+                        }elseif ($bln == "April") {
+                          echo "April" ;
+                        }elseif ($bln == "May") {
+                          echo "Mei" ;
+                        }elseif ($bln == "June") {
+                          echo "Juni" ;
+                        }elseif ($bln == "July") {
+                          echo "Juli" ;
+                        }elseif ($bln == "August") {
+                          echo "Agustus" ;
+                        }elseif ($bln == "September") {
+                          echo "September" ;
+                        }elseif ($bln == "October") {
+                          echo "Oktober" ;
+                        }elseif ($bln == "November") {
+                          echo "November" ;
+                        }elseif ($bln == "December") {
+                          echo "Desember" ;
+                        }else{
+                          echo "";
+                        }
+                        ?>
+                     <?php echo date("Y", strtotime($png->created_date)) ?></td>
+                      <td>Rp.<?php echo number_format($png->harga_pengeluaran,0,'.','.') ?></td>
                       <td class="text-center">
                         <div class="dropdown">
                           <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Options</a>
                           <div class="dropdown-menu">
-                            <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#editDataSupplier<?php echo $spl->id_supplier ?>"><i class="far fa-edit"></i> Edit</button>
-                            <button class="btn btn-icon icon-left btn-light dropdown-item text-danger" data-toggle="modal" data-target="#hapusDataSupplier<?php echo $spl->id_supplier ?>"><i class="fas fa-trash"></i> Hapus</button>
+                            <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#editDataPengeluaran<?php echo $png->id_pengeluaran ?>"><i class="far fa-edit"></i> Edit</button>
+                            <button class="btn btn-icon icon-left btn-light dropdown-item text-danger" data-toggle="modal" data-target="#hapusDataPengeluaran<?php echo $png->id_pengeluaran ?>"><i class="fas fa-trash"></i> Hapus</button>
                           </div>
                         </div>
                       </td>
-                      <!-- <td class="text-center">
-                        <button class="btn btn-icon icon-left btn-light dropdown-item" data-toggle="modal" data-target="#editDataSupplier<?php echo $spl->id_supplier ?>"><i class="far fa-edit"></i> Edit</button>
-                       </td>
-                      <td class="text-center">
-                        <button class="btn btn-icon icon-left btn-light dropdown-item text-danger" data-toggle="modal" data-target="#hapusDataSupplier<?php echo $spl->id_supplier ?>"><i class="fas fa-trash"></i> Hapus</button>
-                      </td> -->
                     </tr>
                     <?php endforeach; ?>
                   </tbody>
@@ -157,38 +184,33 @@
   </div>
 </div>
 
-<!--modal tambah data supplier-->
-<div class="modal fade" id="tambahDataSupplier" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- Modal Tambah Pengeluaran -->
+<div class="modal fade" id="tambahDataPengeluaran" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Supplier</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(). 'admin/data_supplier/tambah_supplier'; ?>" method="post" enctype="multipart/form-data" >
+        <form action="<?php echo base_url(). 'admin/data_pengeluaran/tambah_pengeluaran'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Nama Supplier</label>
+            <label>Nama Pengeluaran</label>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="nama_supplier" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
+              <input type="text" class="form-control" placeholder="" name="nama_pengeluaran" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
             </div>
           </div>
+
           <div class="form-group">
-            <label>Alamat</label>
+            <label>Total Pengeluaran</label>
             <div class="input-group">
-              <textarea class="form-control" name="alamat_supplier" required></textarea>
+              <input type="text" id="uang" name="harga_pengeluaran" onkeypress="return event.charCode >= 48 && event.charCode <=57" onkeyup="rph()" class="form-control" placeholder="Rp." required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
             </div>
           </div>
-          <div class="form-group">
-            <label>Nomor HP</label>
-            <div class="input-group">
-              <input type="number" class="form-control" placeholder="" name="no_hp_supplier" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-            </div>
-          </div>
-       </div>
+        </div>
       <div class="modal-footer bg-whitesmoke br">
         <button type="submit" class="btn btn-primary">Simpan</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -197,40 +219,35 @@
     </div>
   </div>
 </div>
-<!-- akhir modal -->
+<!-- End modal -->
 
-<!--modal edit supplier-->
+
+<!--modal edit pengeluaran-->
 <?php 
-foreach ($supplier as $spl) : ?>
-<div class="modal fade" id="editDataSupplier<?php echo $spl->id_supplier?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+foreach ($pengeluaran as $png) : ?>
+<div class="modal fade" id="editDataPengeluaran<?php echo $png->id_pengeluaran ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Supplier</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url(). 'admin/data_supplier/edit_supplier'; ?>" method="post" enctype="multipart/form-data" >
+        <form action="<?php echo base_url(). 'admin/data_pengeluaran/edit_pengeluaran'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Nama Supplier</label>
+            <label>Nama Pengeluaran</label>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="nama_supplier" value="<?php echo $spl->nama_supplier ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
-              <input type="hidden" value="<?php echo $spl->id_supplier ?>" type="text" name="id_supplier">
+              <input type="text" class="form-control" placeholder="" name="nama_pengeluaran" value="<?php echo $png->nama_pengeluaran ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
+               <input type="hidden" value="<?php echo $png->id_pengeluaran ?>" type="text" name="id_pengeluaran">
             </div>
           </div>
           <div class="form-group">
-            <label>Alamat</label>
+            <label>Total Pengeluaran</label>
             <div class="input-group">
-              <textarea class="form-control" name="alamat_supplier" required><?php echo $spl->alamat_supplier ?></textarea>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Nomor HP/WA</label>
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="no_hp_supplier" value="<?php echo $spl->no_hp_supplier ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
+              <input type="text" id="duit" class="form-control currency" name="harga_pengeluaran" value="Rp. <?php echo number_format($png->harga_pengeluaran,0,'.','.') ?>" onkeypress="return event.charCode >= 48 && event.charCode <=57"  class="form-control" placeholder="Rp." required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
             </div>
           </div>
        </div>
@@ -245,9 +262,9 @@ foreach ($supplier as $spl) : ?>
 <?php endforeach; ?>
 <!-- Akhir modal -->
 
-<!-- modal hapus user-->
-<?php foreach ($supplier as $spl) : ?>
-<div class="modal fade" id="hapusDataSupplier<?php echo $spl->id_supplier ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- modal hapus pengeluaran-->
+<?php foreach ($pengeluaran as $png) : ?>
+<div class="modal fade" id="hapusDataPengeluaran<?php echo $png->id_pengeluaran ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" >
     <div class="modal-content">
@@ -257,8 +274,8 @@ foreach ($supplier as $spl) : ?>
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?php echo base_url('admin/data_supplier/hapus_supplier') ?>" method="post">
-        <input hidden value="<?php echo $spl->id_supplier ?>" type="text" name="id_supplier">
+      <form action="<?php echo base_url('admin/data_pengeluaran/hapus_pengeluaran') ?>" method="post">
+        <input hidden value="<?php echo $png->id_pengeluaran ?>" type="text" name="id_pengeluaran">
         <div class="modal-body">
           Apakah anda yakin ingin menghapus data ini ?
         </div>
@@ -271,3 +288,61 @@ foreach ($supplier as $spl) : ?>
   </div>
 </div>
 <?php endforeach; ?>
+
+<script type="text/javascript">
+  function rph(){
+    var uang = document.getElementById('uang');
+    uang.addEventListener('keyup', function(e){
+      // tambahkan 'Rp.' pada saat form di ketik
+      // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+      uang.value = formatRupiah(this.value, 'Rp. ');
+    });
+
+      /* Fungsi formatRupiah */
+      function formatRupiah(angka, prefix){
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split       = number_string.split(','),
+        sisa        = split[0].length % 3,
+        rupiah        = split[0].substr(0, sisa),
+        ribuan        = split[0].substr(sisa).match(/\d{3}/gi);
+
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if(ribuan){
+          separator = sisa ? '.' : '';
+          rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+      }
+  }
+
+  function idr(){
+    var duit = document.getElementById('duit');
+    duit.addEventListener('keyup', function(e){
+      // tambahkan 'Rp.' pada saat form di ketik
+      // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+      duit.value = formatRupiah2(this.value, 'Rp. ');
+    });
+
+    /* Fungsi formatRupiah */
+    function formatRupiah2(angka, prefix){
+      var number_string = angka.replace(/[^,\d]/g, '').toString(),
+      split       = number_string.split(','),
+      sisa        = split[0].length % 3,
+      rupiah        = split[0].substr(0, sisa),
+      ribuan        = split[0].substr(sisa).match(/\d{3}/gi);
+
+      // tambahkan titik jika yang di input sudah menjadi angka ribuan
+      if(ribuan){
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+      }
+
+      rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+      return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
+  }
+
+
+</script>

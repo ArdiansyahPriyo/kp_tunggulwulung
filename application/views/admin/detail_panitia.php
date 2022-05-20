@@ -14,7 +14,7 @@
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
             </div>
-            <h6 class="ml-4">Sub Event : <?php echo $subevent->subevent ?></h6>
+            <h6 class="ml-4">Event : <?php echo $event->event ?></h6>
             <div class="collapse show" id="event-collapse">
             <div class="card-body">
               <?php echo $this->session->flashdata('berhasilHapusPanitia');  ?> 
