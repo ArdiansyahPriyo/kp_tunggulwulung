@@ -616,7 +616,58 @@ foreach ($event as $evt) : ?>
               Tanggal Mulai
             </span>
             <span class="float-right ">
-              <b><?php echo date("d-m-Y", strtotime($evt->mulai)) ?></b>
+              <b><?php 
+                          $hari = date("D",strtotime($evt->mulai));
+                          if ($hari == "Sun") {
+                            echo "Minggu" ;
+                          }elseif ($hari == "Mon") {
+                            echo "Senin" ;
+                          }elseif ($hari == "Tue") {
+                            echo "Selasa" ;
+                          }elseif ($hari == "Wed") {
+                            echo "Rabu" ;
+                          }elseif ($hari == "Thu") {
+                            echo "Kamis" ;
+                          }elseif ($hari == "Fri") {
+                            echo "Jumat" ;
+                          }elseif ($hari == "Sat") {
+                            echo "Sabtu" ;
+                          }else{
+                            echo "";
+                          }
+                         ?>, <?php echo date("d", strtotime($evt->mulai)) ?>
+
+                         <?php 
+                          $bln = date("F",strtotime($evt->mulai));
+                          if ($bln == "January") {
+                            echo "Januari" ;
+                          }elseif ($bln == "February") {
+                            echo "Februari" ;
+                          }elseif ($bln == "March") {
+                            echo "Maret" ;
+                          }elseif ($bln == "April") {
+                            echo "April" ;
+                          }elseif ($bln == "May") {
+                            echo "Mei" ;
+                          }elseif ($bln == "June") {
+                            echo "Juni" ;
+                          }elseif ($bln == "July") {
+                            echo "Juli" ;
+                          }elseif ($bln == "August") {
+                            echo "Agustus" ;
+                          }elseif ($bln == "September") {
+                            echo "September" ;
+                          }elseif ($bln == "October") {
+                            echo "Oktober" ;
+                          }elseif ($bln == "November") {
+                            echo "November" ;
+                          }elseif ($bln == "December") {
+                            echo "Desember" ;
+                          }else{
+                            echo "";
+                          }
+                         ?>
+                         <?php echo date("Y", strtotime($evt->mulai)) ?></b>
             </span>
           </p>
           <p class="clearfix">
@@ -624,7 +675,58 @@ foreach ($event as $evt) : ?>
               Tanggal Berakhir
             </span>
             <span class="float-right ">
-              <b><?php echo date("d-m-Y", strtotime($evt->akhir)) ?></b>
+              <b><?php 
+                          $hari = date("D",strtotime($evt->akhir));
+                          if ($hari == "Sun") {
+                            echo "Minggu" ;
+                          }elseif ($hari == "Mon") {
+                            echo "Senin" ;
+                          }elseif ($hari == "Tue") {
+                            echo "Selasa" ;
+                          }elseif ($hari == "Wed") {
+                            echo "Rabu" ;
+                          }elseif ($hari == "Thu") {
+                            echo "Kamis" ;
+                          }elseif ($hari == "Fri") {
+                            echo "Jumat" ;
+                          }elseif ($hari == "Sat") {
+                            echo "Sabtu" ;
+                          }else{
+                            echo "";
+                          }
+                         ?>, <?php echo date("d", strtotime($evt->akhir)) ?>
+
+                         <?php 
+                          $bln = date("F",strtotime($evt->akhir));
+                          if ($bln == "January") {
+                            echo "Januari" ;
+                          }elseif ($bln == "February") {
+                            echo "Februari" ;
+                          }elseif ($bln == "March") {
+                            echo "Maret" ;
+                          }elseif ($bln == "April") {
+                            echo "April" ;
+                          }elseif ($bln == "May") {
+                            echo "Mei" ;
+                          }elseif ($bln == "June") {
+                            echo "Juni" ;
+                          }elseif ($bln == "July") {
+                            echo "Juli" ;
+                          }elseif ($bln == "August") {
+                            echo "Agustus" ;
+                          }elseif ($bln == "September") {
+                            echo "September" ;
+                          }elseif ($bln == "October") {
+                            echo "Oktober" ;
+                          }elseif ($bln == "November") {
+                            echo "November" ;
+                          }elseif ($bln == "December") {
+                            echo "Desember" ;
+                          }else{
+                            echo "";
+                          }
+                         ?>
+                         <?php echo date("Y", strtotime($evt->akhir)) ?></b>
             </span>
           </p>
         </div>

@@ -20,6 +20,7 @@ class Data_laporan extends CI_Controller{
 	{
 		$data['laporan_pengeluaran'] = $this->model_pengeluaran->total_pengeluaran();
 		$data['laporan_penjualan'] = $this->model_penjualan->total_penjualan();
+		$data['laporan_ikan'] = $this->model_pengeluaran->total_ikan();
 		// echo "<pre>";
   // print_r($data);exit;
 		$this->load->view('templates_admin/header');

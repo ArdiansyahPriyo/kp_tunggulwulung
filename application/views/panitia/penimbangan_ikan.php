@@ -87,7 +87,7 @@
                     <tr>
                       <th style="width: 5%;">No</th>
                       <th>Nomor Tiket</th>
-                      <th>Pemancing</th>
+                      <th>Nama Pemancing</th>
                       <th>Berat Ikan</th>
                       <th style="width: 20%;" class="text-center">Action</th> 
                    </tr>
@@ -223,6 +223,13 @@
     </div>
   </div>
 </div>
+<footer class="main-footer">
+  <div class="footer-left">
+    <label>Copyright © 2022K.P Tunggul Wulung, All rights Reserved</label>
+  </div>
+  <div class="footer-right">
+  </div>
+</footer>
 
 <script type="text/javascript">
   
@@ -256,9 +263,10 @@
       <div class="modal-body">
         <form action="<?php echo base_url(). 'panitia/penimbangan_ikan/timbang'; ?>" method="post" enctype="multipart/form-data" >
           <div class="form-group">
-            <label>Nomor Tiket</label>
+            <div class="input-group"><video id="preview2" width="250" height="160"></video></div>
+            <label class="mt-2">Nomor Tiket</label>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="" name="id_tiket" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
+              <input type="text" class="form-control" placeholder="" id="qr_id_tiket" name="id_tiket" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
             </div>
           </div>
           <div class="form-group">
@@ -354,7 +362,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?php echo base_url('panitia/penimbangan_ikan/hapus') ?>" method="post">
+      <form action="" method="post">
         <input hidden value="<?php echo $tb->id_timbangikan ?>" type="text" name="id_timbangikan">
         <div class="modal-body">
           Apakah anda yakin akan melakukan perankingan ?
@@ -367,3 +375,28 @@
     </div>
   </div>
 </div>
+
+<script src="<?php echo base_url()?>assets1/jquery.min.js"></script>
+<script src="<?php echo base_url()?>assets1/instascan.min.js"></script>
+
+<script type="text/javascript">
+  
+  let scanner = new Instascan.Scanner({video: document.getElementById('preview2')});
+  scanner.addListener('scan', function(content){
+    //alert(content);
+
+    $('#qr_id_tiket').val(content);
+  });
+
+  Instascan.Camera.getCameras().then(function (cameras){
+
+    if (cameras.length > 0) {
+      scanner.start(cameras[0]);
+    }else{
+      console.error('Kamera tidak ditemukan!');
+    }
+  }).catch(function (e){
+    console.error(e);
+  });
+
+</script>

@@ -45,6 +45,9 @@
     <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/pages/modal-share-project.js"></script>
     <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/pages/app-invoice.js"></script>
     <script src="<?php echo base_url()?>assets1/app-assets/js/scripts/forms/form-wizard.js"></script>
+
+    <!-- barcode scanner -->
+    
     <!-- END: Page JS-->
 
     <script>

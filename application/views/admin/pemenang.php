@@ -6,7 +6,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4>Data Pemenang</h4>
+              <h4>Data Ranking</h4>
                <div class="card-header-action">
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
@@ -197,7 +197,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="myLargeModalLabel">Data Peringkat</h5>
+        <h5 class="modal-title" id="myLargeModalLabel">Data Ranking</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -20,5 +20,13 @@ class Model_pengeluaran extends CI_Model{
 		$query = $this->db->get();
 	    return $query->result();
 	}
+
+	public function total_ikan(){
+		$this->db->select('SUM(total_harga) as total_ikan');
+		$this->db->from('t_pembelianikan');
+		//$this->db->where('transaction_status', 'settlement');
+		$query = $this->db->get();
+	    return $query->result();
+	}
 }
 ?>

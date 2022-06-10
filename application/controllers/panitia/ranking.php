@@ -38,6 +38,16 @@ class Ranking extends CI_Controller{
 					);
 			}
 		$this->db->insert_batch('t_ranking', $data);
+
+		$data = array();
+		foreach ($_POST['id_timbangikan'] as $key => $val) {
+				$dataa[] = array( 				
+					'id_timbangikan' 	=> $_POST['id_timbangikan'][$key],
+					'status_timbang'	=> 'sudah_diranking',
+					
+					);
+			}
+		$this->db->update_batch('t_timbangikan', $dataa, 'id_timbangikan');
 		$this->session->set_flashdata('berhasil_ranking','<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
       <script type ="text/JavaScript">  
       swal("Sukses","Data penimbangan ikan berhasil diranking","success")  

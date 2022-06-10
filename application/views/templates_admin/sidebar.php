@@ -102,7 +102,7 @@
               <a href="<?php echo base_url('admin/data_tiket') ?>" class="nav-link"><i class="fas fa-ticket-alt"></i><span>Tiket</span></a>
             </li>
             <li <?=$this->uri->segment(2) == 'data_pemenang' ? 'class="dropdown active"' : 'class="dropdown"'?>>
-              <a href="<?php echo base_url('admin/data_pemenang') ?>" class="nav-link"><i class="fas fa-award"></i><span>Pemenang</span></a>
+              <a href="<?php echo base_url('admin/data_pemenang') ?>" class="nav-link"><i class="fas fa-award"></i><span>Ranking</span></a>
             </li> 
 
             <li class="menu-header">Laporan</li>

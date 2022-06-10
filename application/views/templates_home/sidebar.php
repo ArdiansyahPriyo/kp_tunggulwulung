@@ -89,7 +89,7 @@
             <div class="user-nav d-sm-flex d-none">
             </div>
             <span class="">
-               <a class="btn btn-sm btn-outline-primary " href="<?php echo base_url('login') ?>"> Login
+               <a class="btn btn-sm btn-primary " href="<?php echo base_url('login') ?>"> Login
                </span>
           </a>
       </li>

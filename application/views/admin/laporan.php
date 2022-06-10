@@ -8,7 +8,7 @@
             <div class="card-header">
               <h4>Laporan Keuntungan</h4>
                <div class="card-header-action">
-                  
+                  <a class="btn btn-icon icon-left btn-success mr-1" href="<?php echo base_url('admin/data_laporan/report') ?>"><i class="fas fa-print"></i> Cetak</a>
                   <a data-collapse="#event-collapse" class="btn btn-icon btn-secondary" href="#"><i class="fas fa-minus"></i></a>
                 </div>
             </div>
@@ -35,8 +35,13 @@
                       
                       <td class="text-center">Rp. <?php echo number_format($lpnj->total_penjualan,0,'.','.') ?></td>
                       <?php foreach($laporan_pengeluaran as $lpng) : ?>
-                      <td class="text-center">Rp. <?php echo number_format($lpng->total_pengeluaran,0,'.','.') ?></td>
-                      <td class="text-center"><b>Rp. <?php echo number_format($lpnj->total_penjualan-$lpng->total_pengeluaran,0,'.','.') ?></b></td>
+                        <?php foreach($laporan_ikan as $likn) : ?>
+                      <td class="text-center">Rp. <?php echo number_format($lpng->total_pengeluaran + $likn->total_ikan ,0,'.','.') ?></td>
+                     
+                      <td class="text-center"> 
+                         <span class="badge badge-primary"><b>Rp. <?php echo number_format($lpnj->total_penjualan-($lpng->total_pengeluaran+$likn->total_ikan),0,'.','.') ?></b></span></td>
+                    
+                       <?php endforeach; ?>
                        <?php endforeach; ?>
                     </tr>
                     <?php endforeach; ?>

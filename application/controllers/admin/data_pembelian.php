@@ -52,7 +52,8 @@ class Data_pembelian extends CI_Controller{
 			'id_supplier' 						=> $id_supplier,
 			'jenis_ikan' 							=> $jenis_ikan,
 			'berat_ikan'							=> $berat_ikan,
-			'total_harga' 						=> preg_replace("/[^0-9]/","",$total_harga)
+			'total_harga' 						=> preg_replace("/[^0-9]/","",$total_harga),
+			'created_date'						=> date('Y-m-d')
 		);
 
 		$this->model_pembelian->tambah_pembelian($data, 't_pembelianikan');

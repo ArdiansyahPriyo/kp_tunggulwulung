@@ -189,18 +189,29 @@
                                             <p class="card-text mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p>
                                         </div>
                                         <div class="mt-md-0 mt-0">
-                                            <h4 class="invoice-title">
+                                            <h4 class="">
                                                 <!-- <i>id tiket</i> -->
                                                 <span class="invoice-number"> #<?php echo $ps->id_tiket ?></span>
                                             </h4>
-                                            <div class="">
-                                                <label class=" mb-0"><i>event</i></label>
-                                                <h5 class="text-primary mb-30"><b><?php echo $ps->event ?></b></h5>
-                                            </div>
-                                            <div class="">
-                                                <label class="invoice-date-title mb-0"><i>tanggal</i></label>
-                                                <h5 class="text-primary invoice-date"><b>
-                                                  <?php 
+                                            <img src="<?php echo site_url('pesanan_saya/QRcode/'.$ps->id_tiket); ?>" alt="">
+                                        </div>
+                                    </div>
+                                    <!-- Header ends -->
+                                </div>
+
+                                <hr class="invoice-spacing" />
+
+                                <!-- Address and Contact starts -->
+                                <div class="card-body invoice-padding pt-0">
+                                    <div class="row ">
+                                        <div class="col-xl-6 p-0">
+                                          <label><i>event</i></label>
+                                          <h5><?php echo $ps->event ?></h5>
+                                          <label><i>sistem</i></label>
+                                          <h5><?php echo $ps->sistem ?></h5>
+                                          <label><i>tanggal</i></label>
+                                          <h5>
+                                              <?php 
                                                   $hari = date("D",strtotime($ps->tanggal_pelaksanaan));
                                                   if ($hari == "Sun") {
                                                     echo "Minggu" ;
@@ -252,18 +263,10 @@
                                                   }
                                                  ?>
                                                  <?php echo date("Y", strtotime($ps->tanggal_pelaksanaan)) ?>
-                                                </b></h5>
-                                            </div>
+                                          </h5>
+                                          <label><i>start - finish</i></label>
+                                          <h5><?php echo substr($ps->jam_mulai, 0,5) ?> - <?php echo substr($ps->jam_selesai, 0,5) ?></h5>
                                         </div>
-                                    </div>
-                                    <!-- Header ends -->
-                                </div>
-
-                                <hr class="invoice-spacing" />
-
-                                <!-- Address and Contact starts -->
-                                <div class="card-body invoice-padding pt-0">
-                                    <div class="row ">
                                         <div class="col-xl-6 p-0">
                                           <label><i>nama</i></label>
                                           <h5><?php echo $ps->nama ?></h5>
@@ -272,13 +275,7 @@
                                           <label><i>alamat</i></label>
                                           <h5><?php echo $ps->alamat ?></h5>
                                         </div>
-                                        <div class="col-xl-6 p-0 ">
-                                          <label><i>sistem</i></label>
-                                          <h5><?php echo $ps->sistem ?></h5>
-                                          <label><i>start - finish</i></label>
-                                          <h5><?php echo substr($ps->jam_mulai, 0,5) ?> - <?php echo substr($ps->jam_selesai, 0,5) ?></h5>
-                                          
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <!-- Address and Contact ends -->

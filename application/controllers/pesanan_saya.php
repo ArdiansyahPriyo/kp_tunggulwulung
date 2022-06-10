@@ -6,6 +6,7 @@ class Pesanan_saya extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
+        $this->load->library('Ciqrcode');
 
         if($this->session->userdata('hak_akses') != 'pemancing'){
             $this->session->set_flashdata('harus_login','<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -28,6 +29,17 @@ class Pesanan_saya extends CI_Controller {
         $this->load->view('templates_home/sidebar', $data);
         $this->load->view('tiket_saya');
         $this->load->view('templates_home/footer');
+    }
+
+    public function QRcode($id_tiket)
+    {
+        QRcode::png(
+            $id_tiket,
+            $outfile = false,
+            $level = QR_ECLEVEL_H,
+            $size = 4,
+            $margin = 2
+        );
     }
 
     public function download()

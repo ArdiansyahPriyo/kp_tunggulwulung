@@ -141,7 +141,7 @@ class Data_user extends CI_Controller{
 			if(!$this->upload->do_upload('foto')){
 				echo "File gagal diupload";
 			}else{
-				$foto = $this->upload->data('file_name');
+				$foto = $this->upload->data('user_'.'file_name');
 			}
 		}
 

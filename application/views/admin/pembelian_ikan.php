@@ -26,7 +26,7 @@
                       <th>Event</th>
                       <th>Supplier</th>
                       <th>Jenis Ikan</th>
-                      <th>Berat Ikan</th>
+                      <th>Total Ikan</th>
                       <th>Total Harga</th>
                       <th class="text-center" style="width: 5%;">Action</th>
                    </tr>
@@ -204,7 +204,7 @@
               </select>
           </div>
           <div class="form-group">
-            <label>Berat Ikan (Kg)</label>
+            <label>Total Ikan (Kg)</label>
             <div class="input-group">
               <input type="number" class="form-control" name="berat_ikan" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" placeholder="Kg">
             </div>
@@ -276,7 +276,7 @@ foreach($pembelian as $pmb) : ?>
             </select>
           </div>
           <div class="form-group">
-            <label>Berat Ikan (Kg)</label>
+            <label>Total Ikan (Kg)</label>
             <div class="input-group">
               <input type="number" class="form-control" name="berat_ikan" value="<?php echo $pmb->berat_ikan ?>" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')" placeholder="Kg">
             </div>

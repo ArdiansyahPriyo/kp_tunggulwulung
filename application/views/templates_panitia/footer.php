@@ -14,6 +14,9 @@
   <script src="<?php echo base_url()?>assets2/bundles/jquery-ui/jquery-ui.min.js"></script>
   <!-- Page Specific JS File -->
   <script src="<?php echo base_url()?>assets2/js/page/datatables.js"></script>
+
+  <!-- QR Code scanner -->
+  
 </body>
 
 
