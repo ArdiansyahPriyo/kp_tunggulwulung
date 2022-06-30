@@ -74,15 +74,27 @@ class Data_sistem_mancing extends CI_Controller{
 	{
 		$id_sistem 	= $this->input->post('id_sistem');
 
-		$where = array('id_sistem' => $id_sistem);
-      $this->db->delete('t_sistem', $where);
-			$this->session->set_flashdata('berhasilHapusSistem','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
-  				Data berhasil dihapus!
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		  </div>');
-		redirect('admin/data_sistem_mancing');
+		$sql = $this->db->query("SELECT id_sistem FROM t_event where id_sistem = '$id_sistem'");
+    $cek_data = $sql->num_rows();
+    if ($cek_data > 0) {
+      $this->session->set_flashdata('berhasilHapusSistem','<div class="alert alert-danger alert-dismissible fade show" role="alert"><i class="fas fa-info-circle"></i>
+						Sistem tidak bisa dihapus karena sudah digunakan!
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			  </div>');
+			redirect('admin/data_sistem_mancing');
+	    }else{
+	        $where = array('id_sistem' => $id_sistem);
+		      $this->db->delete('t_sistem', $where);
+					$this->session->set_flashdata('berhasilHapusSistem','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
+		  				Data berhasil dihapus!
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+				  </div>');
+				redirect('admin/data_sistem_mancing');
+	    }
 	}
 } 
 ?>

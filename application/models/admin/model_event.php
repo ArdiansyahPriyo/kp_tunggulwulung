@@ -32,5 +32,15 @@ class Model_event extends CI_Model{
       $query = $this->db->get();
       return $query->result();
    }
+
+   public function data_dashboard(){
+
+		$this->db->select('count(id_tiket) as tiket');
+		$this->db->from('t_tiket');
+		$this->db->where('status_tiket','belum_validasi');
+		$this->db->or_where('status_tiket','sudah_validasi');
+		$query = $this->db->get();
+        return $query->result();
+	}
 }
 ?>

@@ -1,11 +1,10 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller{
-	
+class Data_pesan extends CI_Controller{
+
 	public function __construct(){
 		parent::__construct();
-
 		if($this->session->userdata('hak_akses') != 'admin'){
 			$this->session->set_flashdata('harus_login','<div class="alert alert-danger alert-dismissible fade show" role="alert">
                       Anda belum login, Silahkan login !
@@ -16,18 +15,17 @@ class Dashboard extends CI_Controller{
 			redirect('login');
 		}
 	}
-	
+
 	public function index()
 	{
-		$data['dashboard']      = $this->model_event->data_dashboard();
+		
+     $data['penjualan'] = $this->model_penjualan->get_data($bulan);
 		$this->load->view('templates_admin/header');
 		$this->load->view('templates_admin/sidebar');
-		$this->load->view('admin/dashboard', $data);
+		$this->load->view('admin/pesan', $data);
 		$this->load->view('templates_admin/footer');
-		 // echo "<pre>";
-   // print_r($data);exit;
-	}
-	
-}
 
- ?>
+
+	}
+}
+?>

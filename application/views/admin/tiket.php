@@ -23,6 +23,7 @@
                       <th>Nama Pemesan</th>
                       <th>Jenis Event</th>
                       <th>Status</th>
+                      <th class="text-center">QR Code</th>
                       <th class="text-center">Action</th>
                    </tr>
                   </thead>
@@ -40,6 +41,8 @@
                       } elseif ($tkt->status_tiket == 'sudah_validasi') {
                         echo "Sudah Validasi";
                       }?></td>
+                      <!-- <td><img src="<?php echo site_url('admin/data_tiket/QRcode/'.$tkt->id_tiket); ?>" alt=""></td> --> 
+                      <td class="text-center"><button class="btn btn-light btn-icon icon-left" data-toggle="modal" data-target="#kotak<?php echo substr($tkt->id_tiket, 6) ?>"><i class="fas fa-search-plus"></i> QR Code</button></td> 
                       <td class="text-center"><button class="btn btn-light btn-icon icon-left" data-toggle="modal" data-target="#tiketEdit<?php echo substr($tkt->id_tiket, 6) ?>"><i class="far fa-edit"></i> Edit</button></td> 
                     </tr>
                     <?php endforeach; ?>
@@ -195,6 +198,30 @@
 <?php endforeach; ?>  
 <!-- end modal -->
 
+<?php foreach ($tiket as $tkt) : ?>
+<div class="modal fade" id="kotak<?php echo substr($tkt->id_tiket, 6) ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">QRCODE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <div class="text-center">
+         <img src="<?php echo site_url('admin/data_tiket/QRcode/'.$tkt->id_tiket); ?>" alt="">
+       </div> 
+      </div>
+      <div class="modal-footer bg-whitesmoke br">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<?php endforeach; ?>  
 
 <!-- modal hapus pesanan-->
 <!-- <?php foreach ($pesanan as $psn) : ?>

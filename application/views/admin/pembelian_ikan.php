@@ -28,7 +28,7 @@
                       <th>Jenis Ikan</th>
                       <th>Total Ikan</th>
                       <th>Total Harga</th>
-                      <th class="text-center" style="width: 5%;">Action</th>
+                      <th class="text-center">Action</th>
                    </tr>
                   </thead>
                   <tbody>
@@ -44,11 +44,12 @@
                       }elseif ($pmb->jenis_ikan == "nila") {
                         echo "Ikan Nila";
                       }elseif($pmb->jenis_ikan == "ikan_mas"){
-                        echo "Ikan Mas";
+                        echo "Ikan Mas/Tombro";
                       } ?></td>
                       <td><?php echo $pmb->berat_ikan ?> Kg</td>
                       <td>Rp. <?php echo number_format($pmb->total_harga,0,'.','.') ?></td>
-                      <td>
+                      <td class="text-center"><button class="btn btn-light btn-icon icon-left" data-toggle="modal" data-target="#editDataPembelian<?php echo $pmb->id_pembelianikan ?>"><i class="far fa-edit"></i> Edit</button></td> 
+                      <!-- <td>
                         <div class="dropdown">
                           <a href="#" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Options</a>
                           <div class="dropdown-menu">
@@ -56,7 +57,7 @@
                             <button class="btn btn-icon icon-left btn-light dropdown-item text-danger" data-toggle="modal" data-target="#hapusDataPembelian<?php echo $pmb->id_pembelianikan ?>"><i class="fas fa-trash"></i> Hapus</button>
                           </div>
                         </div>
-                      </td>
+                      </td> -->
                     </tr>
                     <?php endforeach; ?>
                   </tbody>
@@ -200,7 +201,7 @@
             <select class="form-control" name="jenis_ikan" required>
               <option value="patin">Patin</option>
               <option value="nila">Nila</option>
-              <option value="ikan_mas">Ikan Mas</option>
+              <option value="ikan_mas">Ikan Mas/Tombro</option>
               </select>
           </div>
           <div class="form-group">

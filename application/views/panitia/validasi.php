@@ -14,8 +14,8 @@
           <div class="alert alert-primary alert-has-icon">
             <div class="alert-icon"><i class="fas fa-info"></i></div>
             <div class="alert-body">
-              <div class="alert-title">Anda belum diatur menjadi panitia</div>
-              <small>Hanya panitia yang dapat melakukan validasi tiket </small>
+              <div class="alert-title">Tidak ada tiket untuk divalidasi hari ini</div>
+              <small>Validasi dapat dilakukan sesuai tanggal pelaksanaan event</small>
             </div>
           </div>
       </div>
@@ -33,7 +33,13 @@
                 <h4>Validasi Tiket</h4>
               </div>
               <div class="card-body">
-               <video id="preview" width="250" height="160"></video>
+           <video id="preview" width="250" height="160"></video> 
+               
+                 <!-- <div class="col-4">
+                    <div id="reader"></div>
+                 </div>
+                -->
+              
                 <div class="form-group mt-1">
                   <label>Nomor Tiket</label>
                   <div class="input-group">
@@ -42,7 +48,7 @@
                         <i class="fas fa-money-check"></i>
                       </div>
                     </div>
-                    <input type="text" class="form-control" name="id_tiket" id="qrcode" required oninvalid="this.setCustomValidity('Data harus diisi!')" oninput="setCustomValidity('')">
+                    <input type="text" class="form-control" name="id_tiket" id="inputqrcode" required oninvalid="this.setCustomValidity('Data harus diisi!')" oninput="setCustomValidity('')">
                   </div>
                 </div>
               </div>
@@ -156,6 +162,10 @@
   <div class="footer-right">
   </div>
 </footer>
+</div>
+</div>
+
+
 
 <script src="<?php echo base_url()?>assets1/jquery.min.js"></script>
 <script src="<?php echo base_url()?>assets1/instascan.min.js"></script>
@@ -168,7 +178,7 @@
   scanner.addListener('scan', function(content){
     //alert(content);
 
-    $('#qrcode').val(content);
+    $('#inputqrcode').val(content);
   });
 
   Instascan.Camera.getCameras().then(function (cameras){
@@ -182,5 +192,24 @@
     console.error(e);
   });
 
+</script> 
 
-</script>
+
+<!-- <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script type="text/javascript">
+  function onScanSuccess(decodedText, decodedResult) {
+  
+  $("#inputqrcode").val(decodedText);
+}
+
+function onScanFailure(error) {
+  
+  console.warn(`Code scan error = ${error}`);
+}
+
+let html5QrcodeScanner = new Html5QrcodeScanner(
+  "reader",
+  { fps: 10, qrbox: {width: 250, height: 250} },
+  /* verbose= */ false);
+html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+</script> -->

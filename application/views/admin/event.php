@@ -293,11 +293,11 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputEmail4">Mulai</label>
-              <input type="time" class="form-control" id="inputMulai" placeholder="Email" name="tmmulai">
+              <input type="time" class="form-control" id="inputMulai" placeholder="Email" name="tmmulai" required>
             </div>
             <div class="form-group col-md-6">
               <label for="inputPassword4">Selesai</label>
-              <input type="time" class="form-control" id="inputSelesai" placeholder="Password" name="tmselesai">
+              <input type="time" class="form-control" id="inputSelesai" placeholder="Password" name="tmselesai" required>
             </div>
           </div>
           <div class="form-group">

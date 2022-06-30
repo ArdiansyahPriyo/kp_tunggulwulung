@@ -20,7 +20,7 @@ class Register extends CI_Controller {
         $cek_email = $sql->num_rows();
         if ($cek_email > 0) {
         $this->session->set_flashdata('sudah_ada','<div class="alert alert-danger alert-dismissible fade show" role="alert">
-          Email atau Password sudah ada!
+          Email atau Password sudah digunakan!
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

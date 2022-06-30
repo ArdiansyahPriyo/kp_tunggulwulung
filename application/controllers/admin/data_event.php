@@ -156,15 +156,30 @@ class Data_event extends CI_Controller{
 	{
 		$id_event 	= $this->input->post('id_event');
 
-		$where = array('id_event' => $id_event);
-      $this->db->delete('t_event', $where);
-			$this->session->set_flashdata('berhasilHapusEvent','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
-  				Data berhasil dihapus!
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		  </div>');
-		redirect('admin/data_event');
+
+		$sql = $this->db->query("SELECT id_event FROM t_pesanan where id_event = '$id_event'");
+    $cek_data = $sql->num_rows();
+    if ($cek_data > 0) {
+      $this->session->set_flashdata('berhasilHapusEvent','<div class="alert alert-danger alert-dismissible fade show" role="alert"><i class="fas fa-info-circle"></i>
+						Event tidak bisa dihapus karena sudah ada pemesan!
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			  </div>');
+			redirect('admin/data_event');
+	    }else{
+	      $where = array('id_event' => $id_event);
+	      $this->db->delete('t_event', $where);
+				$this->session->set_flashdata('berhasilHapusEvent','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
+	  				Data berhasil dihapus!
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			  </div>');
+			redirect('admin/data_event');
+	    }
+
+		
 	}
 
 }

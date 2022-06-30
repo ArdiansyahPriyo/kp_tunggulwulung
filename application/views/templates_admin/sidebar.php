@@ -79,6 +79,7 @@
             <li <?=$this->uri->segment(2) == 'data_panitia' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('admin/data_panitia') ?>" class="nav-link"><i class="fas fa-user-cog"></i><span>Panitia</span></a>
             </li>
+            
             <!-- <li <?=$this->uri->segment(2) == 'data_supplier' ? 'class="dropdown active"' : 'class="dropdown"'?>>
               <a href="<?php echo base_url('admin/data_supplier') ?>" class="nav-link"><i class="fas fa-truck"></i><span>Supplier Ikan</span></a>
             </li> --> 

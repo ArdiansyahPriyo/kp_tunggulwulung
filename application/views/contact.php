@@ -15,16 +15,16 @@
                               <div class="form-group">
                                   <div class="col-sm-6 col-12">
                                       <div class="mb-2">
-                                          <input type="text" class="form-control" placeholder="Nama" />
+                                          <input type="text" class="form-control" placeholder="Nama" required />
                                       </div>
                                   </div>
                                   <div class="col-sm-6 col-12">
                                       <div class="mb-2">
-                                          <input type="email" class="form-control" placeholder="Email" />
+                                          <input type="email" class="form-control" placeholder="Email" required />
                                       </div>
                                   </div>
                                   <div class="col-12">
-                                      <textarea class="form-control mb-2" rows="4" placeholder="Tulis pesan Anda disini"></textarea>
+                                      <textarea class="form-control mb-2" rows="4" placeholder="Tulis pesan Anda disini" required></textarea>
                                   </div>
                                   <div class="col-12">
                                       <button type="submit" class="btn btn-primary">Kirim</button>

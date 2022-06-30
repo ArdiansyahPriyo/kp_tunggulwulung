@@ -141,7 +141,7 @@ class Data_user extends CI_Controller{
 			if(!$this->upload->do_upload('foto')){
 				echo "File gagal diupload";
 			}else{
-				$foto = $this->upload->data('user_'.'file_name');
+				$foto = $this->upload->data('file_name');
 			}
 		}
 
@@ -184,17 +184,29 @@ class Data_user extends CI_Controller{
 
 	public function hapus_user()
 	{
-		$id_user 	= $this->input->post('id_user');
+		$id_user 	  = $this->input->post('id_user');
+		$hak_akses 	= $this->input->post('hak_akses');
 
-		$where = array('id_user' => $id_user);
-      $this->db->delete('t_user', $where);
-			$this->session->set_flashdata('berhasilHapusUser','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
-  				Data berhasil dihapus!
+		if ($hak_akses == 'admin') {
+			$this->session->set_flashdata('berhasilHapusUser','<div class="alert alert-danger alert-dismissible fade show" role="alert"><i class="fas fa-info-circle"></i>
+  				Data tidak dapat dihapus!
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		    <span aria-hidden="true">&times;</span>
 		  </button>
 		  </div>');
 		redirect('admin/data_user');
+		}else{
+			$where = array('id_user' => $id_user);
+	      $this->db->delete('t_user', $where);
+				$this->session->set_flashdata('berhasilHapusUser','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
+	  				Data berhasil dihapus!
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			  </div>');
+			redirect('admin/data_user');
+		}
+		
 	}
 
 }

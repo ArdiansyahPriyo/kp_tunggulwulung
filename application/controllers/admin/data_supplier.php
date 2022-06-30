@@ -79,15 +79,28 @@ class Data_supplier extends CI_Controller{
 	{
 		$id_supplier 	= $this->input->post('id_supplier');
 
-		$where = array('id_supplier' => $id_supplier);
-      $this->db->delete('t_supplier', $where);
-			$this->session->set_flashdata('berhasilHapusSupplier','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
-  				Data berhasil dihapus!
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		  </div>');
-		redirect('admin/data_supplier');
+		$sql = $this->db->query("SELECT id_supplier FROM t_pembelianikan where id_supplier = '$id_supplier'");
+    $cek_data = $sql->num_rows();
+    if ($cek_data > 0) {
+      $this->session->set_flashdata('berhasilHapusSupplier','<div class="alert alert-danger alert-dismissible fade show" role="alert"><i class="fas fa-info-circle"></i>
+						Tidak dapat menghapus supplier karena data sudah digunakan dalam pembelian!
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			  </div>');
+			redirect('admin/data_supplier');
+	    }else{
+	      $where = array('id_supplier' => $id_supplier);
+	      $this->db->delete('t_supplier', $where);
+				$this->session->set_flashdata('berhasilHapusSupplier','<div class="alert alert-success alert-dismissible fade show" role="alert"><i class="fas fa-check-circle"></i>
+	  				Data berhasil dihapus!
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			  </div>');
+			redirect('admin/data_supplier');
+	    }
+
 	}
 
 

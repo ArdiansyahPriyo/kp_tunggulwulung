@@ -34,35 +34,7 @@
     </div>
    <ul class="nav navbar-nav align-items-center ms-auto">
       <?php if($this->session->userdata('nama')) { ?>
-         <li class="nav-item dropdown dropdown-notification me-50">
-          <a class="nav-link" href="#" data-bs-toggle="dropdown">
-            <i class="ficon" data-feather="bell"></i>
-            <span class="badge rounded-pill bg-danger badge-up">1</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end">
-              <li class="dropdown-menu-header">
-                  <div class="dropdown-header d-flex">
-                      <h4 class="notification-title mb-0 me-auto">Notifikasi</h4>
-                      <div class="badge rounded-pill badge-light-primary">1 New</div>
-                  </div>
-              </li>
-              <li class="scrollable-container media-list">
-                  <a class="d-flex" href="<?php echo base_url('pesanan_saya') ?>">
-                      <div class="list-item d-flex align-items-start">
-                          <div class="me-1">
-                              <div class="avatar bg-light-primary">
-                                  <div class="avatar-content"><i class="avatar-icon" data-feather="info"></i></div>
-                              </div>
-                          </div>
-                          <div class="list-item-body flex-grow-1">
-                              <p class="media-heading"><span class="fw-bolder">Tiket</span>&nbsp;</p><small class="notification-text"> Pembayaran telah dikonfirmasi, Silahkan unduh tiket anda</small>
-                          </div>
-                      </div>
-                  </a>
-              </li>
-              <!-- <li class="dropdown-menu-footer"><a class="btn btn-primary w-100" href="#">Read all notifications</a></li> -->
-          </ul>
-      </li>
+         
         <li class="nav-item dropdown dropdown-user">
             <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <!-- <div class="user-nav d-sm-flex d-none">
@@ -89,7 +61,7 @@
             <div class="user-nav d-sm-flex d-none">
             </div>
             <span class="">
-               <a class="btn btn-sm btn-primary " href="<?php echo base_url('login') ?>"> Login
+               <a class="btn btn-sm btn-outline-primary " href="<?php echo base_url('login') ?>"> Login
                </span>
           </a>
       </li>
@@ -139,16 +111,16 @@
                   <i data-feather="info"></i><span data-i18n="Dashboards">Info Kolam</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link d-flex align-items-center" href="index.html" data-bs-toggle="dropdown">
                   <i data-feather="image"></i><span data-i18n="Dashboards">Galeri</span>
                 </a>
-              </li>
-              <li <?=$this->uri->segment(1) == 'contact' ? 'class="nav-item active"' : 'class="nav-item"'?>>
+              </li> -->
+             <!--  <li <?=$this->uri->segment(1) == 'contact' ? 'class="nav-item active"' : 'class="nav-item"'?>>
                 <a class="nav-link d-flex align-items-center" href="<?php echo base_url('contact') ?>">
                   <i data-feather="message-circle"></i><span data-i18n="Dashboards">Contact</span>
                 </a>
-              </li>
+              </li> -->
               
             </ul>
         </div>

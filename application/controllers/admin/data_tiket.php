@@ -5,6 +5,7 @@ class Data_tiket extends CI_Controller{
 	
 	public function __construct(){
 		parent::__construct();
+		$this->load->library('Ciqrcode');
 
 		if($this->session->userdata('hak_akses') != 'admin'){
 			$this->session->set_flashdata('harus_login','<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -27,6 +28,17 @@ class Data_tiket extends CI_Controller{
 		
 	}
 
+	 public function QRcode($id_tiket)
+    {
+        QRcode::png(
+            $id_tiket,
+            $outfile = false,
+            $level = QR_ECLEVEL_H,
+            $size = 6,
+            $margin = 2
+        );
+    }
+
 	public function edit()
 	{
 		$id_tiket	 					= $this->input->post('id_tiket');
@@ -46,8 +58,9 @@ class Data_tiket extends CI_Controller{
 		  </button>
 		</div>');
 		redirect('admin/data_tiket');
+	}
 
 
-  }
+
 }
 ?>

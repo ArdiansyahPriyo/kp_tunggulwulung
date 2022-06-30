@@ -40,7 +40,7 @@ class Data_pembelian extends CI_Controller{
 		$cek_event = $sql->num_rows();
 		if ( $cek_event > 0 ) {
 			$this->session->set_flashdata('pembelianSudahAda','<div class="alert alert-danger alert-dismissible fade show" role="alert"><i class="fas fa-times-circle"></i>
-	  				Gagal, Data pembelian pada subevent sudah ada!
+	  				Gagal, Data pembelian pada event yang dipilih sudah ada!
 			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			    <span aria-hidden="true">&times;</span>
 			  </button>

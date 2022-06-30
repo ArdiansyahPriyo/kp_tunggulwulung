@@ -30,7 +30,7 @@
                            <?php foreach ($info as $inf) : ?>
                             <div class="col-md-6 col-12">
                                 <div class="card">
-                                    <a href="page-blog-detail.html">
+                                    <a href="#">
                                         <img class="card-img-top img-fluid" src="<?php echo base_url().'/uploads/'.$inf->gambar ?>" alt="Blog Post pic" />
                                     </a>
                                     <div class="card-body">
@@ -125,19 +125,20 @@
                         <div class="blog-recent-posts mt-3">
                             <h6 class="section-label">Recent Posts</h6>
                             <div class="mt-75">
-                                <?php foreach ($info as $inf) : ?>
+                                <?php foreach ($recentinfo as $reinf) : ?>
                                 <div class="d-flex mb-2">
-                                    <a href="page-blog-detail.html" class="me-2">
+                                    <a href="#" class="me-2">
                                         <img class="rounded" src="<?php echo base_url('')?>/assets1/app-assets/images/banner/banner-39.jpg" width="100" height="70" alt="Recent Post Pic" />
                                     </a>
                                     <div class="blog-info">
                                         <h6 class="blog-recent-post-title">
-                                            <a href="page-blog-detail.html" class="text-body-heading"><?php echo $inf->judul ?></a>
+                                            
+                                            <label class="text-body-heading"><?php echo $reinf->judul ?></button>
                                         </h6>
                                         <div class="text-muted mb-0">
-                                          <?php echo date("d", strtotime($inf->created_date)) ?>
+                                          <?php echo date("d", strtotime($reinf->created_date)) ?>
                                                   <?php 
-                                                    $bln = date("F",strtotime($inf->created_date));
+                                                    $bln = date("F",strtotime($reinf->created_date));
                                                     if ($bln == "January") {
                                                       echo "Januari" ;
                                                     }elseif ($bln == "February") {
@@ -166,8 +167,17 @@
                                                       echo "";
                                                     }
                                                    ?>
-                                                   <?php echo date("Y", strtotime($inf->created_date)) ?>
+                                                   <?php echo date("Y", strtotime($reinf->created_date)) ?>
                                         </div>
+                                        <form action="<?php echo base_url(). 'info/read_more'; ?>" method="post">
+                                          <input type="hidden" name="id_pengumuman" value="<?php echo $reinf->id_pengumuman?>">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <button type="submit" class="btn btn-sm btn-flat-primary">
+                                                  <span>Read More</span>
+                                                  <i data-feather='chevron-right' class="me-25"></i>
+                                                </button> 
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                                 <?php endforeach; ?>

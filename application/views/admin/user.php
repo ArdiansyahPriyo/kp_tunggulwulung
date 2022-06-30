@@ -361,6 +361,7 @@ foreach ($user as $usr) : ?>
       </div>
       <form action="<?php echo base_url('admin/data_user/hapus_user') ?>" method="post">
         <input hidden value="<?php echo $usr->id_user ?>" type="text" name="id_user">
+        <input hidden value="<?php echo $usr->hak_akses ?>" type="text" name="hak_akses">
         <div class="modal-body">
           Apakah anda yakin ingin menghapus data ini ?
         </div>

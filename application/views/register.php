@@ -13,25 +13,25 @@
                 <form method="POST" action="<?php echo base_url('register')?>">
                   <div class="form-group">
                     <label for="name">Nama</label>
-                    <input id="nama" type="text" class="form-control" name="nama" required>
+                    <input id="nama" type="text" class="form-control" name="nama" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
                     <div class="invalid-feedback"></div>
                     
                   </div>
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email" required>
+                    <input id="email" type="email" class="form-control" name="email" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
                     <div class="invalid-feedback"></div>
                    
                   </div>
                   <div class="form-group">
                     <label for="phone">Nomor HP/WA</label>
-                    <input id="no_hp" type="number" class="form-control" name="no_hp" required>
+                    <input id="no_hp" type="number" class="form-control" name="no_hp" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')">
                     <div class="invalid-feedback"></div>
                     
                   </div>
                   <div class="form-group">
                     <label for="phone">Alamat</label>
-                    <textarea class="form-control" name="alamat" placeholder="Desa, Kecamatan, Kota/Kabupaten" required></textarea>
+                    <textarea class="form-control" name="alamat" placeholder="Desa, Kecamatan, Kota/Kabupaten" required oninvalid="this.setCustomValidity('Data wajib diisi!')" oninput="setCustomValidity('')"></textarea>
                     <div class="invalid-feedback"></div>
                     
                   </div>
